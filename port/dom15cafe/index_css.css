@@ -1,0 +1,250 @@
+
+/* ШАПКА */
+
+.header {
+	color: white;
+	background-image: url(media/back.jpg);
+	background-size: cover;
+	padding: 3vh;
+}
+
+.header .nav {
+	text-align: center;
+	display: block;
+}
+
+.header .logo img{
+	cursor: pointer;
+}
+
+.header ul{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: space-around;
+}
+
+.header ul li {
+	list-style-type: none;
+	display: inline-block;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.header ul li:hover {
+	transition: 0.3s;
+	color: #d4d2d2;
+}
+
+.slogan {
+	text-align: center;
+	padding: 30vh;
+}
+
+.slogan h2 {
+	font-size: 13vh;
+	font-family: 'Caveat', cursive;
+}
+
+.slogan span {
+	font-size: 2vh;
+}
+
+.menue_button {
+	padding: 1vh 3vh;
+	border: 1px solid white;
+	display: inline-block;
+	margin-top: 2vh;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.menue_button:hover {
+	transition: 0.3s;
+	background-color: white;
+	color: #ababab;
+}
+
+/* Комментарий */
+
+.description {
+	margin: 13vh 6vh;
+	text-align: center;
+}
+
+.description .first_photo {
+	width: 60%;
+	border-radius: 1vh;
+}
+
+.description .description_text h2 {
+	font-weight: bold;
+	margin-bottom: 3vh;
+}
+
+.description .second_photo{
+	position: absolute;
+	right: 5vh;
+	bottom: 17vh;
+	width: 45%;
+	border-radius: 1vh;
+}
+
+/* Комментарий */
+
+.ph {
+	margin: 15vh 0 5vh 0;
+}
+
+.ph .ph_window{
+	width: 100%;
+	background-color: white;
+	text-align: center;
+	padding: 2vh 3vh;
+}
+
+.ph .ph_window h2{
+	font-size: 2.5vh;
+	font-weight: bold;
+}
+
+.ph .ph_window span {
+	color: black;
+}
+
+.ph .col {
+	padding: 20vh 10vh;
+	background-size: cover;
+	margin: 0vh 2vh;
+}
+
+.ph .ph_first {
+	background-image: url(media/food_3.jpg);
+}
+
+.ph .ph_second {
+	background-image: url(media/food_4.jpg);
+}
+
+.ph .ph_third {
+	background-image: url(media/food_5.jpg);
+}
+
+/* Комментарий */
+
+.advantages {
+	text-align: center;
+	margin-bottom: 5vh;
+}
+
+.advantages .col {
+	margin: 5vh 0;
+	border: 1pc;
+	margin: 2vh 3vh;
+}
+
+.advantages img {
+	width: 17vh;
+}
+
+/* Комментарий */
+
+.sale {
+	text-align: center;
+}
+
+.sale .col {
+	background-image: url(media/cafe.png);
+	background-size: cover;
+	padding: 20vh;	
+	text-align: center;
+}
+
+.sale .col .sale_window {
+	background-color: white;
+	padding: 1vh;
+	text-align: center;
+	margin: 0!important;
+}
+
+/* Комментарий */
+
+.event {
+	margin: 10vh 0;
+	text-align: center;
+}
+
+.event {
+	margin: 10vh 5vh;
+}
+
+.event .table {
+	background-image: url(media/table.jpg);
+	background-size: cover;
+	padding: 18vh 10vh;	
+	text-align: center;
+}
+
+.event .table div {
+	background-color: #24292D;
+	padding: 5vh 0;
+}
+
+.event .table div h3{
+	color: white;
+}
+
+.event .event_description div {
+	padding: 1vh 3vh;
+	border: 1px solid black;
+	display: inline-block;
+	margin-top: 2vh;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.event_description div:hover {
+	transition: 0.3s;
+	background-color: black;
+	color: white;
+}
+
+/* Комментарий */
+
+.map {
+	text-align: center;
+}
+
+/* Комментарий */
+
+.footer{
+	background: #24292D;
+	color: white;
+	text-align: center;
+	padding: 5vh;
+}
+
+.footer ul {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: space-around;
+}
+
+.footer ul li {
+	list-style-type: none;
+	display: inline-block;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.footer h3{
+	padding: 3vh 0;
+}
+
+.footer span{
+	display: block;
+	padding: 0 0 3vh 0;
+	border-bottom: 1px solid white;
+	margin-bottom: 3vh;
+}

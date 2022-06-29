@@ -1,0 +1,516 @@
+
+* {
+	box-sizing: border-box;
+}
+
+.no-gutter > [class*='col'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+/* 
+
+
+		HEADER  
+
+
+*/
+
+.header {
+	box-shadow: 0px 13px 7px 0px rgba(34, 60, 80, 0.2);
+	margin-bottom: 10px;
+	display: flex;
+	position: sticky;
+	top: 0; z-index: 3;
+	background-color: white;
+	opacity: 0.9;
+	padding: 3px;
+} 
+
+.nav li {
+	display: inline-block;
+	padding: 13px;
+	margin: 5px;
+	cursor: pointer;
+	transition: 0.2s;
+	font-size: 17px;
+}
+
+.name {
+	padding: 15px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.nav .default:hover {
+	background-color: #b8b6b6;
+	transition: 0.2s;
+}
+
+.sign_up {
+	border: 1px solid #007BFF;
+	border-radius: 3px;
+}
+
+.sign_up:hover {
+	background-color: #007BFF;
+	color: black;
+	transition: 0.2s;
+}
+
+.footer_ul	{
+	list-style-type: none;
+	color: grey;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.nav_ul {
+	position: relative;
+	top: 7px;
+}
+
+.company_name {
+	margin-left: 20px;
+	font-size: 22px;
+	color: #999;
+	font-weight: bold;
+	border-left: 3px solid #D8D8D8;
+	padding: 15px 0px 15px 10px;
+}
+
+.nav {
+	float: right;
+	padding: 5px;
+}
+
+/* 
+
+
+		ПРЕДЛОЖЕНИЕ  
+
+
+*/
+
+.main {
+	text-align: center;
+	background-image: url(img/remont_blur.jpg);
+	background-size: cover;
+	font-family: 'Jura', sans-serif;
+	color: white;
+	padding: 120px;
+}
+
+.main p {
+	font-size: 32px;
+	color: black;
+	display: inline;
+	padding: 10px;
+	background-color: white;
+	opacity: .9;
+}
+
+.main p:first-child {
+	display: inline;
+	padding: 10px;
+	background-color: black;
+	opacity: .9;
+	color: white;
+	position: relative;
+	top: 20px;
+}
+
+.main form {
+	font-size: 25px;
+	padding: 10px;
+	opacity: .9;
+}
+
+.input_submit{
+	display: inline-block;
+	padding: 10px 40px 10px 40px;
+	margin-top: 20px;
+	color: #007BFF;
+	border: 1px solid #007BFF;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.input_submit:hover {
+	background-color: #007BFF;
+	transition: 0.2s;
+	color: white;
+}
+
+
+
+/* 
+
+
+		ПРЕИМУЩЕСТВА  
+
+
+*/
+
+.our_achieve {
+	padding-bottom: 40px;
+	border-bottom: 2px solid #D8D8D8;
+	margin-bottom: 40px;
+}
+
+.achieve_img {
+	width: 150px;
+	height: 150px;
+	margin-bottom: 15px;
+}
+
+.achieve {
+	display: inline-block;
+	text-align: center;
+	border: 2px solid #f5f5f5;
+	border-radius: 15px;
+	padding: 20px 20px 20px 20px;
+	margin: 20px 20px 20px 0px;
+	width: 100%;
+	height: 90%;
+	cursor: pointer;
+	transition: 0.4s;
+}
+
+.achieve span{
+	color: black;
+	padding: 20px 0px 20px 0px;
+	font-size: 21px;
+}
+
+
+.achieve p{
+	align-items: center;
+}
+
+.button {
+	border: 2px solid #D8D8D8;
+	padding: 5px 0px 25px 0px;
+	border-radius: 10px;
+	margin-top: 20px; 
+	cursor: pointer;
+	width: 55%;
+	font-size: 20px;
+	font-weight: bold;
+	transition: 0.3s;
+	display: inline-block;
+	max-width: 500px;
+}
+
+.button:hover {
+	box-shadow: 0px 8px 9px 4px rgba(34, 60, 80, 0.2);
+	transition: all 0.5s ease;
+	position: relative;
+	transform: translateY(-25px);
+}
+
+.achieve:hover {
+	box-shadow: 0px 8px 9px 4px rgba(34, 60, 80, 0.2);
+	transition: 0.4s;
+}
+
+/* 
+
+
+		КАК МЫ РАБОТАЕМ  
+
+
+*/
+
+.steps {
+	text-align: center;
+	margin: 30px ;
+	font-size: 22px;
+	cursor: pointer;
+}
+
+.steps img {
+	width: 180px;
+	margin-bottom: 15px;
+	transition: 0.3s;
+}
+
+.steps_arrow {
+	margin: 30px;
+	text-align: center;
+}
+
+/* 
+
+
+		УСЛУГИ  
+
+
+*/
+
+.service_table div {
+	display: inline-block;
+	font-size: 18px;
+	text-align: center;
+}
+
+.service_table .service_name {
+	width: 30%;
+}
+
+.service_table .service_time {
+	width: 30%;
+}
+
+.service_table .service_price {
+	width: 30%;
+}
+
+
+.service_table .get {
+	width: 30%;
+	font-weight: bold;
+	transition: 0.3s;
+	display: block;
+	padding-top: 10px;
+}
+
+
+.service_table {
+	padding: 25px 0px 25px 30px;
+	cursor: pointer;
+	box-shadow: 3px 6px 9px 2px rgba(34, 60, 80, 0.2);
+	max-width: 90%;
+	position: relative;
+	margin: 0 auto;
+}
+.service_table_center {
+	position: relative;
+	margin: 0 auto;
+	margin: 15px 0px 15px 0px;
+}
+
+.service_table:hover .get {
+	color: red;
+	transition: 0.3s;
+}
+
+
+/* 
+
+
+		СЛАЙДЕР С ОТЗЫВАМИ  
+
+
+*/
+
+.slider {
+	width: 85%;
+	height: auto;
+	overflow: hidden;
+	display: inline-block;
+	border: 2px solid #D8D8D8;
+	padding: 10px;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.slides {
+	font-size: 18px;
+	margin: 10px;
+	display: flex;
+	color: black;
+	width: 400%;
+	height: 100%;
+}
+
+.slide img {
+	width: 200px;
+	margin-bottom: 10px;
+}
+
+.user_name {
+	font-weight: bold;
+}
+
+.slide {
+	width: 25%;
+	transition: all 0.5s ease;
+
+}
+
+.slide div {
+	max-width: 95%;
+}
+
+.bar {
+	cursor: pointer;
+	background-color: #827f7f;
+	opacity: .6;
+	border-radius: 10px;
+	transition: 0.3s;
+	width: 17px;
+	height: 10px;
+	margin-right: 5px;
+	transition: 0.4s;
+}
+
+.navigation {
+	cursor: pointer;
+	text-align: center;
+}
+
+.bar:hover {
+	background-color: #000;
+	transition: 0.4s;
+}
+
+input[name="r"] {
+	visibility: hidden;
+	position: absolute;
+}
+
+#r1:checked ~ .s1{
+	margin-left: 0;
+}
+
+
+#r2:checked ~ .s1{
+	margin-left: -25%;
+}
+
+
+#r3:checked ~ .s1{
+	margin-left: -50%;
+}
+
+
+#r4:checked ~ .s1{
+	margin-left: -75%;
+}
+
+
+
+/* 
+
+
+		ФУТЕР С ФОРМОЙ  
+
+
+*/
+
+.table_footer {
+	background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+	margin-top: 100px;
+	color: white;
+}
+
+.input_footer {
+	font-size: 17px;
+	padding: 7px;
+	border-radius: 6px;
+	margin: 10px 0px;
+	border: 0;
+}
+
+.input_submit_footer {
+	display: inline-block;
+	padding: 15px 70px 15px 70px;
+	margin-top: 20px;
+	color: white;
+	font-size: 18px;
+	background-color: #24243e;
+	cursor: pointer;
+	transition: 0.3s;
+	border: 0;
+}
+
+.input_submit_footer:hover {
+	background-color: #343469;
+	transition: 0.3s;
+	color: white;
+}
+
+.low_td {
+	background-color: black;
+	opacity: .3;
+	padding: 10px;
+}
+
+.table_footer tr td{
+	padding: 40px;
+}
+
+@media (max-width: 790px) {
+	.main {
+		padding: 10px;
+	}
+
+	.company_name {
+		display: none;
+	}
+
+	.nav_ul li {
+		font-size: 12px;
+		padding: 3px;
+	}
+
+	.logo {
+		display: block;
+		padding: 0!important;
+	}
+
+	.main p{
+		font-size: 19px;
+	}
+
+	.main form{
+		font-size: 19px;
+	}
+
+	.nav {
+		float: left;
+		padding: 0;
+	}
+
+	.how_it_work_img {
+		max-width: 45%;
+	}
+
+	.bi-chevron-compact-down {
+		max-width: 5em;
+		max-height: 5em; 
+	}
+
+	.name_header {
+		flex: 0 0 4%!important;
+		text-align: left;
+	}
+
+	.header {
+		padding: 0;
+	}
+
+}
+
+@media (min-width: 790px) and (max-width: 1150px) {
+	
+	.company_name {
+		display: none;
+	}
+
+	.logo {
+		padding: 0!important;
+
+	}
+
+	.header {
+		flex: 0 0 4%!important;
+		text-align: center;
+	}
+
+	.nav {
+		float: left;
+	}
+
+}

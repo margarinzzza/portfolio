@@ -1,0 +1,20 @@
+a {
+	text-decoration: none!important;
+	color: white;
+}
+
+a:hover {
+	text-decoration: none!important;
+	color: white;
+}
+
+.h_red {
+	font-family: 'Caveat', cursive;
+	font-size: 7vh;
+	color: #8C1943;
+}
+
+* {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+}

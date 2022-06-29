@@ -1,0 +1,337 @@
+/*all*/
+
+.slick-track {
+    display: flex !important;
+    align-items: center !important;
+}
+
+* {
+    font-family: "Open Sans", sans-serif;
+}
+
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0 !important;
+    padding: 0;
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
+.gray_text {
+    color: #868686 !important;
+}
+
+.big_font {
+    font-size: 3.5vh;
+}
+
+.default_font {
+    font-size: 1.6vh !important;
+}
+
+
+/*header_mobile*/
+
+.header_mobile {
+    display: none !important;
+}
+
+
+/*header*/
+
+.header {
+    margin: 1vh 0 2vh 0;
+}
+
+.header_nav_ul {
+    position: relative;
+    top: 1.3vh;
+}
+
+.header_num {
+    font-size: 1.8vh;
+}
+
+.header_nav_soc_number ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.li_catalog {
+    background-color: #aaccbc !important;
+    color: white !important;
+}
+
+
+/*promo*/
+
+.carousel-control-prev,
+.carousel-control-next {
+    opacity: 0 !important;
+}
+
+.promo-text {
+    position: absolute;
+    z-index: 2;
+    top: 24%;
+    left: 9%;
+    width: 33%;
+    color: #232323 !important;
+}
+
+.main_form {
+    position: relative;
+    width: 100%;
+}
+
+.main_form input {
+    width: 100%;
+    height: auto;
+    padding-left: 10px;
+    border: 0.5px solid #868686;
+    border-radius: 5px;
+    outline: none;
+    color: #9e9c9c;
+    opacity: 0.7;
+    padding: 1vh;
+}
+
+.main_form button {
+    color: #232323;
+    position: absolute;
+    top: 0;
+    right: 0px;
+    width: auto;
+    height: -webkit-fill-available;
+    border: 0.5px solid #868686;
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.main_form button:before {
+    font-family: FontAwesome;
+    font-size: 16px;
+    color: #f9f0da;
+}
+
+
+/*advantages*/
+
+.advantages {
+    margin-top: 8vh !important;
+    margin-bottom: 6vh !important;
+}
+
+.advantages,
+.hits {
+    margin: 10vh 0;
+}
+
+.advantages_item img {
+    height: 10vh;
+    margin: 3vh;
+}
+
+.advantages_item {
+    margin: 2vh 1vh;
+}
+
+
+/*new products*/
+
+.new_products {
+    margin: 5vh 0;
+}
+
+.new_products {
+    padding: 0 3vh;
+}
+
+.new_products_item {
+    margin: 3vh 0;
+}
+
+
+/*hits*/
+
+
+/*compilation*/
+
+.compilation_item {
+    position: relative;
+}
+
+.compilation_item_text {
+    position: absolute;
+    top: 41%;
+    left: 28%;
+    z-index: 3;
+    display: none !important;
+    transition: 0.4s;
+}
+
+.darkening {
+    opacity: 0;
+    transition: 0.4s;
+    position: absolute;
+    background-color: black;
+    z-index: 2;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
+.compilation_item {
+    cursor: pointer;
+}
+
+.compilation_item:hover .darkening {
+    opacity: 0.4;
+    transition: 0.4s;
+}
+
+.compilation_item:hover .compilation_item_text {
+    transition: 0.4s;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+
+/*instagram*/
+
+.instagram {
+    margin-top: 7vh;
+    padding: 0 2vh;
+}
+
+
+/*brands*/
+
+.brands {
+    margin: 9vh 0;
+    ;
+}
+
+
+/*you_viewed*/
+
+.you_viewed {
+    padding: 0 3vh;
+}
+
+.multiple-items_2 div {
+    margin: 0 2vh;
+}
+
+
+/*footer*/
+
+.footer {
+    margin-top: 9vh;
+    padding: 4vh 4vh 2vh 4vh;
+    color: white;
+    background-color: #232323;
+}
+
+.footer_border {
+    border-top: 0.2vh solid #868686;
+    margin: 0 0 2vh 0;
+}
+
+.footer_nav ul li {
+    margin-bottom: 2vh;
+}
+
+
+/*about_us*/
+
+.about_us div {
+    margin: 1vh 0.1vh;
+}
+
+.about_us_text {
+    padding: 2vh;
+}
+
+.about_us span {
+    margin: 1vh 0;
+}
+
+
+/*delivery*/
+
+.delivery li {
+    margin: 0.5vh 0;
+}
+
+
+/*contacts*/
+
+.contacts li {
+    margin: 0.5vh 0;
+}
+
+.contacts form * {
+    margin: 0.7vh 0;
+}
+
+.contacts form input,
+textarea {
+    padding: 0.4vh;
+    border: 0.1vh solid line;
+    opacity: 0.6;
+}
+
+.rekvizity li {
+    margin: 0.5vh 0;
+}
+
+.rekvizity {
+    width: 57vh;
+}
+
+
+/*payment*/
+
+
+/*reviews*/
+
+
+/*media*/
+
+@media (max-width: 630px) {
+    .header {
+        display: none !important;
+    }
+    .header_mobile {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer ul {
+        align-items: center !important;
+    }
+    .promo-text h2 {
+        font-size: 1.9vh;
+        margin: 0;
+    }
+    .promo-text span {
+        padding: 0;
+    }
+    .promo-text {
+        width: 60%;
+    }
+    .promo-text p {
+        margin: 1vh 0;
+    }
+}

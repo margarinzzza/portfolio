@@ -1,0 +1,99 @@
+
+/* ШАПКА */
+
+.header {
+	padding: 3vh;
+	font-weight: bold;
+}
+
+.header .nav {
+	text-align: center;
+	display: block;
+}
+
+.header .logo img{
+	cursor: pointer;
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: space-around;
+}
+
+ul li {
+	list-style-type: none;
+	display: inline-block;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+li:hover {
+	transition: 0.3s;
+	color: #8C1943;
+
+}
+
+/* Комментарий */
+
+.menue img{
+	width: 95%;
+}
+
+.menue table {
+	font-weight: bold;
+}
+
+.name td{
+	padding: 1vh 0;
+}
+
+.food_description {
+	margin: 3vh 0;
+	cursor: pointer;
+}
+
+.menue ul {
+	margin: 2vh 0;
+}
+
+/* Комментарий */
+
+.map {
+	text-align: center;
+}
+
+/* Комментарий */
+
+.footer{
+	background: #24292D;
+	color: white;
+	text-align: center;
+	padding: 5vh;
+}
+
+.footer ul {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: space-around;
+}
+
+.footer ul li {
+	list-style-type: none;
+	display: inline-block;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.footer h3{
+	padding: 3vh 0;
+}
+
+.footer span{
+	display: block;
+	padding: 0 0 3vh 0;
+	border-bottom: 1px solid white;
+	margin-bottom: 3vh;
+}
