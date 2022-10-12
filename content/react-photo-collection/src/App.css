@@ -1,0 +1,187 @@
+/* all */
+
+
+html, body {
+    height: 100%;
+    transition: .3s;
+}
+
+a {
+    color: inherit!important;
+    text-decoration: none!important;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #efebeb;
+}
+
+#root, .content {
+    height: 100%;
+}
+
+input {
+    all: unset;
+}
+
+.content {
+    display: flex;
+    margin: 0 auto;
+    width: 95%;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.fs-default {
+    font-size: 10.89vh;
+}
+
+.app {
+    height: 100%;
+    transition: .4s;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+.button {
+    margin: .2vh;
+    transition: .3s;
+    padding: 1vh 2vh;
+    border-radius: 1vh;
+    margin-right: 1vh;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: .1vh solid #efebeb;
+}
+
+.button:hover {
+    transition: .3s;
+    border: .1vh solid black;
+}
+
+.active-button {
+    transition: .3s;
+    background-color: black;
+    color: white!important;
+}
+
+/* photo-collection-filters */
+
+.photo-collection {
+    margin-top: 3vh;
+}
+
+.photo-collection-filters {
+    position: sticky;
+    top: 0;
+    padding: 1vh 0;
+    background-color: #efebeb;
+    z-index: 3;
+}
+
+.photo-collection-categories, .photo-collection-find {
+    margin: .6vh 0;
+}
+
+.photo-collection-find input {
+    transition: .3s;
+    border-radius: 1vh;
+    padding: 1vh;
+    border: 0.1vh solid white;
+}
+
+.photo-collection-find input:focus {
+    transition: .3s;
+    border: .1vh solid gray;
+}
+
+/* photo-collection-list */
+
+.photo-collection-item {
+    transition: .3s;
+    cursor: pointer;
+    margin: 1vh;
+    background-color: white;
+    padding: 2vh;
+    border-radius: 2vh;
+    width: 31%;
+}
+
+.photo-collection-item:hover {
+    transition: .3s;
+    transform: translateY(-1vh);
+}
+
+.photo {
+    border-radius: 1vh;
+    margin: 0.4vh;
+}
+
+.sub-photo {
+    height: 17%;
+    width: 30%;
+}
+
+.photo-collection-name {
+    margin-top: 3vh;
+}
+
+/* pagination */
+
+.pagination {
+    padding: 4vh 0;
+}
+
+.pagination li {
+
+}
+
+.pagination-item {
+
+}
+
+/* media */
+
+@media(max-width: 835px) {
+
+    .photo-collection-item {
+        width: 38vh;
+    }
+
+    .sub-photo {
+        height: 8vh;
+        width: 16.2vh;
+    }
+
+}
+
+@media(max-width: 759px) {
+
+    .photo-collection-item {
+        width: 100%;
+    }
+
+    .photos {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sub-photo {
+        height: 10vh;
+        width: 31%;
+    }
+
+}

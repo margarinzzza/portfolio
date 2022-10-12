@@ -1,0 +1,114 @@
+/* all */
+
+html, body {
+    height: 100%;
+    transition: .3s;
+}
+
+body {
+    background: rgb(46 24 85);
+}
+
+#root, .content {
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.fs-default {
+    font-size: 10.89vh;
+}
+
+.app {
+    height: 100%;
+    transition: .4s;
+}
+
+.content {
+    width: 80%;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
+.button {
+    color: white;
+    display: inline-block;
+    background-color: brown;
+    padding: 1.3vh 3vh;
+    border-radius: 3vh;
+    cursor: pointer;
+}
+
+/* qna */
+
+.qna-card {
+    padding: 3vh;
+    background-color: white;
+    border-radius: 2vh;
+    width: 70vh;
+}
+
+.qna-card img {
+    width: auto;
+}
+
+.qna-q {
+    font-weight: bolder;
+    font-size: 3.5vh;
+    margin: 3vh 0;
+}
+
+.qna-progress {
+    transition: .3s;
+    height: 1vh;
+    border-radius: 1vh;
+    background: rgb(40, 28, 61);
+    background: linear-gradient(281deg, rgba(40, 28, 61, 1) 0%, rgba(33, 172, 161, 1) 100%);
+}
+
+.qna-answers {
+    padding: 0 2vh;
+}
+
+.qna-answer {
+    transition: .3s;
+    cursor: pointer;
+    margin: 1vh 0;
+    padding: 1vh;
+    border-bottom: .1vh solid white;
+}
+
+.qna-answer:hover {
+    transition: .3s;
+    border-bottom: .1vh solid rgb(40, 28, 61);
+}
+
+.qna-end h4 {
+    font-weight: bold;
+    margin: 2vh 0;
+}
+
+.qna-end img {
+    width: 17vh;
+}
+
+/* media */
+
+@media(max-width: 769px) {
+
+    .content {
+        width: 95%;
+    }
+
+}
