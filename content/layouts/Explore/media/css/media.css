@@ -1,0 +1,99 @@
+
+
+@media(max-width: 1600px) {
+    .content {
+        width: 90% !important;
+    }
+
+}
+
+@media(max-width: 412px) {
+    .content__image_humans {
+        width: 100%;
+        height: auto;
+    }
+
+    .content__image_woman {
+        width: auto;
+        right: 27vh !important;
+
+    }
+
+}
+
+@media(max-width: 1545px) {
+    .content__image_board {
+        display: none !important;
+    }
+}
+
+@media(max-width: 1025px) {
+
+    .about__content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about__content__description {
+        width: 100% !important;
+    }
+
+    .banner__table__form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .banner__table__form div {
+        width: 100%;
+    }
+
+    .banner__table__form .button {
+        margin-top: 2vh;
+    }
+
+    .header__nav-hamburger {
+        display: flex !important;
+    }
+
+    .header__nav__logo {
+        width: 50% !important;
+    }
+
+    .header__nav__logo h2 {
+        color: #FFC814;
+    }
+
+    .header__nav__hamburger {
+        width: 50% !important;
+    }
+
+    .header__nav__ul {
+        display: none !important;
+    }
+
+    .header__nav {
+        position: fixed;
+        top: 2vh;
+        z-index: 3;
+    }
+
+    .banner__table__form p {
+        margin: 2vh 0;
+    }
+
+    .about__content__images {
+        justify-content: unset !important;
+        bottom: 6vh;
+        left: 0vh;
+        padding: 0 !important;
+    }
+
+    .content__image_woman {
+        right: 24vh;
+    }
+
+    .content__image_board {
+        display: none;
+    }
+
+}

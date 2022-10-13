@@ -1,0 +1,208 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+@font-face {
+    font-family: 'Quick Kiss';
+    src: url(../fonts/Quick\ Kiss\ Personal\ Use.ttf);
+}
+
+.quick_kiss {
+    font-family: 'Quick Kiss';
+}
+
+.default_text {
+    font-size: 1.8vh !important;
+}
+
+.yellow_bg {
+    background: #FFC814;
+}
+
+.gray_text {
+    color: rgba(157, 161, 180, 1);
+}
+
+.dark_text {
+    color: rgba(31, 51, 71, 1);
+}
+
+.yellow_text {
+    color: #FFC814;
+}
+
+.white_bg {
+    background: #FFFDFD;
+}
+
+.button {
+    font-size: 1.8vh !important;
+    border: none;
+    border-radius: 4px;
+    width: 18.1vh;
+    height: 6.3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: scale(1.07);
+    transition: 0.3s;
+}
+
+a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+h1 {
+    font-size: 7.2vh !important;
+    line-height: 76px;
+    font-weight: 600 !important;
+}
+
+h2 {
+    font-size: 4.08vh !important;
+    line-height: 54px;
+    font-weight: 600 !important;
+}
+
+.content {
+    width: 70% !important;
+}
+
+/* HEADER FOR MOBILE */
+
+.header__nav-hamburger {
+    display: none;
+}
+
+/* HEADER */
+
+.header {
+    padding: 2vh 0 4vh 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../img/BG.png');
+    color: white;
+}
+
+.header__nav__ul {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    justify-content: space-around;
+
+}
+
+.header__nav__ul li {
+    font-weight: 600;
+    line-height: 24px;
+    list-style-type: none;
+
+}
+
+.header__promo {
+    padding: 7vh 0 19vh 0;
+}
+
+/* BANNER */
+
+.banner {
+    position: relative;
+    bottom: 10vh;
+}
+
+.banner__ul ul {
+    margin: 0;
+    display: flex;
+    padding: 0;
+}
+
+.banner__ul ul li {
+    cursor: pointer;
+    padding: 0 1vh;
+    margin-right: 0.6vh;
+    display: flex;
+    align-items: center;
+    width: 13.6vh;
+    height: 5.1vh;
+    font-weight: 600 !important;
+    color: #1F3347 !important;
+    border-radius: 5px 5px 0 0;
+}
+
+.banner__table {
+    padding: 3vh 4vh 5vh 4vh;
+    box-shadow: 0px 6px 24px #E4E2EE;
+}
+
+.banner__table__form p {
+    font-weight: 600;
+    color: #1F3347;
+}
+
+.banner__table__form input {
+    padding: 1vh;
+    box-shadow: 0px 6px 24px #E4E2EE;
+    border-radius: 4px;
+    border: none;
+}
+
+/* About_us */
+
+.about {
+    margin-bottom: 4vh;
+}
+
+.about__content__images {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    left: 2vh;
+}
+
+.content__image_humans {
+    width: 46.5vh;
+    height: 59vh;
+}
+
+.content__image_woman {
+    width: 30.1vh;
+    height: 32vh;
+    z-index: 2;
+    position: relative;
+    top: 32vh;
+    right: 17vh;
+}
+
+.about__content__ul li {
+    margin: 1.5vh 0;
+    list-style-image: url(../img/icons/check.svg);
+}
+
+.about__content___adv {
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+}
+
+.about__content___adv div {
+    display: flex;
+    flex-direction: column;
+    width: 22%;
+}
+
+.content__image_board {
+    width: 39.8vh !important;
+    height: 50vh !;
+    position: absolute;
+    bottom: 0;
+
+    right: 0;
+}
+

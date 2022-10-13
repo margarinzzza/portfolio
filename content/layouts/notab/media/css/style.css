@@ -1,0 +1,539 @@
+/* for all*/
+html,
+body {
+    height: 100%;
+}
+
+img {
+    cursor: pointer !important;
+}
+
+.empty_field {
+    transition: 0.4s;
+    border: 0.2vh solid red !important;
+}
+
+.container-fluid {
+    overflow: hidden;
+}
+
+body {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+a {
+    color: inherit !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+p {
+    font-style: normal;
+    font-size: 1.5vh;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 5vh !important;
+}
+
+.montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nunito {
+    font-size: small;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/* cookie*/
+
+.cookie {
+    z-index: 5;
+    background-color: #212834;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 3vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cookie p {
+    margin: 0 !important;
+}
+
+.cookie_button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 0.1vh solid #FFFFFF;
+    border-radius: 1vh;
+    padding: 1vh 5vh;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cookie_button:hover {
+    background: rgba(35, 134, 247, 0.171);
+    border: 0.1vh solid #FFFFFF;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* promo */
+
+.promo_img {
+    background-size: cover;
+    background: url(../img/backs/back_1.png);
+}
+
+.promo_desc {
+    padding: 0 7vh !important;
+}
+
+.promo_desc div {
+    padding: 3vh 0;
+}
+
+/* download */
+
+.download {
+    margin: 6vh 0 !important;
+}
+
+/* partner*/
+
+.partner_contact, .partner_login {
+    border-radius: 1vh;
+    padding: 5vh;
+    width: 75%;
+    margin: 1vh 0;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/*our_mission*/
+
+.our_mission {
+    margin: 2vh 0 24vh 0 !important;
+}
+
+/*id_scanner*/
+
+.id_scanner_back img {
+    position: absolute;
+    top: -24vh;
+    z-index: -1;
+}
+
+.id_scanner_desc {
+    position: relative;
+    bottom: 7vh;
+}
+
+/* Tool Integration */
+
+.tool_integration {
+    margin: 15vh 0 !important;
+}
+
+.tool_integration_desc {
+    padding: 0 7vh !important;
+}
+
+.tool_integration_img img {
+    width: 28%;
+}
+
+/*QR code */
+
+.qr {
+    margin: 30vh 0 !important;
+}
+
+.qr_desc_col {
+    padding: 0 0 0 9vh !important;
+}
+
+.qr_img_top {
+    position: relative;
+    bottom: 13vh;
+    right: 4vh;
+}
+
+.qr_img_bottom {
+    position: relative;
+    top: 13vh;
+}
+
+/* generate qr */
+
+.generate_qr_scan {
+    margin-bottom: 6vh;
+    padding: 6vh 0 !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background: url(../img/notab_back.png);
+
+}
+
+.scan_arrow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    left: 5vh;
+    bottom: 4vh;
+}
+
+.generate_qr_scan h5 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    left: 8vh;
+    top: 2vh;
+}
+
+.generate_qr_scan img {}
+
+.generate_qr_scan div {}
+
+/* преимущества */
+
+.advantages {
+    margin: 8vh 0 !important;
+}
+
+.advantages_desc {
+    width: 35%;
+}
+
+.advantage_card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1vh solid rgba(255, 255, 255, 0.4);
+    border-radius: 1.5vh;
+    width: fit-content;
+    padding: 1.4vh;
+    background-color: #000000;
+}
+
+.advantage_card_1 {
+    left: 45vh;
+    top: 14vh;
+}
+
+.advantage_card_2 {
+    top: 24vh;
+}
+
+.advantage_card_3 {
+    top: 40vh;
+    left: 68vh;
+}
+
+.advantage_card_4 {
+    top: 41vh;
+    left: 19vh;
+}
+
+
+/* notab */
+
+.notab {
+    margin: 15vh 0 !important;
+    padding: 7vh 0;
+    background-size: contain !important;
+    background: url(../img/notab_back_2.png);
+}
+
+/*форма */
+
+.form_desc {
+    width: 35%;
+}
+
+.form_main {
+    margin-top: 4vh !important;
+    color: #BFBFBF;
+    background-size: cover !important;
+    background-repeat: round !important;
+    background: url(../img/backs/back_4.png);
+}
+
+.form_main input {
+    padding: 2vh;
+    border: 0.1vh solid #5C5C5C;
+    border-radius: 1vh;
+    margin: 1vh;
+}
+
+.form_main textarea {
+    padding: 2vh;
+    border: 0.1vh solid #5C5C5C;
+    border-radius: 1vh;
+    margin: 1vh;
+}
+
+.form_button {
+    background-color: black;
+    border: 0.2vh solid #FFFFFF;
+    border-radius: 1vh;
+    color: white;
+    width: fit-content;
+    padding: 2vh 15vh;
+    transition: 0.5s;
+}
+
+.form_button:hover {
+    transition: 0.5s;
+    background-color: #FFFFFF;
+    border: 0.2vh solid #FFFFFF;
+    color: black;
+}
+
+/* подвал */
+
+.footer {
+    margin-top: 8vh !important;
+    padding: 5vh;
+    background-size: cover !important;
+    background-position: 50% 40% !important;
+    background: url(../img/backs/back_3.png);
+}
+
+/* Tool Integration */
+
+@media (max-width: 800px) {
+
+    .header_logo {
+        width: 70% !important;
+    }
+
+    .header_login {
+        width: 30% !important;
+        display: flex;
+        justify-content: end;
+    }
+
+    .header_logo img {
+        width: 37%;
+    }
+
+    .user_icon {
+        display: none;
+    }
+
+    .promo {
+        margin-top: 6vh !important;
+    }
+
+    .promo_desc {
+        width: 75% !important;
+        padding: 0 3vh !important;
+    }
+
+    .promo_desc_h {
+        padding: 0 !important;
+    }
+
+    .promo_desc_text {
+        padding: 0 !important;
+    }
+
+    .promo_desc_text p {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .promo_img {
+        width: 15% !important;
+    }
+
+    .promo_img img {
+        width: 400% !important;
+        position: relative !important;
+        right: -6vh !important;
+    }
+
+    .download_buttons {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .download img {
+        margin: 1.5vh 0 !important;
+        width: 22vh;
+    }
+
+    .our_mission {
+        margin: 7vh 0 34vh 0 !important;
+        flex-direction: column-reverse;
+    }
+
+    .our_mission_desc_col {
+        justify-content: center;
+    }
+
+    .id_scanner_img {
+        order: 3;
+    }
+
+    .id_scanner_img img {
+        width: 65%;
+        margin: 2vh 0vh !important;
+    }
+
+    .id_scanner_desc {
+        width: 85% !important;
+    }
+
+    .id_scanner_back img {
+        top: -38vh;
+    }
+
+    .qr {
+        margin-bottom: 12vh !important;
+        margin-top: 0 !important;
+    }
+
+    .qr_download_buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .qr_img {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .qr_desc {
+        padding: 0 3vh !important;
+    }
+
+    .qr_desc p {
+        width: 85% !important;
+    }
+
+    .qr_desc_col {
+
+        padding: 0 !important;
+    }
+
+    .qr img {
+        display: flex;
+        align-items: center;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: fit-content;
+        margin: 2vh 0 !important;
+    }
+
+    .generate_qr_scan {
+        order: 2;
+    }
+
+    .generate_qr_scan div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .generate_qr_scan img {
+        width: 29vh;
+    }
+
+    .generate_qr_desc p {
+        width: 75% !important;
+    }
+
+    .scan_arrow svg {
+        left: 14vh;
+        position: relative;
+        transform: rotate3d(1, 1, 1,
+                45deg);
+        bottom: 2vh;
+    }
+
+    .advantages div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .advantages_desc {
+        padding: 0 2vh !important;
+        width: 100%;
+    }
+
+    .advantage_card {
+        display: none !important;
+    }
+
+    /* .advantage_card_1 {
+        position: relative;
+        left: 0;
+        top: 0;
+    }
+
+    .advantage_card_3 {
+        position: relative;
+        left: 0;
+    } */
+
+    .notab {
+        display: none !important;
+    }
+
+    .form_desc {
+        width: 80%;
+    }
+
+    .feedback_form * {
+        width: 100% !important;
+    }
+
+    .feedback_form input {
+        width: 100% !important;
+    }
+
+    .feedback_form div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .download_footer div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .download_footer img {
+        margin: 1vh 0 !important;
+        width: 29vh;
+    }
+
+    .footer {
+        text-align: center;
+    }
+
+    .footer_left_col {
+        order: 2;
+    }
+
+    .footer_right p {
+        width: 100%;
+    }
+
+}

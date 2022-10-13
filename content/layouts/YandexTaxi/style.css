@@ -1,0 +1,296 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Yandex Sans Regular';
+}
+
+@font-face {
+    font-family: 'Yandex Sans Light';
+    src: local('Yandex Sans Text Light'), local('Yandex-Sans-Text-Light'),
+        url('media/fonts/yandexsanslight/YandexSansText-Light.woff2') format('woff2'),
+        url('media/fonts/yandexsanslight/YandexSansText-Light.woff') format('woff'),
+        url('media/fonts/yandexsanslight/YandexSansText-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yandex Sans Regular';
+    src: local('Yandex Sans Text Regular'), local('Yandex-Sans-Text-Regular'),
+        url('media/fonts/yandexsansregular/YandexSansText-Regular.woff2') format('woff2'),
+        url('media/fonts/yandexsansregular/YandexSansText-Regular.woff') format('woff'),
+        url('media/fonts/yandexsansregular/YandexSansText-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.yellow_background {
+    background-color: #FFDF39;
+}
+
+.gray_text {
+    color: #8B8B8B;
+}
+
+.cursored {
+    cursor: pointer;
+}
+
+.underlined {
+    text-decoration: underline;
+}
+
+.small_font {
+    font-size: 1.6vh;
+}
+
+.regular_font {
+    font-size: 1.8vh;
+}
+
+.big_font {
+    font-size: 4vh;
+}
+
+.bold_font {
+    font-weight: bold;
+}
+
+.button {
+    background-color: #FFDF39;
+    padding: 1vh 6vh;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    transition: 0.3s;
+    border-radius: 0.5vh;
+    border: 0;
+}
+
+.button:hover {
+    background-color: #f7d219;
+    transition: 0.3s;
+}
+
+/* HEADER */
+
+.header {
+    padding: 2vh 1vh;
+}
+
+.header .name div {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.header .nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.header .nav ul li {
+    color: #8B8B8B;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 0 2vh;
+}
+
+.header .nav ul li:hover {
+    color: black;
+    transition: 0.2s;
+}
+
+/* промо */
+
+.promo .text_promo {
+    padding: 10vh;
+    background-color: #F0F0F0;
+    color: black;
+
+}
+
+.promo .text_promo p {
+    margin: 5vh 0;
+}
+
+.promo .img_promo {
+    background-image: url(media/img/1.png);
+    background-size: cover;
+}
+
+/* алгоритм работы */
+
+.algoritm {
+    color: black;
+    padding: 13vh 8vh;
+}
+
+.algoritm span {
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+.algoritm p {
+    margin-top: 1vh;
+    font-size: 1.6vh;
+}
+
+.algoritm .alg_h {
+    margin-bottom: 4vh;
+    font-weight: bold;
+}
+
+/* преимущества */
+
+.text_advantages {
+    background-color: #222222;
+    color: white;
+    padding: 8vh;
+}
+
+.img_advantages {
+    background-image: url(media/img/2.jpg);
+    background-size: cover;
+}
+
+.divTableRow {
+    display: flex;
+    margin-bottom: 3vh;
+}
+
+.divTableCell {
+    margin: 0 2vh;
+}
+
+.advantages h2 {
+    margin-bottom: 7vh;
+}
+
+.advantages p {
+    font-size: 1.5vh;
+}
+
+/* Приложение */
+
+.app {
+    color: black;
+    margin: 7vh 0;
+}
+
+.text_app {
+    padding: 10vh;
+    background-color: #F0F0F0;
+}
+
+.text_app p {
+    margin: 3vh 0;
+}
+
+.text_app img {
+    width: 20vh;
+    cursor: pointer;
+}
+
+.img_app {
+    background-image: url(media/img/3.png);
+    background-size: cover;
+}
+
+/* контакты */
+
+.contacts {
+    padding: 2vh 8vh 10vh 8vh;
+    color: black;
+}
+
+.contacts img {
+    width: 3vh;
+    cursor: pointer;
+    margin: 1vh;
+}
+
+.contact_h h2 {
+    margin-bottom: 4vh;
+    font-weight: bold;
+}
+
+.contacts span {
+    display: inline-block;
+    margin: 1vh;
+}
+
+/* форма */
+
+.callback h1 {
+    margin-bottom: 4vh;
+}
+
+.text_callback {
+    padding: 7vh;
+    color: black;
+    background-color: #F0F0F0;
+}
+
+.img_callback {
+    background-image: url(media/img/4.png);
+    background-size: cover;
+}
+
+.callback p {
+    margin: 0;
+    color: #8B8B8B;
+    font-size: 1.3vh;
+}
+
+.callback input {
+    width: 100%;
+    border: 1px solid #bfbeba;
+    border-radius: 0.5vh;
+    padding: 1vh;
+    margin: 2vh 0;
+}
+
+/* предложение */
+
+.proposal {
+    background-color: #FFDF39;
+    padding: 5vh 0;
+    color: black;
+    font-size: 2.5vh;
+}
+
+.proposal span {
+    margin: 0 1vh;
+}
+
+/* футер */
+
+.footer {
+    background-color: #222222;
+    padding: 2vh;
+    font-size: 1.6vh;
+    color: #b3b2af;
+}
+
+.footer ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    color: #8B8B8B;
+}
+
+.footer ul li {
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+
+.footer ul li:hover {
+    transition: 0.3s;
+    color: white;
+}
