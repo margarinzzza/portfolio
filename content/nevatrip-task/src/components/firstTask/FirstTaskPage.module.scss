@@ -1,0 +1,289 @@
+* {
+    line-height: 100%;
+}
+
+.content {
+    //width: 85%;
+    margin: 0 2vh;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    width: 121.45vh;
+    border: .1vh solid #8e8e8e52;
+    border-radius: 1.7vh;
+    margin: 3vh auto;
+    display: flex;
+}
+
+.itemImg {
+    background-size: cover;
+    width: 44.2%;
+    position: relative;
+    border-radius: 1vh 0 0 1vh;
+
+    img {
+        width: 100%;
+    }
+}
+
+.itemImgBanner {
+    font-size: 1.81vh;
+    padding: 1.6vh 0;
+    text-align: center;
+    width: 17.48vh;
+    top: 5.2vh;
+    text-transform: uppercase;
+    position: absolute;
+}
+
+.itemDescription {
+    justify-content: center;
+    width: 63%;
+    padding: 0 2.61vh;
+    display: flex;
+    flex-direction: column;
+
+    .itemDescriptionHeader {
+        line-height: 3.85vh;
+        //line-height: 34px;
+        padding-top: 1.81vh;
+        font-size: 2.95vh;
+        //font-size: 26px;
+    }
+
+    .itemDescriptionSpentTime {
+        align-items: center;
+        display: flex;
+        color: rgba(158, 158, 158, 1);
+        padding: 1.24vh 0 1vh 0;
+        font-size: 1.58vh;
+        //font-size: 14px;
+    }
+
+    .itemDescriptionFlight {
+        cursor: pointer;
+        padding: 0.6vh 1.7vh;
+        margin: .4vh 0.4vh;
+        border-radius: 1.24vh;
+        transition: .3s;
+        background-color: rgba(197, 220, 255, 1);
+    }
+
+    .itemDescriptionFlight:hover {
+        color: white;
+        transition: .3s;
+        background-color: rgba(107, 166, 255, 1);
+    }
+
+    .itemDescriptionList .itemDescriptionListItem {
+        margin: 0.7vh 0;
+        align-items: center;
+        display: flex;
+        color: rgba(52, 52, 52, 1);
+        padding: 0.68vh 0;
+        font-size: 2.04vh;
+        //font-size: 18px;
+
+        svg {
+            width: 2.4vh;
+        }
+
+        span {
+            color: rgba(52, 52, 52, 1);
+            line-height: 2vh;
+            //line-height: 20px;
+            margin-left: 1.58vh;
+        }
+
+        .flightsList {
+            position: relative;
+            top: .5vh;
+            margin-left: .6vh;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+    }
+
+    .itemDescriptionDetails {
+        padding: 1.4vh 0 2vh 0;
+        display: flex;
+    }
+
+    .itemDescriptionCost {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h3 {
+            font-size: 4.08vh;
+           // font-size: 36px;
+        }
+
+        span {
+            font-size: 1.58vh;
+            //font-size: 14px;
+        }
+    }
+
+    .detailsButton {
+        color: rgba(41, 41, 41, 1);
+        transition: .3s;
+        cursor: pointer;
+        margin-left: 2vh;
+        padding: 2vh 5vh;
+        border-radius: 2.61vh;
+        background: #FFD83C;
+        display: flex;
+        align-items: center;
+        font-size: 2.04vh;
+        //font-size: 18px;
+    }
+
+    .detailsButton:hover {
+        transition: .3s;
+        cursor: pointer;
+        background: #f5ca20;
+    }
+
+}
+
+.nearestFlight {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+@media (max-width: 1280px) {
+    .content {
+        //width: 85%;
+    }
+}
+
+@media (max-width: 890px) {
+
+    .itemsList {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .item {
+        flex-direction: column;
+        align-items: center;
+        width: 47%;
+        margin: 1vh;
+
+        .itemImg {
+            border-radius: 1vh 1vh 0 0;
+            width: 100%;
+            height: 30vh;
+
+            img {
+                border-radius: 1vh 1vh 0 0;
+            }
+        }
+
+        .itemDescription {
+            width: 100%;
+        }
+
+        .itemDescriptionSpentTime {
+            padding: 2vh 0;
+            order: 1;
+        }
+
+        .itemDescriptionHeader {
+            padding: 0;
+            padding-bottom: 2vh;
+            order: 2;
+        }
+
+        .itemDescriptionList {
+            order: 3;
+
+            .itemDescriptionListItem span {
+                line-height: 2.8vh;
+                margin-left: 1.58vh;
+            }
+
+        }
+
+        .flightsList {
+            width: 100%;
+            justify-content: flex-end;
+
+        }
+
+        .nearestFlight {
+            align-items: flex-start !important;
+            flex-direction: column;
+        }
+
+        .itemDescriptionDetails {
+            display: flex;
+            justify-content: space-around;
+            order: 4;
+        }
+
+    }
+}
+
+@media (max-width: 720px) {
+    .item {
+
+        .itemDescriptionListItem {
+            margin: 0 !important;
+        }
+
+        .itemDescriptionHeader {
+            line-height: 22px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .itemDescriptionList {
+            div {
+                span {
+                    font-size: 14px;
+                }
+
+                svg {
+                    width: 2.3vh;
+                    height: 2.3vh;
+                }
+
+            }
+        }
+
+    }
+}
+
+@media (max-width: 650px) {
+
+    .itemsList {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .item {
+        margin: 2vh 0;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+
+@media (min-width: 1600px) {
+
+    .item {
+        margin: 3vh auto;
+        width: 80%;
+    }
+}
