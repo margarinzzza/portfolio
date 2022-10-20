@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* all */
+
+input {
+    all: unset;
+}
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+
+    body {
+        margin: 0;
+        color: black !important;
+        background-color: rgb(255, 223, 140);
+    }
+
+}
+
+#root,
+.content,
+.app {
+    height: 100%;
+}
+
+.content {
+    border-radius: 1.13vh;
+    padding: 4.54vh;
+    background-color: white;
+    margin: 2vh auto;
+    width: 95%;
+}
+
+.rotate-180 {
+    transition: .3s;
+    rotate: 180deg;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 2.5vh;
+    width: 2.5vh;
+    background: url('./media/img/close-search.svg') no-repeat 50% 50%;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.fc-orange {
+    color: rgba(254, 95, 30, 1);
+}
