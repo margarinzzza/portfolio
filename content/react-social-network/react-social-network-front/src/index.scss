@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+$defaulBgc: gray;
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #6b6b6b;
+    overflow-x: hidden;
+}
+
+*::-webkit-scrollbar {
+    width: .5vh;
+    transition: .3s;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(187, 187, 187);
+    border-radius: 1vh;
+}
+
+input {
+    all: unset;
+    box-sizing: border-box;
+}
+
+textarea {
+    all: unset;
+    box-sizing: border-box;
+    padding: 1vh;
+    transition: .3s;
+    border-radius: .4vh;
+    border: .1vh solid #cecece;
+    width: 100%;
+
+    &:focus {
+        transition: .3s;
+        border: .1vh solid #979797;
+    }
+}
+
+.app {
+    margin: 0 auto;
+    width: 90%;
+}
+
+h1 {
+    font-size: 25px;
+    margin-bottom: 1vh;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 1vh;
+}
+
+.default-underline {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.hrefItem {
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+        transition: .3s;
+        color: #424242;
+    }
+}
+
+.hide-error {
+    z-index: -1;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    transition: .3s;
+    height: 0px;
+    transform: scaleY(0);
+}
+
+.show-error {
+    transition: .3s;
+    height: auto;
+    transform: scaleY(1);
+}
+
+.content {
+    padding: 1vh 2vh;
+}
+
+.formButton {
+    display: flex;
+    justify-content: flex-end;
+
+    span {
+        transition: .3s;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        cursor: pointer;
+        padding: 1vh;
+
+        &:hover {
+            transition: .3s;
+            color: #424242;
+        }
+    }
+}
+
+.form {
+    position: relative;
+    min-width: 45vh;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
+    * {
+        padding: 1vh;
+        margin: 1vh 0;
+        border: .1vh solid rgb(182, 182, 182);
+        transition: .3s;
+        border-radius: .2vh;
+
+        &:hover {
+            border: .1vh solid rgb(146, 146, 146);
+            transition: .3s;
+        }
+
+        &:focus {
+            border: .1vh solid rgb(121, 121, 121);
+            transition: .3s;
+        }
+    }
+
+    .formSumitBtn {
+        cursor: pointer;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    .app {
+        width: 100%;
+    }
+}

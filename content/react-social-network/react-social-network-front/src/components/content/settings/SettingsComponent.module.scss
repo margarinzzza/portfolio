@@ -1,0 +1,29 @@
+.settings {
+    
+}
+
+.settingsOptions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1{
+        padding: 0 1vh;
+        cursor: pointer;
+    }
+    h2{
+        cursor: pointer;
+    }
+    h1:first-child {
+        border-right: .1vh solid #6b6b6b;
+    }
+}
+
+@media (max-width: 413px) {
+    .settingsOptions {
+        flex-direction: column;
+        align-items: center;
+        h1:first-child {
+            border: 0;
+        }
+    }
+}

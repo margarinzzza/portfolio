@@ -1,0 +1,32 @@
+.posts {
+    display: flex;
+    flex-direction: column;
+}
+
+.postItem {
+    margin: 1vh 0;
+    display: flex;
+}
+
+.postItemImg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1vh;
+    width: 10vh;
+    min-width: 6vh;
+}
+
+.postItemData {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+@media(max-width: 400px){
+    .postItemImg {
+        margin-right: 1vh;
+        width: 6vh;
+        min-width: 6vh;
+    }
+}
