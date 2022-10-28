@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { createChat } from '../../../features/profile/chatSlice'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const UserComponent = ({ data }) => {
+  const navigate = useNavigate()
   const { myChats } = useSelector(state => state.chat)
   const { userData } = useSelector(state => state.auth)
   const [chatMatch, setChatMatch] = useState([])
@@ -18,6 +19,7 @@ const UserComponent = ({ data }) => {
       participantName: data.name,
     }
     dispatch(createChat(newChat))
+    navigate('../messages')
   }
 
   useEffect(() => {

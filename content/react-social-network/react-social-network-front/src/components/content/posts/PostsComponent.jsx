@@ -43,8 +43,10 @@ const PostsComponent = () => {
       {allPosts !== null && allPosts.length > currentTape * itemsPerTape &&
         <div onClick={() => setCurrentTape(currentTape + 1)} className='hrefItem text-center my-2'>Load more</div>
       }
-      {allPosts !== null && allPosts.length > 0 &&
+      {searchData == null ?
+        allPosts !== null && allPosts.length > 0 &&
         <div className='text-center my-2'>Number of posts: {allPosts.length} </div>
+        : <div className='text-center my-2'>Number of posts: {searchData.length} </div>
       }
 
     </div>

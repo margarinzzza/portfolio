@@ -2,27 +2,38 @@ import styles from './MessengerComponent.module.scss'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getMessages, selectDialog, sendMessage } from '../../../features/profile/chatSlice'
-import { useEffect, useState } from 'react'
-import { useRef } from 'react';
+import { useEffect, useState, useRef } from 'react'
 
 const MessagesComponent = () => {
-  const { selectedChat, myChats, messages } = useSelector(state => state.chat)
+  const { selectedChat, messages } = useSelector(state => state.chat)
   const { userData } = useSelector(state => state.auth)
   const { chatId } = useParams()
-
+  const dispatch = useDispatch()
   const messageChat = useRef(null)
+
+  const [currentTape, setCurrentTape] = useState(1)
+  const itemsPerTape = 10
+  const lastCollectionIndex = messages.length
+  let currentCollection = []
+  if (messages !== null) {
+    if (lastCollectionIndex - (itemsPerTape * currentTape) < 0) {
+      currentCollection = messages.slice(0, lastCollectionIndex)
+    } else {
+      currentCollection = messages.slice(lastCollectionIndex - (itemsPerTape * currentTape), lastCollectionIndex)
+    }
+  }
+
   const scrollToBottom = () => {
-    messageChat.current?.scrollIntoView({ behavior: "auto", block: 'nearest', inline: 'start'})
+    messageChat.current?.scrollIntoView({ behavior: "auto", block: 'nearest', inline: 'start' })
   }
 
   useEffect(() => {
-    dispatch(getMessages({ chatId }))
     scrollToBottom()
-  }, [chatId, messages])
+  }, [messages])
 
-  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(selectDialog(chatId))
+    dispatch(getMessages({ chatId }))
   }, [chatId])
 
   const [messageText, setMessageText] = useState('')
@@ -50,9 +61,13 @@ const MessagesComponent = () => {
         messages.length > 0 ?
           // НЕПУСТОЙ ДИАЛОГ
           <>
-            <div  className={`${styles.messageList}`}>
-              <div  className={`${styles.messageChat}`}>
-                {messages.map(message => {
+            <div className={`${styles.messageList}`}>
+              <div className={`${styles.messageChat}`}>
+                {messages !== null &&
+                messages.length > currentTape * itemsPerTape &&
+                  <div onClick={() => setCurrentTape(currentTape + 1)} className='hrefItem text-center my-2'>Load more</div>
+                }
+                {currentCollection.map(message => {
                   return (
                     <div ref={messageChat} key={message._id} className={`${message.senderName == userData.name && styles.myMessage} ${styles.message}`}>
                       <div className={`${styles.messageSender}`}>

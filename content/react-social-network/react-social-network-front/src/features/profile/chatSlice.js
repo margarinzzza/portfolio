@@ -66,7 +66,7 @@ export const dialogsSlice = createSlice({
       } else state.selectedChat = null
     },
     resetSelectDialog: (state, action) => {
-      state.selectedDialog = []
+      state.selectedChat = []
     },
   },
   extraReducers: {
