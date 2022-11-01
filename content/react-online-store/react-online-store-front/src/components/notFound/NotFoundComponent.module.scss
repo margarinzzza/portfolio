@@ -1,0 +1,22 @@
+.notFound {
+  display: flex;
+  height: 75vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1 {
+    font-size: 45px;
+    color: rgb(255 97 97);
+  }
+
+}
+
+@media(max-width: 400px) {
+  .notFound {
+    h1 {
+      font-size: 35px;
+    }
+
+  }
+}

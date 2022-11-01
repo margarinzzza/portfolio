@@ -1,0 +1,35 @@
+.header {
+  box-shadow: -1px 9px 16px 7px rgb(255 0 36 / 26%);
+  z-index: 3;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1vh 4vh;
+  color: white;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  h1 {
+    cursor: pointer;
+  }
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  * {
+    margin: 0 .7vh;
+    cursor: pointer;
+  }
+}
+
+@media(max-width: 490px){
+  .headerTitle {
+    h1 {
+      display: none;
+    }
+  }
+}

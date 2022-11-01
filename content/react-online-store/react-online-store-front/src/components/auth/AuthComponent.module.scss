@@ -1,0 +1,31 @@
+.authForm {
+    top: 10vh;
+    width: 50%;
+    min-width: 50vh;
+    margin: 0 auto;
+    position: relative;
+    
+    h2 {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .formInput {
+        margin: 2vh 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .formSubmit {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+@media(max-width: 529px) {
+    .authForm {
+        width: 90%;
+        min-width: 0;
+    }
+}
