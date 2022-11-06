@@ -1,0 +1,40 @@
+.order {
+    margin: 2vh 0;
+}
+
+.orderDevice {
+    margin: 2vh 0;
+    display: flex;
+    img {
+        width: 10vh;
+        margin-right: 2vh;
+    }
+    div {
+        display: flex;
+    }
+}
+
+.orderDeviceDesc {
+    flex: 3;
+}
+.orderDeviceCount {
+    white-space: nowrap;
+    flex: 1;
+}
+.orderDevicePrice {
+    white-space: nowrap;
+    flex: 1;
+}
+.orderDeviceTotalPrice {
+    white-space: nowrap;
+    flex: 1;
+}
+
+@media(max-width: 677px){
+    .orderDevice {
+        flex-direction: column;
+        img {
+            width: 15vh;
+        }
+    }
+}

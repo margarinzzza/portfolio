@@ -28,6 +28,16 @@
   }
 }
 
+.addPopUp {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: 5vh;
+  color: gray;
+}
+
+
 @media(max-width: 720px){
   .itemPriceBuy {
     flex-direction: column;

@@ -18,7 +18,6 @@ exports.createDevice = async (req, res) => {
                 deviceId: device.id
             })
         })
-
     } catch (e) {
         console.log(e)
         return res.status(400).json({ msg: 'createDevice reject' })

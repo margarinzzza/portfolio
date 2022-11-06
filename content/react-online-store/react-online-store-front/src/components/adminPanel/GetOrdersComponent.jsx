@@ -1,16 +1,16 @@
-import styles from './ProfileComponent.module.scss'
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import styles from './AdminPanelComponent.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import { createCategory, filtersActions } from '../../features/auth/filtersSlice';
 import { useEffect } from 'react';
-import { changeOrderStatus, getOrders } from '../../features/auth/cartSlice';
+import { changeOrderStatus, getAllOrders } from '../../features/auth/cartSlice';
 import phone_img from '../../media/img/phone.png'
 
-const ProfileComponent = () => {
-  const { userData } = useSelector(store => store.auth)
-  const { ordersData } = useSelector(store => store.cart)
+const GetOrdersComponent = () => {
   const dispatch = useDispatch()
+  const { ordersData } = useSelector(store => store.cart)
   useEffect(() => {
-    dispatch(getOrders({ userId: userData.id }))
+    dispatch(getAllOrders())
   }, [])
 
   const mathOrderCount = (idx) => {
@@ -29,19 +29,35 @@ const ProfileComponent = () => {
     return price
   }
 
-  const changeOrderStatusHandler = async (orderId, value) => {
+  const changeOrderStatusHandler = (orderId, value) => {
     dispatch(changeOrderStatus({ orderId, value }))
+    dispatch(getAllOrders())
+  }
+
+  const compareOrderStatus = (orderId, value) => {
+    switch (value) {
+      case 'created':
+        return (
+          <>
+            <span className='ml-6 link_item' onClick={() => changeOrderStatusHandler(orderId, 'canceled')}>Cancel order</span>
+            <span className='ml-6 link_item' onClick={() => changeOrderStatusHandler(orderId, 'accepted')}>Accept the order</span>
+            <span className='ml-6 link_item' onClick={() => changeOrderStatusHandler(orderId, 'completed')}>Mark completed</span>
+          </>
+        )
+      case 'accepted':
+        return (
+          <span className='ml-6 link_item' onClick={() => changeOrderStatusHandler(orderId, 'completed')}>Mark compeleted</span>
+        )
+    }
   }
 
   return (
-    <div className={`${styles.profile}`}>
-      <h1>Hello, {userData.email}</h1>
+    <div className={`${styles.createForm}`}>
       {ordersData.length > 0 ?
-        <div>
-          <h1>Your orders</h1>
-          <div className={`${styles.orders}`}>
-            {ordersData.map((el, idx) => {
-              return (
+        <>
+          {ordersData.map((el, idx) => {
+            return (
+              <div>
                 <div key={idx} className={`${el.order.status === 'canceled' && 'text-gray-400'} ${styles.order}`}>
                   <h2 className={`${el.order.status === 'canceled' && 'line-through'}`}>Order id: {el.order.id}</h2>
                   <h4>Order from: {el.order.createdAt.slice(0, 10)} {el.order.createdAt.slice(11, 19)}</h4>
@@ -62,25 +78,20 @@ const ProfileComponent = () => {
                     <span>Status: {el.order.status}</span>
                     <span className='mx-2'>Items number: {mathOrderCount(idx)}</span>
                     <span>Order price: {mathOrderPrice(idx)}</span>
-                    {el.order.status === 'created' &&
-                      <span className='ml-6 link_item' onClick={() => changeOrderStatusHandler(el.order.id, 'canceled')}>Cancel order</span>
-                    }
+                    {compareOrderStatus(el.order.id, el.order.status)}
                   </div>
                 </div>
-              )
-            })}
-          </div>
-        </div>
-        :
-        <div className='text-center'>
-          <h1>You don't have any orders</h1>
-          <Link className='link_item' to={'/catalog'}>In catalog</Link>
-        </div>
-      }
 
+              </div>
+
+            )
+          })}
+        </>
+        : <h2>Orders list empty</h2>
+      }
 
     </div>
   );
 }
 
-export default ProfileComponent;
+export default GetOrdersComponent;

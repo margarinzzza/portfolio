@@ -14,6 +14,20 @@ const Basket = sequelize.define('basket', {
 
 const BasketDevice = sequelize.define('basket_device', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    count: {type: DataTypes.INTEGER}
+})
+
+const Order = sequelize.define('orders', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    status: { type: DataTypes.STRING },
+    customerId: {type: DataTypes.INTEGER}
+})
+
+const OrderDevice = sequelize.define('order_device', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    deviceId: {type: DataTypes.INTEGER},
+    count: {type: DataTypes.INTEGER},
+    orderId: {type: DataTypes.INTEGER}
 })
 
 const Device = sequelize.define('device', {
@@ -87,5 +101,7 @@ module.exports = {
     Brand,
     Rating,
     DeviceInfo,
-    TypeBrand
+    TypeBrand,
+    Order,
+    OrderDevice
 }

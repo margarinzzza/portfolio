@@ -12,22 +12,22 @@ import NotFoundComponent from "./components/notFound/NotFoundComponent";
 import ItemPageComponent from "./components/itemPage/ItemPageComponent";
 import { useLocation } from 'react-router-dom';
 import { checkAuth } from "./features/auth/authSlice";
+import { getCart } from "./features/auth/cartSlice";
 
 const App = () => {
   const dispatch = useDispatch()
   let location = useLocation();
+  useEffect(() => {
+    let token = localStorage.getItem('token')
+    dispatch(checkAuth({ token }))
+  }, [])
   const { isAuth, userData } = useSelector(store => store.auth)
   const navigate = useNavigate()
 
   useEffect(() => {
-    let token = localStorage.getItem('token')
-    dispatch(checkAuth({token}))
-  }, [])
-
-  useEffect(() => {
     if (!isAuth) {
       navigate('/')
-    } else if(isAuth && location.pathname=='/') {
+    } else if (isAuth && location.pathname == '/') {
       navigate('/catalog')
     }
   }, [isAuth])
@@ -38,7 +38,7 @@ const App = () => {
       <div className="content">
         <Routes>
           <Route path="/catalog" element={<CatalogComponent />} />
-          <Route path="/catalog/:itemId" element={<ItemPageComponent/>} />
+          <Route path="/catalog/:itemId" element={<ItemPageComponent />} />
           {isAuth ?
             <>
               <Route path="/profile" element={<ProfileComponent />} />

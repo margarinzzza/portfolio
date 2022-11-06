@@ -136,7 +136,6 @@ export const deviceSlice = createSlice({
       state.deviceLoading = 'loading'
     },
     [getDevice.fulfilled]: (state, action) => {
-      console.log(action.payload)
       state.deviceInfoData = action.payload.deviceInfoData
       state.deviceData = action.payload.deviceData
       state.deviceLoading = 'loaded'
