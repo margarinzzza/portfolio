@@ -34,6 +34,7 @@ function App() {
     setInputedNumber(null)
     setBestResult(0)
     setGameStatus('')
+    setHint('Start guessing')
   }
 
   const checkNumber = (number) => {
