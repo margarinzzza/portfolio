@@ -45,7 +45,7 @@ function App() {
     let anotherUserIdx
     userObj.permanentPoints += userObj.currentPoints
     userObj.currentPoints = 0
-    if (userObj.permanentPoints >= 20) {
+    if (userObj.permanentPoints >= 100) {
       setIsEndGame(true)
       setWinnerIdx(userIdxMove)
     } else {
