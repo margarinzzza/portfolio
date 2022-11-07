@@ -20,6 +20,8 @@ function App() {
 
   const [userIdxMove, setUserIdxMove] = useState(0)
   const [diceValue, setDiceValue] = useState(0)
+  const [isEndGame, setIsEndGame] = useState(false)
+  const [winnerIdx, setWinnerIdx] = useState(null)
 
   const rollDice = () => {
     let newState = [...playersData]
@@ -40,10 +42,17 @@ function App() {
   const keep = () => {
     let newState = [...playersData]
     let userObj = playersData[userIdxMove]
+    let anotherUserIdx
     userObj.permanentPoints += userObj.currentPoints
     userObj.currentPoints = 0
-    let anotherUserIdx = playersData.findIndex(el => el.id !== userObj.id)
-    setUserIdxMove(anotherUserIdx)
+    if (userObj.permanentPoints >= 20) {
+      setIsEndGame(true)
+      setWinnerIdx(userIdxMove)
+    } else {
+      anotherUserIdx = playersData.findIndex(el => el.id !== userObj.id)
+      setUserIdxMove(anotherUserIdx)
+    }
+    console.log(isEndGame)
     newState[userIdxMove] = userObj
     setPlayersData(newState)
   }
@@ -57,7 +66,11 @@ function App() {
     setPlayersData(newState)
     setUserIdxMove(0)
     setDiceValue(0)
+    setIsEndGame(false)
+    setWinnerIdx(null)
   }
+
+
 
   return (
     <div className={`app`}>
@@ -82,15 +95,22 @@ function App() {
 
         <div className="options">
           <div className="optionButton" onClick={() => newGame()}>🐷 New game</div>
-          <DiceComponent value={diceValue} />
-          <div>
-            <div className="optionButton" onClick={() => rollDice()}>
-              🎲 Roll the dice
-            </div>
-            <div className="optionButton" onClick={() => keep()}>
-              👌🏻 Keep
-            </div>
-          </div>
+          {!isEndGame ?
+            <>
+              <DiceComponent value={diceValue} />
+              <div>
+                <div className="optionButton" onClick={() => rollDice()}>
+                  🎲 Roll the dice
+                </div>
+                <div className="optionButton" onClick={() => keep()}>
+                  👌🏻 Keep
+                </div>
+              </div>
+            </>
+            :
+            <h3>Player {playersData[winnerIdx].name} win!</h3>
+          }
+
         </div>
 
       </div>
