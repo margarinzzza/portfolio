@@ -142,7 +142,7 @@ const App = () => {
     setInitialCardsArrLength(finalArr.length)
   }, [complexity])
 
-  function endGame ()  {
+  function endGame() {
     setIsGameStart(false)
     setComplexity(null)
     setSelectedCards([])
@@ -152,20 +152,19 @@ const App = () => {
     clearInterval(window.timerrrr)
   }
 
-  function startGame (complexity) {
+  function startGame(complexity) {
     let startGameTime = Date.now();
     setIsGameStart(true)
     setComplexity(complexity)
     window.timerrrr = setInterval(() => {
-      let delta = Date.now() - startGameTime;
-      let s = Math.floor(delta / 1000)
-      let m = 0
-      if (s >= 60) {
-        s -= 60
-        m += 1
+      if (timer.seconds >= 59) {
+        timer.seconds -= 59
+        timer.minutes++
+      } else {
+        timer.seconds++
       }
-      let newTimer = { minutes: m, seconds: s }
-      setTimer(newTimer) 
+      let newTimer = { seconds: timer.seconds, minutes: timer.minutes }
+      setTimer(newTimer)
     }, 1000);
   }
 
