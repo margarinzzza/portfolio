@@ -12,6 +12,14 @@ body {
   margin: 0 auto;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: 1.2;
+}
+
 h1 {
   font-size: 35px;
 }
@@ -24,7 +32,12 @@ h3 {
   font-size: 25px;
 }
 
-input, textarea {
+h4 {
+  font-size: 20px;
+}
+
+input,
+textarea {
   all: unset;
   display: flex;
   transition: .3s;
@@ -33,7 +46,7 @@ input, textarea {
 
   &:focus {
     transition: .3s;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.553);  
+    border-bottom: 1px solid rgba(0, 0, 0, 0.553);
   }
 }
 
@@ -50,9 +63,11 @@ input, textarea {
   h3 {
     text-align: center;
   }
+
   input {
     margin: 10px 0;
   }
+
   padding-top: 20px;
   margin: 0 auto;
   width: 60%;

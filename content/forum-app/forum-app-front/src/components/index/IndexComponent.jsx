@@ -32,6 +32,9 @@ function IndexComponent() {
             )
           })}
         </div>
+        <div className='text-center linkItem my-8'>
+          Загрузить больше
+        </div>
       </div>
     </>
   );

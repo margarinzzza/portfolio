@@ -5,6 +5,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 10px 0 20px 0;
+  z-index: 3;
 }
 
 .headerName {
@@ -55,6 +57,7 @@
   left: -8px;
   padding: 10px;
   width: 100%;
+  pointer-events: none;
 
   * {
     margin: 3px 0;

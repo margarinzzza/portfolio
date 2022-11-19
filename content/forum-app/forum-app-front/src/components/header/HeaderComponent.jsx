@@ -19,10 +19,10 @@ function HeaderComponent() {
       </Link>
       <div className={`${styles.headerNav}`}>
         {isAuth ?
-          <div onClick={() => setAuthSettings(!authSettings)} className={`${styles.authSettings} ${authSettings && styles.activeAuthSettings}`}>
+          <div onBlur={() => setAuthSettings(false)} onClick={() => setAuthSettings(!authSettings)} className={`${styles.authSettings} ${authSettings && styles.activeAuthSettings}`}>
             <div className='linkItem'>Margarinzza</div>
             <i className={`bi bi-caret-down-fill ${authSettings && 'rotate-180'}`}></i>
-            <div className={`${styles.authSettingsList} transition-all ${authSettings && 'opacity-100'}`}>
+            <div className={`${styles.authSettingsList} transition-all ${authSettings && 'opacity-100 pointer-events-auto'}`}>
               <Link to={'/profile'} className='linkItem'>
                 Профиль
               </Link>
