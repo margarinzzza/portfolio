@@ -8,9 +8,6 @@
 .boardsListItem {
   display: flex;
   padding: 10px;
-  .boardsListId {
-    flex: 1;
-  }
 
   .boardsListName {
     flex: 4;
@@ -25,6 +22,10 @@
   }
 
   .boardsListPosts {
+    flex: 3;
+  }
+
+  .boardsListThreads {
     flex: 3;
   }
 }

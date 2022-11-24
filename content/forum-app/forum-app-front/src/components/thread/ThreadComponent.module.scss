@@ -7,11 +7,8 @@
 
     img {
         margin-right: 20px;
-        flex: 1;
-    }
-
-    .threadHeaderData {
-        flex: 3;
+        max-width: 35%;
+        height: fit-content;
     }
 
 }
@@ -56,6 +53,24 @@
     }
 }
 
+.postForm {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        margin: 15px 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    i {
+        position: absolute;
+        bottom: 12px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
 @media(max-width: 574px) {
     .threadHeader {
         flex-direction: column;
@@ -63,6 +78,7 @@
         img {
             margin: 0 0 10px 0;
             width: fit-content;
+            max-width: 100%;
         }
     }
 }

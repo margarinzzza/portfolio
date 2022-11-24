@@ -1,64 +1,109 @@
 import styles from './ThreadComponent.module.scss'
-import { useSelector } from 'react-redux'
-import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router';
+import { useEffect, useRef } from 'react';
+import { getThread } from '../../features/threadSlice';
+import { createPost, getPosts, postReducerAction } from '../../features/postSlice';
+import SpinnerComponent from '../spinner/SpinnerComponent';
+import { getBoard } from '../../features/boardSlice';
 
 function ThreadComponent() {
 
-  const { isAuth } = useSelector((state) => state.auth)
-  const [authSettings, setAuthSettings] = useState(false)
+  const dispatch = useDispatch()
   const { threadId } = useParams();
+  const { boardHref } = useParams();
+  useEffect(() => {
+    dispatch(getBoard({ boardHref }))
+    dispatch(getThread({ threadId }))
+    dispatch(getPosts({ threadId }))
+  }, [])
+  const threadTop = useRef()
+  const threadBottom = useRef()
+  const { userData } = useSelector((state) => state.auth)
+  const { thread, threadLoadStatus } = useSelector((state) => state.thread)
+  const { board } = useSelector((state) => state.board)
+  const { posts, postsLoadingStatus, createPostErrors, text } = useSelector((state) => state.post)
+  let treadCreatedAtDate
+  let treadCreatedAtTime
+
+  if (threadLoadStatus === 'loaded') {
+    treadCreatedAtDate = thread.createdAt.slice(0, 10)
+    treadCreatedAtTime = thread.createdAt.slice(11, 19)
+  }
+
+  function setPostCreatedAt(time) {
+    treadCreatedAtDate = time.slice(0, 10)
+    treadCreatedAtTime = time.slice(11, 19)
+    return `${treadCreatedAtDate} ${treadCreatedAtTime}`
+  }
+
+  function createPostHandler() {
+    const boardId = board.id
+    const threadId = thread.id
+    let creatorNickName
+    let userId
+    if (userData.length > 0) {
+      creatorNickName = userData.nickName
+      userId = userData.id
+    } else {
+      creatorNickName = 'Аноним'
+      userId = 'Аноним'
+    }
+    dispatch(createPost({ boardId, threadId, creatorNickName, text, userId }))
+  }
 
   return (
 
     <div className={`${styles.thread}`}>
-      <div className={`${styles.threadHeader}`}>
-        <img src="https://2ch.hk/b/thumb/277841343/16688724491410s.jpg" alt="^" />
-        <div className={`${styles.threadHeaderData}`}>
-          <div className={`${styles.threadCreatorInfo}`}>
-            <span>Аноним</span>
-            <span>19/09/2022</span>
-            <span>№2414244</span>
-          </div>
-          <h2 className='my-2'>Заголовок</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, molestias iure quam aperiam tenetur voluptas aut similique sequi obcaecati impedit ut cum, consequatur, quaerat officia reprehenderit dolores incidunt aspernatur quis.</p>
-        </div>
-      </div>
-      <div className={`${styles.postList}`}>
-        <div className={`${styles.postListItem}`}>
-          <div className={`${styles.postCreatorInfo}`}>
-            <span>Аноним</span>
-            <span>19/09/2022</span>
-            <span>№2414244</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit, sint. Voluptate laudantium accusantium quidem corporis quaerat aliquam. Fugit, eum perspiciatis delectus id consequatur tenetur quod quidem deleniti tempora vel unde?</p>
-        </div>
-        <div className={`${styles.postListItem}`}>
-          <div className={`${styles.postCreatorInfo}`}>
-            <span>Аноним</span>
-            <span>19/09/2022</span>
-            <span>№2414244</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit, sint. Voluptate laudantium accusantium quidem corporis quaerat aliquam. Fugit, eum perspiciatis delectus id consequatur tenetur quod quidem deleniti tempora vel unde?</p>
-        </div>
-        <div className={`${styles.postListItem}`}>
-          <div className={`${styles.postCreatorInfo}`}>
-            <span>Аноним</span>
-            <span>19/09/2022</span>
-            <span>№2414244</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit, sint. Voluptate laudantium accusantium quidem corporis quaerat aliquam. Fugit, eum perspiciatis delectus id consequatur tenetur quod quidem deleniti tempora vel unde?</p>
-        </div>
-      </div>
-      <div className='text-center linkItem my-8'>
-        Загрузить больше
-      </div>
-      <div className={`${styles.navArrows}`}>
-        <i className="bi bi-arrow-up"></i>
-        <i className="bi bi-arrow-down"></i>
-      </div>
-
+      {board === 'not found' ?
+        <div className='text-center text-gray-500'>Доска не найдена</div>
+        :
+        thread === 'not found' ?
+          <div className='text-center text-gray-500'>Тред не найден</div>
+          :
+          <>
+            <div ref={threadTop} className={`${styles.threadHeader}`}>
+              <img src="https://proprikol.ru/wp-content/uploads/2020/09/kartinki-lyagushki-52.jpg" alt="^" />
+              <div className={`${styles.threadHeaderData}`}>
+                <div className={`${styles.threadCreatorInfo}`}>
+                  <span>{thread.creatorNickName}</span>
+                  <span>{treadCreatedAtDate} {treadCreatedAtTime}</span>
+                  <span>#{thread.id}</span>
+                </div>
+                <h2 className='my-2'>{thread.name}</h2>
+                <p>{thread.desc}</p>
+              </div>
+            </div>
+            <div className={`${styles.postList}`}>
+              {postsLoadingStatus === 'loaded' ?
+                posts.length > 0 ?
+                  posts.map(el => {
+                    return (
+                      <div key={el.id} className={`${styles.postListItem}`}>
+                        <div className={`${styles.postCreatorInfo}`}>
+                          <span>{el.creatorNickName}</span>
+                          <span>{setPostCreatedAt(el.createdAt)}</span>
+                          <span>#{el.id}</span>
+                        </div>
+                        <p>{el.text}</p>
+                      </div>
+                    )
+                  })
+                  : <div className='text-center text-gray-500 mt-4'>Посты отсутствуют</div>
+                : <SpinnerComponent />
+              }
+            </div>
+            <div ref={threadBottom} className={`${styles.postForm}`}>
+              <textarea value={text} onChange={(e) => dispatch(postReducerAction.setText(e.target.value))} placeholder='Блаблабла..' rows="4"></textarea>
+              <span onClick={() => createPostHandler()} className='z-10 linkItem'>Отправить</span>
+              <i className='text-gray-500'>{createPostErrors !== '' && createPostErrors}</i>
+            </div>
+            <div className={`${styles.navArrows}`}>
+              <i onClick={() => threadTop.current.scrollIntoView({ behavior: "smooth", })} className="bi bi-arrow-up"></i>
+              <i onClick={() => threadBottom.current.scrollIntoView({ behavior: "smooth", })} className="bi bi-arrow-down"></i>
+            </div>
+          </>
+      }
     </div>
   );
 }
