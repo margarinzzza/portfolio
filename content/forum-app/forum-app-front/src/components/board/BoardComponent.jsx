@@ -50,9 +50,9 @@ function BoardComponent() {
             <h1>{board.name}</h1>
             <span onClick={() => setPopUp(true)} className='linkItem'>Создать тред</span>
           </div>
+          <input className='m-2' value={searchQuery} onChange={(e) => dispatch(threadReducerAction.setSearchQuery(e.target.value))} type="text" placeholder='Поиск' />
           {threadsLoadStatus === 'loaded' ? threads.length > 0 ?
             <>
-              <input className='m-2' value={searchQuery} onChange={(e) => dispatch(threadReducerAction.setSearchQuery(e.target.value))} type="text" placeholder='Поиск' />
               <div className={`${styles.threadList}`}>
                 {threads.map(el => {
                   return (
