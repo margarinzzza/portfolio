@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: #6b6b6b;
+  overflow-x: hidden;
+}
+
+*::-webkit-scrollbar {
+  width: 0.5vh;
+  transition: 0.3s;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #bbbbbb;
+  border-radius: 1vh;
+}
+
+input {
+  all: unset;
+  box-sizing: border-box;
+}
+
+textarea {
+  all: unset;
+  box-sizing: border-box;
+  padding: 1vh;
+  transition: 0.3s;
+  border-radius: 0.4vh;
+  border: 0.1vh solid #cecece;
+  width: 100%;
+}
+textarea:focus {
+  transition: 0.3s;
+  border: 0.1vh solid #979797;
+}
+
+.app {
+  margin: 0 auto;
+  width: 90%;
+}
+
+h1 {
+  font-size: 25px;
+  margin-bottom: 1vh;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 1vh;
+}
+
+.default-underline {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.hrefItem {
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.hrefItem:hover {
+  transition: 0.3s;
+  color: #424242;
+}
+
+.hide-error {
+  z-index: -1;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  transition: 0.3s;
+  height: 0px;
+  transform: scaleY(0);
+}
+
+.show-error {
+  transition: 0.3s;
+  height: auto;
+  transform: scaleY(1);
+}
+
+.content {
+  padding: 1vh 2vh;
+}
+
+.formButton {
+  display: flex;
+  justify-content: flex-end;
+}
+.formButton span {
+  transition: 0.3s;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  padding: 1vh;
+}
+.formButton span:hover {
+  transition: 0.3s;
+  color: #424242;
+}
+
+.form {
+  position: relative;
+  min-width: 45vh;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.form * {
+  padding: 1vh;
+  margin: 1vh 0;
+  border: 0.1vh solid #b6b6b6;
+  transition: 0.3s;
+  border-radius: 0.2vh;
+}
+.form *:hover {
+  border: 0.1vh solid #929292;
+  transition: 0.3s;
+}
+.form *:focus {
+  border: 0.1vh solid #797979;
+  transition: 0.3s;
+}
+.form .formSumitBtn {
+  cursor: pointer;
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .app {
+    width: 100%;
+  }
+}

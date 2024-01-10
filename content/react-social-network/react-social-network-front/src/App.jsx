@@ -23,7 +23,7 @@ const App = () => {
   }, [])
   
   useEffect(() => {
-    if (!isAuth) {
+    if (!isAuth) { 
       navigate('/')
     } else navigate('/profile')
   }, [isAuth])

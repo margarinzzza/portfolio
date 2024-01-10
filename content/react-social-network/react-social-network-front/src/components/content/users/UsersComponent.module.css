@@ -1,0 +1,48 @@
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.user {
+  margin: 2vh 0;
+  width: 46%;
+  display: flex;
+}
+
+.userImg {
+  margin-right: 1vh;
+  display: flex;
+  width: 12vh;
+  min-width: 10vh;
+}
+
+.userDesc {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+.userDesc h2 {
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.userAdd {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 835px) {
+  .user {
+    width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  .userDesc h2 {
+    font-weight: bold;
+    font-size: 2.3vh;
+  }
+  .userDesc span {
+    font-size: 2vh;
+  }
+}

@@ -1,4 +1,4 @@
-import styles from './ProfileComponent.module.scss'
+import styles from './ProfileComponent.module.css'
 import { useSelector } from 'react-redux';
 import PostItemComponent from './PostItemComponent';
 import { useState } from 'react';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './SettingsComponent.module.scss'
+import styles from './SettingsComponent.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProfile } from '../../../features/profile/authSlice';
 import UpdateProfileComponent from './UpdateProfileComponent';

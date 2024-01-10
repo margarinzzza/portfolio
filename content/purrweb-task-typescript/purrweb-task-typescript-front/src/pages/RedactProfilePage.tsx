@@ -3,13 +3,21 @@ import { Link, Navigate } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRedactProfile } from "../Auth";
+import bcryptjs from 'bcryptjs'
 
 const RedactProfilePage = (props: any) => {
 
   const dispatch = useDispatch<any>();
-  //const { data:{} } = useSelector<any>(state => state.authReducer);
+  const userData = useSelector((state: any)=>state.auth.data)
+  console.log(userData)
   const { register, handleSubmit, setError, formState: { errors, isValid } } = useForm({
-    mode: 'onTouched'
+    mode: 'onTouched',
+    defaultValues: {
+      name: userData?.user.name,
+      surname: userData?.user.surname,
+      phoneNumber: userData?.user.phoneNumber,
+      password: userData?.user.password
+    }
   })
   const onSubmitRedactProfile = async (values: any) => {
     const data = await dispatch(fetchRedactProfile(values))
@@ -73,6 +81,18 @@ const RedactProfilePage = (props: any) => {
               }
             })} maxLength={11} type="search" placeholder="88009501141" />
           <p className="error-text">{errors?.phoneNumber && <>{errors?.phoneNumber?.message || 'Error'}</>}</p>
+
+          <span>Пароль</span>
+          <input className={errors?.password ? 'error-input' : 'success-check'}
+            {...register('password', {
+              required: 'Укажите пароль',
+              minLength: {
+                value: 8,
+                message: "Пароль должен содержать минимум 8 символов"
+              },
+            })}  type="text" />
+          <p className="error-text">{errors?.password && <>{errors?.password?.message || 'Error'}</>}</p>
+
         </div>
         <button className={`button ${isValid ? 'blue_button my-3' : 'disabled_button my-3'}`}>
           Продолжить

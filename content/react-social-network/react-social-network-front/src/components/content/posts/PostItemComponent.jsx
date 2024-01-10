@@ -1,4 +1,4 @@
-import styles from './PostsComponent.module.scss'
+import styles from './PostsComponent.module.css'
 
 const PostItemComponent = ({ data }) => {
   const {timeStamps} = data

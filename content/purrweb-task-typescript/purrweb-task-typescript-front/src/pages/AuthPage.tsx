@@ -100,7 +100,6 @@ const AuthPage = (props: any) => {
                 {...registerLogin('password',
                   {
                     required: 'Укажите пароль',
-                    minLength: { value: 4, message: "Пароль должен содержать минимум 4 символа" }
                   })} type="search" placeholder="Введите пароль" />
               <a onClick={() => setShowPasswordLogin(!showPasswordLogin)} className={`password_eye ${showPasswordLogin ? 'password-hide' : 'password-show'} `}></a>
             </div>
@@ -144,7 +143,7 @@ const AuthPage = (props: any) => {
                     {
                       required: 'Укажите пароль',
                       pattern: { value: /\S+$/, message: 'Введите пароль без пробелов' },
-                      minLength: { value: 4, message: "Пароль должен содержать минимум 4 символа" }
+                      minLength: { value: 8, message: "Пароль должен содержать минимум 8 символов" }
                     })} type="search" placeholder="Введите пароль"
                 />
                 <a onClick={() => setShowPasswordRegister(!showPasswordRegister)} className={showPasswordRegister ? 'password-hide' : 'password-show'}></a>

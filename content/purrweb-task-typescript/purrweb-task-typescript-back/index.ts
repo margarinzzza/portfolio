@@ -9,7 +9,7 @@ import { registerValidator, redactUserInfoValidator } from './validations/valida
 import { RegisterController, LoginController, ProfileController, RedactUserInfoConroller} from './controllers/Controllers';
 import UserModel from './models/User'
 import checkAuth from './utils/checkAuth';
-const port = 4000;
+const port = 2000;
 
 mongoose
   .connect('mongodb+srv://userbuser:afc__0013wdRQ3R@purrweb-task.8ejwpsc.mongodb.net/purrweb-task?retryWrites=true&w=majority')
@@ -24,7 +24,7 @@ app.listen(port, (err: any) => {
 });
 
 app.post('/register', registerValidator, RegisterController);
-app.post('/login', LoginController);
+app.post('/login', LoginController); 
 app.get('/profile', checkAuth, ProfileController); 
 app.post('/redact_profile', checkAuth, redactUserInfoValidator, RedactUserInfoConroller), async (req: any, res: any) => {
 

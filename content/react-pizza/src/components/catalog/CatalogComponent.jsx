@@ -1,4 +1,4 @@
-import styles from './CatalogComponent.module.scss';
+import styles from './CatalogComponent.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterPizzas } from '../../redux/slices/filterSlice';
 import PizzaComponent from './PizzaComponent';

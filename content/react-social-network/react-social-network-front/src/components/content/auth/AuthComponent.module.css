@@ -1,0 +1,14 @@
+.auth {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.auth h2 {
+  margin-top: 3vh;
+}
+.auth h2 span {
+  cursor: pointer;
+  font-weight: bold;
+}

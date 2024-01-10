@@ -1,4 +1,4 @@
-import styles from './ProfileComponent.module.scss'
+import styles from './ProfileComponent.module.css'
 import { deletePost } from '../../../features/profile/postsSlice';
 import { useDispatch } from 'react-redux';
 

@@ -1,4 +1,4 @@
-import styles from './HeaderComponent.module.scss'
+import styles from './HeaderComponent.module.css'
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { navItems } from '../../states/states';

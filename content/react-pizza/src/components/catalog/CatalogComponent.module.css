@@ -1,0 +1,152 @@
+.catalog {
+  display: flex;
+  flex-direction: column;
+}
+.catalog h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+}
+.catalog h5 {
+  width: 100%;
+  text-align: center;
+  color: #a5a5a5;
+  margin: 3vh 0 1vh 0;
+}
+
+.pizzasList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pizzasItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1vh 0.3vh;
+  width: 24%;
+}
+.pizzasItem h2 {
+  text-align: center;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 1vh 0 2vh 0;
+}
+.pizzasItem span {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
+}
+.pizzasItem h3 {
+  margin-right: 1vh;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 27px;
+  white-space: nowrap;
+}
+.pizzasItem h4 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #EB5A1E;
+  margin: 0 0.8vh;
+}
+
+.priceAndAdd {
+  display: flex;
+  align-items: center;
+}
+
+.addButton {
+  padding: 1.58vh 2.04vh;
+  border: 0.1vh solid #EB5A1E;
+  border-radius: 3.4vh;
+  transition: 0.3s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.addButton:hover {
+  transition: 0.3s;
+  background-color: #fe5f1e;
+}
+.addButton:hover h4 {
+  color: white;
+}
+.addButton:hover svg path {
+  fill: white;
+}
+.addButton div {
+  position: relative;
+  transition: 0.1s;
+  width: 0px;
+  opacity: 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.8vh;
+  border: 0.1vh solid #fe5f1e;
+  border-radius: 50%;
+  color: white;
+  background-color: #fe5f1e;
+}
+.addButton div .itemConter {
+  transition: 0.1s;
+  position: absolute;
+}
+.addButton div:hover {
+  transition: 0.1s;
+  border: 0.1vh solid #ffbfa6;
+}
+.addButton div:hover .addButton {
+  pointer-events: none !important;
+}
+.addButton div:hover .itemConter {
+  transition: 0.1s;
+  opacity: 0;
+  margin-top: 3.2vh;
+}
+.addButton div:hover .deleteItem {
+  pointer-events: all;
+  opacity: 1;
+  margin-bottom: 0;
+  transition: 0.1s;
+}
+.addButton div .deleteItem {
+  opacity: 0;
+  margin-bottom: 3.2vh;
+  transition: 0.1s;
+  position: absolute;
+}
+.addButton .notEmptyItemsCounter {
+  transition: 0.1s;
+  width: 3vh;
+  opacity: 1;
+}
+
+.sizes {
+  margin: 1vh 0 2vh 0;
+}
+
+@media (max-width: 1100px) {
+  .pizzasItem {
+    width: 31%;
+  }
+}
+@media (max-width: 940px) {
+  .pizzasList {
+    justify-content: space-around;
+  }
+
+  .pizzasItem {
+    width: 45%;
+  }
+}
+@media (max-width: 680px) {
+  .pizzasItem {
+    width: 100%;
+  }
+}

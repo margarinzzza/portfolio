@@ -1,4 +1,4 @@
-import styles from './PostsComponent.module.scss'
+import styles from './PostsComponent.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import PostItemComponent from './PostItemComponent';
 import { useState } from 'react';
@@ -43,10 +43,8 @@ const PostsComponent = () => {
       {allPosts !== null && allPosts.length > currentTape * itemsPerTape &&
         <div onClick={() => setCurrentTape(currentTape + 1)} className='hrefItem text-center my-2'>Load more</div>
       }
-      {searchData == null ?
-        allPosts !== null && allPosts.length > 0 &&
+      {allPosts !== null && allPosts.length > 0 &&
         <div className='text-center my-2'>Number of posts: {allPosts.length} </div>
-        : <div className='text-center my-2'>Number of posts: {searchData.length} </div>
       }
 
     </div>

@@ -1,4 +1,4 @@
-import styles from './UsersComponent.module.scss'
+import styles from './UsersComponent.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getUsers, searchUser, setSearchQuery } from '../../../features/profile/usersSlice'

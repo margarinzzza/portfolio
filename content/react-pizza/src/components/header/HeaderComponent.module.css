@@ -1,0 +1,111 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding: 2vh 0;
+}
+
+.headerLogo {
+  margin-right: 4vh;
+  cursor: pointer;
+}
+.headerLogo .logoSlogan {
+  display: flex;
+  flex-direction: column;
+}
+.headerLogo .logo {
+  margin-right: 1.3vh;
+}
+.headerLogo .logo img {
+  min-width: 3.5vh;
+}
+.headerLogo .headerTitle {
+  font-weight: bolder;
+  font-size: 24px;
+  line-height: 29px;
+  text-transform: uppercase;
+}
+.headerLogo .headerSubtle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #7B7B7B;
+}
+
+.headerSearch {
+  margin-right: 2vh;
+  flex: 2;
+}
+.headerSearch input {
+  transition: 0.3s;
+  width: 30vh;
+  border-radius: 1vh;
+  border: 0.1vh solid #dadada;
+  padding: 1vh;
+}
+.headerSearch input:focus {
+  transition: 0.3s;
+  border: 0.1vh solid #b6b5b5;
+}
+
+.headerCartButton {
+  white-space: nowrap;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 1.7vh 2vh;
+  border-radius: 3.4vh;
+  transition: 0.3s;
+  color: white;
+  background-color: #fe5f1e;
+  display: flex;
+  align-items: center;
+}
+.headerCartButton:hover {
+  transition: 0.3s;
+  background-color: #d83d00;
+}
+.headerCartButton .headerCartCounter {
+  display: flex;
+  align-items: center;
+  border-left: 0.1vh solid rgba(255, 255, 255, 0.25);
+}
+.headerCartButton div {
+  padding: 0 1vh;
+}
+
+@media (max-width: 800px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .headerLogo {
+    margin: 0;
+    width: 55%;
+    order: 1;
+  }
+
+  .headerSearch {
+    margin: 2vh 0;
+    order: 3;
+  }
+  .headerSearch input {
+    width: -webkit-fill-available;
+  }
+
+  .headerCart {
+    order: 2;
+  }
+}
+@media (max-width: 495px) {
+  .headerLogo {
+    width: 25%;
+  }
+
+  .logoSlogan * {
+    display: none;
+  }
+}

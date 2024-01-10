@@ -1,4 +1,4 @@
-import styles from './CatalogComponent.module.scss';
+import styles from './CatalogComponent.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { addItemToCart, deleteItemsFromCart } from '../../redux/slices/cartSlice';

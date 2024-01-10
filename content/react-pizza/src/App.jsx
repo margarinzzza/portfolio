@@ -1,16 +1,12 @@
-import { useSelector } from 'react-redux';
-import './index.scss';
-import { qnas } from './store/store';
-import { setQuestion } from './redux/slices/filterSlice';
+import './index.css';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
-import MainPage from './pages/main/MainPage';
+import MainPage from './pages/MainPage';
 import HeaderComponent from './components/header/HeaderComponent';
-import CartPage from './pages/cart/CartPage';
+import CartPage from './pages/CartPage';
+import NotFoundComponent from './components/NotFoundComponent'
 
 const App = () => {
-
-  const dispatch = useDispatch()
 
   return (
     <div className={`app`}>
@@ -19,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<MainPage/>}/>
           <Route path='/cart' element={<CartPage/>}/>
+          <Route path='*' element={<NotFoundComponent/>}/>
         </Routes>
       </div>
     </div>

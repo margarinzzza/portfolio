@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from './AuthComponent.module.scss'
+import styles from './AuthComponent.module.css'
 import LoginComponent from './LoginComponent';
 import RegisterComponent from './RegisterComponent';
 import { useSelector } from 'react-redux/es/exports';

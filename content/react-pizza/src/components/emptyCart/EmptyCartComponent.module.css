@@ -1,0 +1,36 @@
+.emptyCart {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 10vh 0;
+}
+.emptyCart h1 {
+  font-weight: 700;
+  font-size: 32px;
+}
+.emptyCart span {
+  font-size: 25px;
+  margin-left: 1vh;
+}
+.emptyCart p {
+  max-width: 70vh;
+  margin: 1vh auto 3vh auto;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 145.4%;
+  text-align: center;
+  color: #777777;
+}
+.emptyCart .goBackButton {
+  margin-top: 2vh;
+  padding: 1.5vh 4vh;
+  border-radius: 3.4vh;
+  font-weight: 700;
+  transition: 0.3s;
+  background-color: #282828;
+  color: white;
+}
+.emptyCart .goBackButton:hover {
+  transition: 0.3s;
+  background-color: black;
+}

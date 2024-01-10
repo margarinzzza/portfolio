@@ -9,7 +9,7 @@ export const RegisterController = async (req: any, res: any) => {
     if (!errors.isEmpty()) {
       return res.status(400).json(errors.array())
     } else {
-      const password = req.body.password;
+      const password = req.body.password; 
       const salt = await bcrypt.genSalt(10);
       const passwordHash = await bcrypt.hash(password, salt);
       const doc = new UserModel({
@@ -32,31 +32,7 @@ export const RegisterController = async (req: any, res: any) => {
 }
 
 export const checkUniqueEmail = async (req: any, res: any) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json(errors.array())
-    } else {
-      const password = req.body.password;
-      const salt = await bcrypt.genSalt(10);
-      const passwordHash = await bcrypt.hash(password, salt);
-      const doc = new UserModel({
-        email: req.body.email,
-        name: req.body.name,
-        surname: req.body.surname,
-        phoneNumber: req.body.phoneNumber,
-        password: passwordHash
-      })
-      const user = await doc.save();
-      const token = jwt.sign({
-        _id: user._id,
-      }, 'secret', {expiresIn: '15d'})
-      res.json({user, token});
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: 'Не удалось зарегистрироваться', err })
-  }
+  
 }
 
 export const LoginController = async (req: any, res: any)=>{
@@ -100,9 +76,13 @@ export const RedactUserInfoConroller = async (req: any, res: any)=>{
     if(!user){
       res.json('Пользователя не существует')
     } else {
+      const password = req.body.password;
+      const salt = await bcrypt.genSalt(10);
+      const passwordHash = await bcrypt.hash(password, salt);
       user.name = req.body.name;
       user.surname = req.body.surname;
       user.phoneNumber = req.body.phoneNumber;
+      user.password = passwordHash;
       await user.save();
       res.json({user})
     }

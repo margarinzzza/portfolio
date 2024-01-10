@@ -1,4 +1,4 @@
-import styles from './MessengerComponent.module.scss'
+import styles from './MessengerComponent.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, Route, Routes } from 'react-router-dom';
 import MessagesComponent from './MessagesComponent';

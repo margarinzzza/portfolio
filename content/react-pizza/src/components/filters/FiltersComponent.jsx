@@ -1,4 +1,4 @@
-import styles from './FiltersComponent.module.scss';
+import styles from './FiltersComponent.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { categoryList, sortList } from '../../store/store';
 import { setCategory, setSort } from '../../redux/slices/filterSlice';

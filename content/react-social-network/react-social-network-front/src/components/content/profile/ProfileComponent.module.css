@@ -1,0 +1,41 @@
+.profileData {
+  display: flex;
+}
+.profileData img {
+  width: 15vh;
+  margin-right: 2vh;
+}
+
+.profileDataInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.profilePosts {
+  display: flex;
+  flex-direction: column;
+}
+
+.profilePostsListItem {
+  display: flex;
+  margin: 2vh 0;
+}
+
+.profilePostsListItemData {
+  flex: 10;
+}
+
+.deletePost {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+.deletePost span {
+  cursor: pointer;
+}
+
+@media (max-width: 470px) {
+  .profilePostsListItem img {
+    margin-right: 6vh;
+  }
+}

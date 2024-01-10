@@ -1,4 +1,4 @@
-import styles from './HeaderComponent.module.scss';
+import styles from './HeaderComponent.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../media/img/logo.png'
 import { Link } from 'react-router-dom';

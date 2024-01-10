@@ -1,4 +1,4 @@
-import styles from './EmptyCartComponent.module.scss';
+import styles from './EmptyCartComponent.module.css';
 import { useDispatch } from 'react-redux';
 import emptyCartImg from '../../media/img/emptyCart.png'
 import { Link } from 'react-router-dom';

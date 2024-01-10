@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, getMyPosts } from '../../../features/profile/postsSlice';
 import PostsListComponent from './PostsListComponent';
-import styles from './ProfileComponent.module.scss'
+import styles from './ProfileComponent.module.css'
 
 const ProfileComponent = () => {
   const { userData } = useSelector(state => state.auth)
