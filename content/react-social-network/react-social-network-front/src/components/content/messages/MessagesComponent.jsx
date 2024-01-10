@@ -18,7 +18,7 @@ const MessagesComponent = () => {
   useEffect(() => {
     dispatch(getMessages({ chatId }))
     scrollToBottom()
-  }, [chatId, messages])
+  }, [])
 
   const dispatch = useDispatch()
   useEffect(() => {

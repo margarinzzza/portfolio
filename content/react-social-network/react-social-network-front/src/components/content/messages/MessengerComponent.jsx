@@ -12,7 +12,7 @@ const MessengerComponent = () => {
 
   useEffect(() => {
     dispatch(getMyChats({ userId: userData._id }))
-  }, [myChats])
+  }, [])
 
   return (
     <div className={`${styles.messenger}`}>

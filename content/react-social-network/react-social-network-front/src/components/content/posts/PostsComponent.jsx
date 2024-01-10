@@ -2,7 +2,7 @@ import styles from './PostsComponent.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import PostItemComponent from './PostItemComponent';
 import { useState } from 'react';
-import { postsSliceActions } from '../../../features/profile/postsSlice';
+import { getAllPosts, postsSliceActions } from '../../../features/profile/postsSlice';
 import { useEffect } from 'react';
 
 const PostsComponent = () => {
@@ -15,7 +15,9 @@ const PostsComponent = () => {
   if (allPosts !== null) {
     currentCollection = (allPosts.slice(0, lastCollectionIndex)).reverse()
   }
-
+  useEffect(() => {
+    dispatch(getAllPosts())
+  }, [])
   useEffect(() => {
     dispatch(postsSliceActions.searchPost())
   }, [searchQueryByName, searchQueryByText])

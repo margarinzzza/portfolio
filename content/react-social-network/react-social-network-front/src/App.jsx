@@ -28,10 +28,6 @@ const App = () => {
     } else navigate('/profile')
   }, [isAuth])
 
-  useEffect(() => {
-    dispatch(getAllPosts())
-  }, [allPosts])
-
   return (
     <div className="app">
       <HeaderComponent />

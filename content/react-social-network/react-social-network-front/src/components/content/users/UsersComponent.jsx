@@ -34,7 +34,7 @@ const UsersComponent = () => {
 
   useEffect(() => {
     dispatch(getMyChats({ userId: userData._id }))
-  }, [myChats])
+  }, [])
 
   return (
     <>

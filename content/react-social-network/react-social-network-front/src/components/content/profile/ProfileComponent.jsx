@@ -6,16 +6,17 @@ import PostsListComponent from './PostsListComponent';
 import styles from './ProfileComponent.module.css'
 
 const ProfileComponent = () => {
+
   const { userData } = useSelector(state => state.auth)
   const { myPosts } = useSelector(state => state.posts)
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(getMyPosts({userId: userData._id}))
-  }, [myPosts])
+  }, [])
   
   const [postText, setPostText] = useState('')
   const [isEmptyPostText, setIsEmptyPostText] = useState(false)
-  const addPostHandler = (postText) => {
+  const addPostHandler = async (postText) => {
     setIsEmptyPostText(false)
     if (postText !== '') {
       const newPost = {
@@ -23,12 +24,12 @@ const ProfileComponent = () => {
         name: userData.name,
         text: postText
       }
-      dispatch(createPost(newPost))
-      setPostText('')
+      await dispatch(createPost(newPost)).unwrap().then(()=>{
+        setPostText('')
+        dispatch(getMyPosts({userId: userData._id}))
+      }).catch()
     } else setIsEmptyPostText(true)
-
   }
-
 
   return (
     <div className={`${styles.profile}`}>
