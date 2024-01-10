@@ -1,0 +1,294 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* global */
+
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+input,
+textarea {
+  all: unset;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+h1 {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.sity-selector::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sity-selector::-webkit-scrollbar-track {
+  background: rgb(219, 219, 219);
+}
+
+.sity-selector::-webkit-scrollbar-thumb {
+  background-color: rgb(168, 168, 168);
+  border-radius: 10px;
+}
+
+/* forms */
+
+input,
+textarea {
+  width: -webkit-fill-available;
+  margin: 8px 5px;
+  padding: 14px 9px;
+  transition: .2s;
+  border-bottom: 1px solid rgb(137 135 135 / 34%);
+}
+
+input:focus {
+  transition: .2s;
+  border-bottom: 1px solid rgb(175, 175, 175);
+}
+
+
+/* header */
+
+.header {
+  padding: 20px 25px;
+  box-shadow: 9px 9px 9px 1px rgb(51 51 51 / 20%);
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 3;
+}
+
+.header .header_logo img {
+  max-width: 87px;
+  height: fit-content;
+}
+
+.header_logo_name {
+  border-left: 4px solid #e3dfdf;
+  padding-left: 13px;
+  margin-left: 13px;
+  margin-top: 3px;
+  text-wrap: nowrap;
+}
+
+.header_logo_name h1 {
+  font-size: 50px;
+  text-wrap: nowrap;
+  font-family: 'Rubik Doodle Shadow';
+}
+
+.header .header_nav img {
+  border-radius: 10px;
+  max-width: 47px;
+  height: fit-content;
+}
+
+.nav_items {
+  display: flex;
+  margin-right: 20px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-end;
+}
+
+.header .header_nav ul * {
+  cursor: pointer;
+  border-bottom: 1px solid #5dadff;
+  padding: 4px 4px;
+  margin: 1px 5px;
+  transition: .2s;
+}
+
+.header .header_nav ul *:hover {
+  border-bottom: 1px solid #2993fd;
+  transition: .2s;
+}
+
+.sity-selector {
+  top: 35px;
+  position: absolute;
+  max-height: 124px;
+  overflow-y: scroll;
+  background-color: #ffffffc2;
+  padding: 3px 6px;
+  border-radius: 5px;
+  transition: .3s;
+  min-width: 125px;
+}
+
+/* events */
+
+.events_categories {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.events_categories div {
+  background-color: #d9d8d8;
+  padding: 5px 20px;
+  margin: 5px 8px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.events_categories div:hover {
+  background-color: #c2c2c2;
+  transition: .2s;
+}
+
+.events_list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.event {
+  padding: 20px;
+  display: flex;
+  min-width: 378px;
+  width: 32%;
+  max-width: 400px;
+  margin: 7px;
+  box-shadow: 6px 4px 7px 3px rgb(51 51 51 / 12%);
+  border-radius: 0 6px 6px 0;
+  border-left: 5px solid #5b504c17;
+  flex-direction: column;
+}
+
+.events {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: 28px;
+}
+
+.pagination span {
+  border-bottom: 1px solid black;
+  margin: 0px 5px;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.pagination svg {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* proposals */
+
+.proposal_form input,
+textarea {
+  display: flex;
+  flex: 1;
+}
+
+.proposal_form h3 {
+  margin: 17px 0 5px 0;
+}
+
+.create_proposal,
+.my_proposals {
+  margin: 10px;
+  display: flex;
+  flex: 1;
+  flex-basis: 600px;
+  flex-direction: column;
+}
+
+.proposal_list_item {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 33px 12px;
+}
+
+.item_desc {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  flex-basis: 523px;
+}
+
+.item_more {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  flex-basis: 399px;
+}
+
+.item_more_value {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eeeeee;
+  justify-content: space-between;
+}
+
+.participansListShow {
+  max-height: 100vh;
+  overflow: hidden;
+  transition: 4s;
+}
+
+.participansListHide {
+  max-height: 0;
+  overflow: hidden;
+  transition: 2s;
+}
+
+/* eventPage */
+
+.event_img {
+  position: relative;
+  background-size: cover;
+  height: 56vh;
+  top: -20px;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}

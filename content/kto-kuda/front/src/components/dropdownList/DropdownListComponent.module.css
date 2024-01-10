@@ -1,0 +1,34 @@
+.dropDown input {
+    width: -webkit-fill-available;
+    margin: 8px 0;
+    padding: 14px 9px;
+    transition: .2s;
+    border-bottom: 1px solid rgb(137 135 135 / 34%);
+}
+
+.dropDown input:focus {
+    transition: .2s;
+    border-bottom: 1px solid rgb(175, 175, 175);
+}
+
+.dropDownList {
+    position: absolute;
+    background-color: #fffffff7;
+    padding: 13px;
+    border-radius: 8px;
+    transition: .3s;
+    opacity: 0;
+    min-width: 192px;
+    max-height: 166px;
+    min-height: min-content;
+    overflow-y: auto;
+    pointer-events: none;
+    width: -webkit-fill-available;
+}
+
+.listVisible {
+    transition: .3s;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+}

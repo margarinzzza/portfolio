@@ -1,0 +1,35 @@
+.dropDownList {
+    position: absolute;
+    background-color: #fffffff7;
+    padding: 13px;
+    border-radius: 8px;
+    transition: .3s;
+    opacity: 0;
+    min-width: 192px;
+    max-height: 166px;
+    min-height: min-content;
+    overflow-y: auto;
+    pointer-events: none;
+    width: -webkit-fill-available;
+}
+
+.listVisible {
+    transition: .3s;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+}
+
+.selectedItems {
+
+}
+
+.selectedItems div {
+    display: flex;
+    align-items: center;
+    background-color: #cfcccc;
+    margin: 4px 7px;
+    padding: 2px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+}

@@ -1,0 +1,32 @@
+.popUp {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: #00000061;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transition: .2s;
+    opacity: 0;
+}
+
+.popUp__active {
+    pointer-events: all;
+    transition: .2s;
+    opacity: 1;
+    z-index: 10;
+}
+
+.popUpContent {
+    display: flex;
+    background-color: #fffffff7;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 10px;
+}
