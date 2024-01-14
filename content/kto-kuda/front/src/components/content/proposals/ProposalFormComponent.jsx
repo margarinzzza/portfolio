@@ -33,9 +33,7 @@ const ProposalFormComponent = () => {
   const [generalExpenses, setGeneralExpenses] = useState(0)
   const [individualExpenses, setIndividualExpenses] = useState(0)
   const [totalExpenses, setTotalExpenses] = useState(0)
-  useEffect(() => {
-    console.log(totalExpenses)
-  }, [description])
+
   const createProposal = async () => {
     if (title === '') return dispatch(eventsSliceActions.setCreateEventError('Введите заголовок'))
     if (description === '') return dispatch(eventsSliceActions.setCreateEventError('Введите описание'))

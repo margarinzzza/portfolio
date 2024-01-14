@@ -71,7 +71,7 @@ const EventComponent = () => {
 
   const partActionHandler = async () => {
     if (isAuth) {
-      if (eventData.creator === userData._id) {
+      if (!eventData.creator === userData._id) {
         await axios.get('/checkAuth').then(async r => {
           if (!eventData.participants.indexOf(userData._id)) {
             await axios.post(`/cancelParticipate`, { userId: userData._id, eventId: eventData._id })
@@ -146,7 +146,7 @@ const EventComponent = () => {
             <div onClick={() => partActionHandler()} className="bg-[#38a1ff] py-4 rounded-t-md w-[305px] flex justify-center items-center cursor-pointer text-white">
               {(() => {
                 if (!userData) return 'Войдите чтобы принять участие'
-                if (!eventData.creator === userData._id) return 'Вы организатор'
+                if (eventData.creator === userData._id) return 'Вы организатор'
                 if (!eventData.participants.indexOf(userData._id)) return 'Отменить'
                 return 'Записаться'
               })()}
