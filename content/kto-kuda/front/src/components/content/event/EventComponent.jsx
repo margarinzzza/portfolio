@@ -68,7 +68,7 @@ const EventComponent = () => {
   }
 
   const partActionHandler = () => {
-    
+
   }
 
   return (
@@ -129,14 +129,16 @@ const EventComponent = () => {
               <h3>Дмитрий</h3>
             </div>
           </div>
-          <div className="fixed w-full left-0 bottom-0 flex justify-center">
-            <div className="bg-[#38a1ff] py-4 rounded-t-md w-[305px] flex justify-center items-center cursor-pointer text-white">
-              {(() => {
-                if (!eventData.participants.indexOf(userData._id)) return 'Отменить'
-                return 'Записаться'
-              })()}
+          {userData?._id &&
+            <div className="fixed w-full left-0 bottom-0 flex justify-center">
+              <div className="bg-[#38a1ff] py-4 rounded-t-md w-[305px] flex justify-center items-center cursor-pointer text-white">
+                {(() => {
+                  if (!eventData.participants.indexOf(userData._id)) return 'Отменить'
+                  return 'Записаться'
+                })()}
+              </div>
             </div>
-          </div>
+          }
         </div>
         : <NotFoundComponent />
       }
