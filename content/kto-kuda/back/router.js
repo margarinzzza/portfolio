@@ -17,6 +17,12 @@ router.post('/createEvent', EventController.createEvent)
 router.post('/deleteEvent', EventController.deleteEvent)
 router.get('/getEvent/:id', EventController.getEvent)
 router.post('/getEvents', EventController.getEvents)
-router.post('/getUserEvents', EventController.getUserEvents) 
+router.post('/getUserEvents', EventController.getUserEvents)
+router.get('/getEventCreator/:userId', EventController.getEventCreator)
+router.get('/getParticipants/:eventId', EventController.getParticipants)
 
-module.exports = router
+router.post('/participate', EventController.participate)
+router.post('/cancelParticipate', EventController.cancelParticipate)
+
+
+module.exports = router 

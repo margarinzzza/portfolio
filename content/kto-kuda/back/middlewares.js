@@ -12,7 +12,7 @@ const authMiddleware = async (req, res, next) => {
             const decodedData = jwt.verify(token, 'SECRET_KEY')
             //const user = await User.findById(decodedData.user._id)
             res.status(200).json(decodedData)
-            next()
+            next() 
         } catch (err) {
             return res.status(403).json({ msg: 'Нет доступа' })
         }

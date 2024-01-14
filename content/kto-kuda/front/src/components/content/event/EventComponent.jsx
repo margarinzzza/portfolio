@@ -2,10 +2,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { declOfNum } from "../../../funcs";
-import { cities } from "../../../staticStates";
-import { categories } from "../../../staticStates";
-import { DropdownListComponent } from "../../dropdownList/DropdownListComponent";
-import styles from './EventComponent.module.css'
 import axios from '../../../axios'
 import { useParams } from "react-router";
 import NotFoundComponent from "../../notFound/NotFoundComponent";
@@ -21,14 +17,20 @@ const EventComponent = () => {
   const { isAuth, userData } = useSelector(state => state.authSlice)
   const eventId = params.eventId
   const [isEventFound, setIsEventFound] = useState(false)
+  const [eventCreatorData, setEventCreatorData] = useState({})
+  const [participants, setParticipants] = useState([])
   const [showParticipants, setShowParticipants] = useState(false)
 
-  useEffect(() => {
-    dispatch(getEvent(eventId)).unwrap().then((res) => {
+  const getEventReq = async () => {
+    await dispatch(getEvent(eventId)).unwrap().then(async (res) => {
+      await axios.get(`/getEventCreator/${res.data.creator}`).then(res => setEventCreatorData(res.data.userData))
+      await axios.get(`/getParticipants/${res.data._id}`).then(res => setParticipants(res.data.participantsData))
       setIsEventFound(true)
-    }).catch(() => {
-      setIsEventFound(false)
-    })
+    }).catch(() => setIsEventFound(false))
+  }
+
+  useEffect(() => {
+    getEventReq()
   }, [])
 
   const returnStartDateAndTime = (e) => {
@@ -67,8 +69,19 @@ const EventComponent = () => {
     return `${city}, улица ${str[0]}, дом ${str[1]}`
   }
 
-  const partActionHandler = () => {
-
+  const partActionHandler = async () => {
+    if (isAuth) {
+      if (eventData.creator === userData._id) {
+        await axios.get('/checkAuth').then(async r => {
+          if (!eventData.participants.indexOf(userData._id)) {
+            await axios.post(`/cancelParticipate`, { userId: userData._id, eventId: eventData._id })
+            return getEventReq()
+          }
+          await axios.post(`/participate`, { userId: userData._id, eventId: eventData._id })
+          return getEventReq()
+        }).catch(e => console.log('не авторизованы', e))
+      }
+    }
   }
 
   return (
@@ -115,30 +128,30 @@ const EventComponent = () => {
                   </> : <span className="text-slate-500">Участников нет</span>}
               </div>
               <div className={`flex flex-wrap ${showParticipants ? 'participansListShow' : 'participansListHide'}`}>
-                {eventData.participants.length !== 0 && eventData.participants.map((el, idx) => {
-                  return <div className={`participansList_item flex py-2 px-3 m-2 w-fit bg-[#eeeeee] rounded-[5px]`}>
+                {participants.length !== 0 && participants.map((el, idx) => {
+                  return <div key={idx} className={`participansList_item flex py-2 px-3 m-2 w-fit bg-[#eeeeee] rounded-[5px]`}>
                     <img src={ava} className="w-[45px] mr-3 " />
-                    <h4>Вася</h4>
+                    <h4>{el.name}</h4>
                   </div>
                 })}
               </div>
             </div>
-            <div className="w-fit cursor-pointer border-[7px] p-[10px] flex flex-col items-center rounded-[5px]">
+            <div className="w-fit cursor-pointer border-[3px] p-[10px] flex flex-col items-center rounded-[5px]">
               <img src={ava} className="w-[85px] mb-2" />
               <span className="text-slate-500">Организатор</span>
-              <h3>Дмитрий</h3>
+              <h3>{eventCreatorData.name}</h3>
             </div>
           </div>
-          {userData?._id &&
-            <div className="fixed w-full left-0 bottom-0 flex justify-center">
-              <div className="bg-[#38a1ff] py-4 rounded-t-md w-[305px] flex justify-center items-center cursor-pointer text-white">
-                {(() => {
-                  if (!eventData.participants.indexOf(userData._id)) return 'Отменить'
-                  return 'Записаться'
-                })()}
-              </div>
+          <div className="fixed w-full left-0 bottom-0 flex justify-center">
+            <div onClick={() => partActionHandler()} className="bg-[#38a1ff] py-4 rounded-t-md w-[305px] flex justify-center items-center cursor-pointer text-white">
+              {(() => {
+                if (!userData) return 'Войдите чтобы принять участие'
+                if (!eventData.creator === userData._id) return 'Вы организатор'
+                if (!eventData.participants.indexOf(userData._id)) return 'Отменить'
+                return 'Записаться'
+              })()}
             </div>
-          }
+          </div>
         </div>
         : <NotFoundComponent />
       }

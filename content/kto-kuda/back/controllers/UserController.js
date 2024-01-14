@@ -64,7 +64,6 @@ class UserController {
             userData.city = newData.city
             userData.age = newData.age
             userData.interests = newData.interests
-            
             await userData.save()
             const token = generateJwtToken(userData)
             return res.status(200).json({ msg: 'Успешно', data: userData, token })

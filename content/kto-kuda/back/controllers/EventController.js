@@ -71,16 +71,77 @@ class EventController {
                 let tapeArr = []
                 let eventsData = []
                 eventsData = r.filter(el => el.title.toLowerCase().includes(eventQuery.toLowerCase()) || el.text.toLowerCase().includes(eventQuery.toLowerCase()))
-                tapeArr = eventsData.slice(0, userEventsDataTape * itemsPerTape) 
+                tapeArr = eventsData.slice(0, userEventsDataTape * itemsPerTape)
                 return res.status(200).json({ msg: 'Успешно', data: tapeArr, length: eventsData.length })
             }).catch(e => {
-                res.status(400).json({ msg: 'не найден создатель события'})
+                res.status(400).json({ msg: 'не найден создатель события' })
             })
         } catch (err) {
             console.log(err)
             res.status(400).json({ msg: 'Ошибка поиска' })
         }
     }
+
+    async getEventCreator(req, res) {
+        try {
+            let { userId } = req.params
+            await User.findById(userId).then(r => res.status(200).json({ msg: 'Успешно', userData: r }))
+                .catch(e => res.status(400).json({ msg: 'не найден создатель события' }))
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({ msg: 'Ошибка поиска' })
+        }
+    }
+
+    async getParticipants(req, res) {
+        try {
+            const { eventId } = req.params
+            const event = await Event.findById(eventId).catch(e => res.status(400).json({ msg: 'Событие не найдено' }))
+            let participantsData = []
+            for (let i = 0; i < event.participants.length; i++) {
+                const user = await User.findById(event.participants[i]).then(r => participantsData.push(r)).catch(e => { return 0 })
+            }
+            return res.status(200).json({ msg: 'Успешно', participantsData })
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({ msg: 'Ошибка создания события' })
+        }
+    }
+
+    async participate(req, res) {
+        try {
+            const { userId, eventId } = req.body
+            const event = await Event.findById(eventId).catch(e => res.status(400).json({ msg: 'Событие не найдено' }))
+            const user = await User.findById(userId).catch(e => res.status(400).json({ msg: 'Пользователь не найден' }))
+            event.participants.push(user._id)
+            user.events.push(event._id)
+            await event.save()
+            await user.save()
+            return res.status(200).json({ msg: 'Успешно', eventData: event, userData: user })
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({ msg: 'Ошибка создания события' })
+        }
+    }
+
+    async cancelParticipate(req, res) {
+        try {
+            const { userId, eventId } = req.body
+            const event = await Event.findById(eventId).catch(e => res.status(400).json({ msg: 'Событие не найдено' }))
+            const user = await User.findById(userId).catch(e => res.status(400).json({ msg: 'Пользователь не найден' }))
+            let filteredEvent = event.participants.filter(el => el===userId)
+            let filteredUser = user.events.filter(el => el === eventId)
+            event.participants = filteredEvent 
+            user.events = filteredUser
+            await event.save()
+            await user.save()
+            return res.status(200).json({ msg: 'Успешно', eventData: event, userData: user })
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({ msg: 'Ошибка создания события' })
+        }
+    }
+
 }
 
 module.exports = new EventController()

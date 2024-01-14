@@ -33,7 +33,6 @@ const ProposalListItemComponent = ({ data }) => {
 
   const returnAdress = ({city, adress}) => {
     let str = adress.split(',')
-    console.log(str)
     return `${city}, улица ${str[0]}, дом ${str[1]}`
   }
 
