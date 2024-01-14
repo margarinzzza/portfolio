@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRedactProfile } from "../Auth";
-import bcryptjs from 'bcryptjs'
 
 const RedactProfilePage = (props: any) => {
 
+  const navigate = useNavigate()
   const dispatch = useDispatch<any>();
-  const userData = useSelector((state: any)=>state.auth.data)
-  console.log(userData)
+  const userData = useSelector((state: any) => state.auth.data)
+  const { authErr } = useSelector((state: any) => state.auth)
+
   const { register, handleSubmit, setError, formState: { errors, isValid } } = useForm({
     mode: 'onTouched',
     defaultValues: {
@@ -20,10 +21,7 @@ const RedactProfilePage = (props: any) => {
     }
   })
   const onSubmitRedactProfile = async (values: any) => {
-    const data = await dispatch(fetchRedactProfile(values))
-    if (!data.payload) {
-      return alert('Не удалось обновить профиль')
-    }
+    const data = await dispatch(fetchRedactProfile(values)).unwrap().then(() => navigate('/profile')).catch()
   }
 
   if (!props.isAuth) {
@@ -47,7 +45,7 @@ const RedactProfilePage = (props: any) => {
             {...register('name', {
               required: 'Укажите имя',
               pattern: {
-                value: /[A-Za-zА-Яа-яЁё][\S]{1,50}/,
+                value: /[A-Za-zА-Яа-яЁё]{1,50}/,
                 message: "Неверный формат данных"
               }
             })}
@@ -90,11 +88,11 @@ const RedactProfilePage = (props: any) => {
                 value: 8,
                 message: "Пароль должен содержать минимум 8 символов"
               },
-            })}  type="text" />
-          <p className="error-text">{errors?.password && <>{errors?.password?.message || 'Error'}</>}</p>
+            })} type="text" />
+          <p className="error-text">{errors?.password && <>{errors?.password?.message || 'Error'}</>}{authErr}</p>
 
         </div>
-        <button className={`button ${isValid ? 'blue_button my-3' : 'disabled_button my-3'}`}>
+        <button className={`button ${isValid ? 'blue_button mt-3' : 'disabled_button my-3'}`}>
           Продолжить
         </button>
       </form>

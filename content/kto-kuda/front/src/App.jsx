@@ -6,18 +6,15 @@ import AlertsComponent from "./components/content/alerts/AlertsComponent";
 import ProposalsComponent from "./components/content/proposals/ProposalsComponent";
 import AccountComponent from "./components/content/account/AccountComponent";
 import CalendarComponent from "./components/content/calendar/CalendarComponent";
-import { createContext, useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./features/authSlice";
-import { useNavigate, Navigate  } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import EventComponent from "./components/content/event/EventComponent";
 import LoadingComponent from "./components/loading/LoadingComponent";
 
-//export const popUpContext = createContext(false)
-
 const App = () => {
 
-  //const [popUpVisible, setPopUpVisible] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const { isAuth, authStatus } = useSelector(state => state.authSlice)
@@ -26,9 +23,8 @@ const App = () => {
   }, [])
 
   return (
-    //<popUpContext.Provider value={{ popUpVisible, setPopUpVisible }}>
     <>
-      {authStatus === 'loading' ? <LoadingComponent/>  :
+      {authStatus === 'loading' ? <LoadingComponent /> :
         <div className={`app`}>
           <HeaderComponent />
           <div className="content w-11/12 mx-auto mt-4">
@@ -50,7 +46,6 @@ const App = () => {
         </div>
       }
     </>
-    //</popUpContext.Provider>
   )
 }
 

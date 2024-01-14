@@ -15,11 +15,11 @@
 .password_eye {
   cursor: pointer;
   position: absolute;
-  top: 13.192px;
-  right: 52.8px;
+  top: 15px;
+  right: 51px;
   display: inline-block;
-  width: 28.08px;
-  height: 28.08px;
+  width: 24px;
+  height: 24px;
   background-repeat: no-repeat!important;
   background-size: cover!important;
 }
@@ -38,8 +38,8 @@
 [type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
-  height: 16.2px;
-  width: 16.2px;
+  height: 14px;
+  width: 14px;
   background-image: url(../img/clear_field.png);
   background-size: cover;
 }
@@ -50,6 +50,9 @@ input[type="search"].error-input::-webkit-search-cancel-button {
 
 input[type="search"].success-check::-webkit-search-cancel-button {
   background-image: url(../img/success_check.png);
+  background-size: cover;
+  /* height: 16.2px;
+  width: 16.2px; */
 }
 
 input[type="search"].success-check::-webkit-search-cancel-button:hover {
@@ -91,8 +94,9 @@ input {
 * {
   color: Grayscale/800;
   font-family: 'Gilroy medium';
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
+  font-weight: 500;
 }
 
 .main-content {
@@ -109,6 +113,7 @@ h3,
 h4,
 h5 {
   margin: 0;
+  font-weight: initial;
 }
 
 .c-pointer {
@@ -168,16 +173,17 @@ display: flex;
 }
 
 .auth h4 {
-  padding-bottom: 58.752px;
+  padding-bottom: 38.752px;
 }
 
 .auth-form span {
   margin: 10.8px 0;
-  font-size: 14.688px;
-  line-height: 19.44px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .auth-form input {
+  font-size: 14px;
   transition: .3s;
   background: #F2F3F4;
   border-radius: 14.688px;
@@ -198,7 +204,7 @@ display: flex;
 }
 
 .content_wrapper {
-  width: 88%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -295,15 +301,20 @@ display: flex;
 }
 
 .error-text {
+  font-size: 14px;
   transition: .3s;
-  margin: 7.56px;
+  margin: 7.56px 0;
   color: #F46666;
 }
 
-.success-input {
+.error-text * {
+  font-size: 14px;
+}
+
+/* .success-check {
   transition: .3s;
   border: 2.7px solid #17BC77 !important;
-}
+} */
 
 /* media */
 
@@ -349,6 +360,12 @@ display: flex;
   .header__logo h3 {
     display: none;
   }
+
+  .auth {
+    padding: 80px 31px 60px 31px;
+    width: initial;
+}
+
 }
 
 @media(max-width: 420px) {
@@ -384,6 +401,7 @@ display: flex;
     padding: 39.204px 29.376px;
     width: 91%;
     position: fixed;
+    bottom: 0px;
   }
 
 }

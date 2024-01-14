@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt'
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { registerValidator, redactUserInfoValidator } from './validations/validators'
-import { RegisterController, LoginController, ProfileController, RedactUserInfoConroller} from './controllers/Controllers';
+import { RegisterController, LoginController, ProfileController, RedactUserInfoConroller, checkEmailUnique} from './controllers/Controllers';
 import UserModel from './models/User'
 import checkAuth from './utils/checkAuth';
 const port = 2000;
@@ -24,6 +24,7 @@ app.listen(port, (err: any) => {
 });
 
 app.post('/register', registerValidator, RegisterController);
+app.post('/checkEmailUnique', checkEmailUnique);
 app.post('/login', LoginController); 
 app.get('/profile', checkAuth, ProfileController); 
 app.post('/redact_profile', checkAuth, redactUserInfoValidator, RedactUserInfoConroller), async (req: any, res: any) => {

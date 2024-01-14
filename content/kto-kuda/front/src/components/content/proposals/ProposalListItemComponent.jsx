@@ -18,6 +18,7 @@ const ProposalListItemComponent = ({ data }) => {
     if (finalTime === '') return 'Не указано'
     return finalTime
   }
+  
   const returnPrice = (e) => {
     const slashIdx = e.indexOf('/')
     if (slashIdx !== -1) {
@@ -30,16 +31,22 @@ const ProposalListItemComponent = ({ data }) => {
     return `${e} ₽`
   }
 
+  const returnAdress = ({city, adress}) => {
+    let str = adress.split(',')
+    console.log(str)
+    return `${city}, улица ${str[0]}, дом ${str[1]}`
+  }
+
   return (
-    <div className="proposal_list_item">
+    <div className="flex flex-wrap my-[33px] mx-[12px]">
       <div className="item_desc">
         <div className="flex justify-between">
           <span className="text-slate-500">{data.startDateAndTime}</span>
           <span className="text-slate-500">Статус: {data.status}</span>
         </div>
-
+        <span className="text-slate-500">{returnAdress({city: data.city, adress: data.adress})}</span>
         <h2>{data.title}</h2>
-        <p>{data.text}toLowerCase toLowerCase toLowerCase toLowerCase toLowerCase toLowerCase toLowerCase toLowerCase toLowerCase</p>
+        <p>{data.text}</p>
       </div>
       <div className="item_more">
         <div className="item_more_value">
@@ -74,7 +81,7 @@ const ProposalListItemComponent = ({ data }) => {
         <div className="text-slate-500 cursor-pointer w-fit mt-2">
           {confirmDelete ? <span onClick={async () => {
             await dispatch(deleteEvent({ userId: userData._id, eventId: data._id })).unwrap().then(() => {
-              dispatch(getUserEvents(userData._id))
+              dispatch(getUserEvents({userId: userData._id}))
             }).catch()
           }}>Подтвердить</span> : <span onClick={() => setConfirmDelete(true)}>Отменить событие</span>}
         </div>

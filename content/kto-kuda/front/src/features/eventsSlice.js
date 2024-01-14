@@ -3,7 +3,9 @@ import axios from '../axios'
 
 const initialState = {
     userEventsData: [],
+    userEventsDataTape: 1,
     eventsData: [],
+    eventsDataPage: 1,
     eventData: {},
     eventsLoading: 'loading',
     eventLoading: 'loading',
@@ -38,8 +40,8 @@ export const deleteEvent = createAsyncThunk('deleteEvent', async (params, { reje
 })
 
 export const getEvents = createAsyncThunk('getEvents', async (params, { rejectWithValue }) => {
-    try { 
-        const { data } = await axios.get('/getEvents')
+    try {
+        const { data } = await axios.post('/getEvents', params)
         return data
     } catch (e) {
         return rejectWithValue(e.response.data)
@@ -47,12 +49,7 @@ export const getEvents = createAsyncThunk('getEvents', async (params, { rejectWi
 })
 
 export const getUserEvents = createAsyncThunk('getUserEvents', async (params, { rejectWithValue }) => {
-    try {
-        const { data } = await axios.get(`/getUserEvents/${params}`)
-        return data
-    } catch (e) {
-        return rejectWithValue(e.response.data)
-    }
+    return await axios.post(`/getUserEvents`, params).then(response => response.data).catch(e => rejectWithValue(e.response.data))
 })
 
 export const getEvent = createAsyncThunk('getEvent', async (params, { rejectWithValue }) => {
@@ -138,6 +135,12 @@ export const eventsSlice = createSlice({
     reducers: {
         setCreateEventError: (state, action) => {
             state.createEventError = action.payload
+        },
+        setEventsDataPage: (state, action) => {
+            state.eventsDataPage = action.payload
+        },
+        setUserEventsDataTape: (state, action) => {
+            state.userEventsDataTape = state.userEventsDataTape + 1
         },
     }
 })

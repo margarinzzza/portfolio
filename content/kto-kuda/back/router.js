@@ -12,10 +12,11 @@ router.post('/updateUser', authMiddleware, UserController.updateUser) //обно
 router.get('/getUser/:id', UserController.getUserById) //получить юзера
 router.get('/checkAuth', authMiddleware) //получить мою страницу
 
+//events
 router.post('/createEvent', EventController.createEvent)
 router.post('/deleteEvent', EventController.deleteEvent)
 router.get('/getEvent/:id', EventController.getEvent)
-router.get('/getEvents', EventController.getEvents)
-router.get('/getUserEvents/:id', EventController.getUserEvents) 
+router.post('/getEvents', EventController.getEvents)
+router.post('/getUserEvents', EventController.getUserEvents) 
 
 module.exports = router

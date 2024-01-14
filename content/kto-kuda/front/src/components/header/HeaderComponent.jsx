@@ -14,7 +14,6 @@ const HeaderComponent = () => {
   const dispatch = useDispatch()
   const [popUpVisible, setPopUpVisible] = useState(false)
   const { isAuth, userData, authError, authType } = useSelector(state => state.authSlice)
-
   const [phoneNumber, setPhoneNumber] = useState('')
   const [userName, setUserName] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')

@@ -7,7 +7,7 @@ import { DropdownListComponent } from "../../dropdownList/DropdownListComponent"
 import styles from './EventsComponent.module.css'
 import axios from '../../../axios'
 import { Link } from "react-router-dom";
-import { getEvents } from "../../../features/eventsSlice";
+import { eventsSliceActions, getEvents } from "../../../features/eventsSlice";
 import ava from '../../../media/img/ava.png'
 import LoadingComponent from '../../loading/LoadingComponent'
 
@@ -15,32 +15,26 @@ const EventsComponent = () => {
 
   const dispatch = useDispatch()
   const { userData, isAuth } = useSelector(state => state.authSlice)
-  const { eventsData, eventsLoading, eventActionsError } = useSelector(state => state.eventsSlice)
+  const { eventsData, eventsLoading, eventActionsError, eventsDataPage } = useSelector(state => state.eventsSlice)
   const [selectedCity, setSelectedCity] = useState(isAuth ? userData.city : cities[0])
   const [eventQuery, setEventQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [eventsArr, setEventsArr] = useState([])
-  const [tapeArr, setTapeArr] = useState([])
-  const [page, setPage] = useState(1)
-  const itemsPerPage = 9
+  const [eventsArrLength, setEventsArrLength] = useState(null)
+  const [itemsPerPage, setItemsPerPage] = useState(null)
 
   useEffect(() => {
     const test = async () => {
-      let arr = []
-      let tape = []
-      const getEventsReq = await dispatch(getEvents()).then((res) => {
-        arr = res.payload.data
-        if(selectedCategory!=='') arr = arr.filter((item) => item.category === selectedCategory)
-        arr = arr.filter((item) => item.title.toLowerCase().includes(eventQuery.toLowerCase()) && item.city === selectedCity)
-        tape = arr.slice((page * itemsPerPage) - itemsPerPage, page * itemsPerPage)
-        setEventsArr(arr)
-        setTapeArr(tape)
-      }).catch(() => {
-        console.log('эвенты не загружены')
-      })
+      await dispatch(getEvents({ eventsDataPage, eventQuery, selectedCity, selectedCategory })).unwrap().then((e) => {
+        setEventsArrLength(e.length)
+        setItemsPerPage(e.itemsPerPage)
+      }).catch()
     }
     test()
-  }, [page, eventQuery, selectedCity, selectedCategory])
+  }, [eventsDataPage, eventQuery, selectedCity, selectedCategory])
+
+  useEffect(() => {
+    dispatch(eventsSliceActions.setEventsDataPage(1))
+  }, [selectedCity, selectedCategory])
 
   return (
     <div className="events">
@@ -59,8 +53,8 @@ const EventsComponent = () => {
       <input onChange={(e) => setEventQuery(e.target.value)} value={eventQuery} className={`w-min ml-2 border-b-2 border-solid border-white mt-3 p-3 transition-all focus:border-b-gray-400`} type="text" placeholder="Поиск по названию" />
       {eventsLoading === 'loaded' &&
         <div className={`events_list`}>
-          {eventsArr.length === 0 && <div className="text-slate-500 mt-4">Ничего не найдено</div>}
-          {tapeArr.map((el, idx) => {
+          {eventsArrLength === 0 && <div className="text-slate-500 mt-4">Ничего не найдено</div>}
+          {eventsData.map((el, idx) => {
             const returnPrice = (e) => {
               const slashIdx = e.indexOf('/')
               if (slashIdx !== -1) {
@@ -96,23 +90,23 @@ const EventsComponent = () => {
         </div>
       } {eventsLoading === 'loading' && <LoadingComponent />}
 
-      {eventsArr.length > itemsPerPage &&
+      {eventsArrLength > itemsPerPage &&
         <div className={`pagination`}>
           <svg onClick={() => {
-            if (page > 1) {
-              setPage(p => p - 1)
+            if (eventsDataPage > 1) {
+              dispatch(eventsSliceActions.setEventsDataPage(eventsDataPage - 1))
             }
           }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left-circle" viewBox="0 0 16 16">
             <path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
           </svg>
           <div className={`pagination_items flex mx-3`}>
-            {Array(Math.ceil(eventsArr.length / itemsPerPage)).fill().map((el, idx) => {
-              return <span className={`${page === idx + 1 && 'transition-all bg-black text-white'}`} onClick={() => setPage(idx + 1)} key={idx}>{idx + 1}</span>
+            {Array(Math.ceil(eventsArrLength / itemsPerPage)).fill().map((el, idx) => {
+              return <span className={`${eventsDataPage === idx + 1 && 'transition-all bg-black text-white'}`} onClick={() => dispatch(eventsSliceActions.setEventsDataPage(idx + 1))} key={idx}>{idx + 1}</span>
             })}
           </div>
           <svg onClick={() => {
-            if (page < Math.ceil(eventsArr.length / itemsPerPage)) {
-              setPage(p => p + 1)
+            if (eventsDataPage < Math.ceil(eventsArrLength / itemsPerPage)) {
+              dispatch(eventsSliceActions.setEventsDataPage(eventsDataPage + 1))
             }
           }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-circle" viewBox="0 0 16 16">
             <path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />

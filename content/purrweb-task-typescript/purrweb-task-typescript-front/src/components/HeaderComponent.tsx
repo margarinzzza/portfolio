@@ -6,7 +6,7 @@ const HeaderComponent = (props: any) => {
   return (
     <>
       <div className="header d-flex align-items-center justify-content-between">
-        <div className="header__logo c-pointer d-flex">
+        <div className="header__logo c-pointer d-flex align-items-center">
           <img src={logo} alt="" />
           <h3 className={`ms-2 ${!props.isAuth&&'d-flex'}`}>Purrweb</h3>
         </div>

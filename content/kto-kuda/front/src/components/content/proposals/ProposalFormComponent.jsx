@@ -33,7 +33,9 @@ const ProposalFormComponent = () => {
   const [generalExpenses, setGeneralExpenses] = useState(0)
   const [individualExpenses, setIndividualExpenses] = useState(0)
   const [totalExpenses, setTotalExpenses] = useState(0)
-
+  useEffect(() => {
+    console.log(totalExpenses)
+  }, [description])
   const createProposal = async () => {
     if (title === '') return dispatch(eventsSliceActions.setCreateEventError('Введите заголовок'))
     if (description === '') return dispatch(eventsSliceActions.setCreateEventError('Введите описание'))
@@ -47,7 +49,7 @@ const ProposalFormComponent = () => {
     if (durationMinutes !== '' && durationMinutes > 59) return dispatch(eventsSliceActions.setCreateEventError('Укажите корректное время'))
     if (!minMembers > 0) return dispatch(eventsSliceActions.setCreateEventError('Укажите минимальное количество участников'))
     let price
-    if (Array.isArray(totalExpenses)) price = `${totalExpenses[0]}/${totalExpenses[1]}`
+    if (Array.isArray(totalExpenses) && totalExpenses[1] !== 0) price = `${totalExpenses[1]}/${totalExpenses[0]}`
     else price = individualExpenses
     const proposalData = {
       title, text: description, imgUrl, category, city: cityPoint, creator: userData._id, adress: `${streetPoint}, ${buildingPoint}`,
@@ -61,7 +63,7 @@ const ProposalFormComponent = () => {
       setTimeout(() => {
         dispatch(eventsSliceActions.setCreateEventError(''))
       }, 3000)
-      dispatch(getUserEvents(userData._id))
+      dispatch(getUserEvents({ userId: userData._id }))
     }).catch((e) => {
       console.log('e')
     })

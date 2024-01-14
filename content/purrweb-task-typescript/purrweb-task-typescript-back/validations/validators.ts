@@ -1,4 +1,5 @@
 import { body } from "express-validator";
+import UserModel from '../models/User'
 
 export const registerValidator = [
   body('email', 'Неверный формат почты').isEmail(),
