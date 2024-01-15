@@ -129,9 +129,9 @@ class EventController {
             const { userId, eventId } = req.body
             const event = await Event.findById(eventId).catch(e => res.status(400).json({ msg: 'Событие не найдено' }))
             const user = await User.findById(userId).catch(e => res.status(400).json({ msg: 'Пользователь не найден' }))
-            let filteredEvent = event.participants.filter(el => el===userId)
-            let filteredUser = user.events.filter(el => el === eventId)
-            event.participants = filteredEvent 
+            let filteredEvent = event.participants.filter(el => el.toString() !== userId.toString())
+            let filteredUser = user.events.filter(el => el.toString() !== eventId.toString())
+            event.participants = filteredEvent
             user.events = filteredUser
             await event.save()
             await user.save()

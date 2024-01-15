@@ -72,15 +72,18 @@ const EventComponent = () => {
   const partActionHandler = async () => {
     if (isAuth) {
       if (eventData.creator !== userData._id) {
-        await axios.get('/checkAuth').then(async r => {
-          console.log(r)
-          if (!eventData.participants.indexOf(userData._id)) {
+        if (eventData.participants.length !== eventData.participantsMaxNum) {
+          if (eventData.participants.find(e => e === userData._id)) {
             await axios.post(`/cancelParticipate`, { userId: userData._id, eventId: eventData._id })
             return getEventReq()
           }
           await axios.post(`/participate`, { userId: userData._id, eventId: eventData._id })
           return getEventReq()
-        }).catch(e => console.log('не авторизованы', e))
+        }
+        if (eventData.participants.length === eventData.participantsMaxNum && eventData.participants.find(e => e === userData._id)) {
+          await axios.post(`/cancelParticipate`, { userId: userData._id, eventId: eventData._id })
+          return getEventReq()
+        }
       }
     }
   }
@@ -150,7 +153,8 @@ const EventComponent = () => {
               {(() => {
                 if (!userData) return 'Войдите чтобы принять участие'
                 if (eventData.creator === userData._id) return 'Вы организатор'
-                if (!eventData.participants.indexOf(userData._id)) return 'Отменить'
+                if (eventData.participants.length === eventData.participantsMaxNum && !eventData.participants.find(e => e === userData._id)) return 'Максимальное число участников'
+                if (eventData.participants.find(e => e === userData._id)) return 'Отменить'
                 return 'Записаться'
               })()}
             </div>
