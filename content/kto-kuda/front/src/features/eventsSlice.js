@@ -15,12 +15,12 @@ const initialState = {
 
 export const createEvent = createAsyncThunk('createEvent', async (params, { rejectWithValue }) => {
     try {
-        await axios.get('/checkAuth').then(async () => {
+        // await axios.get('/checkAuth').then(async () => {
             const { data } = await axios.post('/createEvent', params)
             return data
-        }).catch((e) => {
-            console.log(e)
-        })
+        // }).catch((e) => {
+            // console.log(e)
+        // })
     } catch (e) {
         return rejectWithValue(e.response.data)
     }
@@ -28,12 +28,12 @@ export const createEvent = createAsyncThunk('createEvent', async (params, { reje
 
 export const deleteEvent = createAsyncThunk('deleteEvent', async (params, { rejectWithValue }) => {
     try {
-        await axios.get('/checkAuth').then(async () => {
+        // await axios.get('/checkAuth').then(async () => {
             const { data } = await axios.post('/deleteEvent', params)
             return data
-        }).catch((e) => {
-            console.log(e)
-        })
+        // }).catch((e) => {
+        //     console.log(e)
+        // })
     } catch (e) {
         return rejectWithValue(e.response.data)
     }

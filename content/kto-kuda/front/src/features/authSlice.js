@@ -49,9 +49,18 @@ export const deleteUser = createAsyncThunk('deleteUser', async (params, { reject
     }
 })
 
-export const checkAuth = createAsyncThunk('checkAuth', async () => {
+// export const checkAuth = createAsyncThunk('checkAuth', async () => {
+//     try {
+//         const { data } = await axios.get('/checkAuth')
+//         return data
+//     } catch (e) {
+//         throw e
+//     }
+// })
+
+export const refreshMe = createAsyncThunk('refreshMe', async () => {
     try {
-        const { data } = await axios.get('/checkAuth')
+        const { data } = await axios.get('/refreshMe')
         return data
     } catch (e) {
         throw e
@@ -64,8 +73,8 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(registerUser.pending, (state) => {
-                state.userData = null
-                state.authStatus = 'loading'
+                //state.userData = null
+                //state.authStatus = 'loading'
             })
             .addCase(registerUser.fulfilled, (state, action) => {
                 state.authError = ''
@@ -116,8 +125,8 @@ export const authSlice = createSlice({
             })
 
             .addCase(login.pending, (state) => {
-                state.userData = null
-                state.authStatus = 'loading'
+                //state.userData = null
+                //state.authStatus = 'loading'
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.authError = ''
@@ -132,19 +141,30 @@ export const authSlice = createSlice({
                 state.authStatus = 'err'
             })
 
-            .addCase(checkAuth.pending, (state) => {
-                //state.userData = null
+            // .addCase(checkAuth.pending, (state) => {
+            //     state.authStatus = 'loading'
+            // })
+            // .addCase(checkAuth.fulfilled, (state, action) => {
+            //     state.userData = action.payload
+            //     state.isAuth = true
+            //     state.authStatus = 'loaded'
+            // })
+            // .addCase(checkAuth.rejected, (state, action) => {
+            //     state.userData = null
+            //     state.isAuth = false
+            //     state.authStatus = 'err'
+            // })
+
+            .addCase(refreshMe.pending, (state) => {
                 state.authStatus = 'loading'
             })
-            .addCase(checkAuth.fulfilled, (state, action) => {
-                //state.authError = ''
-                state.userData = action.payload.req
+            .addCase(refreshMe.fulfilled, (state, action) => {
+                state.userData = action.payload
                 state.isAuth = true
                 state.authStatus = 'loaded'
             })
-            .addCase(checkAuth.rejected, (state, action) => {
+            .addCase(refreshMe.rejected, (state, action) => {
                 state.userData = null
-                
                 state.isAuth = false
                 state.authStatus = 'err'
             })

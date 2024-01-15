@@ -66,8 +66,7 @@ const EventsComponent = () => {
               if (!Number(e) > 0) return 'Бесплатно'
               return `${e} ₽`
             }
-            return <Link key={idx} to={`/events/${el._id}`}>
-              <div className={`event cursor-pointer`}>
+            return <Link key={idx} to={`/events/${el._id}`} className="event">
                 <div className={`flex items-center text-slate-400 justify-between`}>
                   <span>{el.startDateAndTime.slice(0, 10)}</span>
                   <span>{el.startDateAndTime.slice(12, 17)}</span>
@@ -83,8 +82,18 @@ const EventsComponent = () => {
                   </div>
                   <span className={`text-slate-500 ml-3`}>{el.participants?.length} из {el.participantsMaxNum} чел.</span>
                 </div>
-                <h4 className="pt-[12px] border-t-2 border-slate-200">{returnPrice(el.price)}</h4>
-              </div>
+                <div className="pt-[12px] border-t-2 border-slate-200 flex justify-between items-center">
+                  <h4>{returnPrice(el.price)}</h4>
+                  <span className={`${(el.creator === userData?._id || el.participants.find(e => e === userData?._id) || el.participants.length === el.participantsMaxNum) && 'px-[9px] py-[3px]'}
+                  ${el.participants.find(e => e === userData?._id) && 'bg-[#77c0ff]'} 
+                  ${el.creator === userData?._id && 'bg-[#000092]'} 
+                  ${(el.participants.length === el.participantsMaxNum && !el.participants.find(e => e === userData?._id)) && 'bg-[#97080c]'}
+                   text-[15px] text-white rounded-[6px] mx-[5px] w-fit`}>
+                    {el.participants.find(e => e === userData?._id) && 'Вы участник'}
+                    {el.creator === userData?._id && 'Вы создатель'}
+                    {(el.participants.length === el.participantsMaxNum && !el.participants.find(e => e === userData?._id)) && 'Максимум участников'}
+                  </span>
+                </div>
             </Link>
           })}
         </div>

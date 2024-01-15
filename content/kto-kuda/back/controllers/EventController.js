@@ -32,7 +32,7 @@ class EventController {
     async getEvents(req, res) {  // получить много событий
         try {
             const { eventsDataPage, eventQuery, selectedCity, selectedCategory } = req.body
-            const itemsPerPage = 9
+            const itemsPerPage = 20
             let tape = []
             let eventsData = await Event.find({ city: selectedCity })
             eventsData = eventsData.filter((item) => item.title.toLowerCase().includes(eventQuery.toLowerCase()))

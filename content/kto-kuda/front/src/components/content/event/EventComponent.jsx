@@ -46,9 +46,9 @@ const EventComponent = () => {
   const returnDurationTime = (e) => {
     const string = e.split('/')
     let finalTime = ''
-    if (string[0] !== '0') finalTime += `${string[0]} дней `
-    if (string[1] !== '0') finalTime += `${string[1]} часов `
-    if (string[2] !== '0') finalTime += `${string[2]} минут `
+    if (string[0] !== '0') finalTime += `${string[0]} ${declOfNum(string[0], ['день', 'дня', 'дней'])} `
+    if (string[1] !== '0') finalTime += `${string[1]} ${declOfNum(string[1], ['час', 'часа', 'часов'])} `
+    if (string[2] !== '0') finalTime += `${string[2]} ${declOfNum(string[2], ['минута', 'минуты', 'минут'])}`
     if (finalTime === '') return 'Не указано'
     return finalTime
   }
@@ -133,9 +133,9 @@ const EventComponent = () => {
               </div>
               <div className={`flex flex-wrap ${showParticipants ? 'participansListShow' : 'participansListHide'}`}>
                 {participants.length !== 0 && participants.map((el, idx) => {
-                  return <div key={idx} className={`participansList_item flex py-2 px-3 m-2 w-fit bg-[#eeeeee] rounded-[5px]`}>
+                  return <div key={idx} className={`participansList_item flex py-2 px-3 m-2 w-fit bg-[#eeeeee] rounded-[5px] ${el.name === userData.name&&'bg-[#77c0ff]'}`}>
                     <img src={ava} className="w-[45px] mr-3 " />
-                    <h4>{el.name}</h4>
+                    <h4>{el.name === userData.name ? 'Вы' : el.name}</h4>
                   </div>
                 })}
               </div>

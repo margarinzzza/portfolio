@@ -163,14 +163,15 @@ input:focus {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-bottom: 30px;
 }
 
 .event {
+  cursor: pointer;
   padding: 20px;
   display: flex;
-  min-width: 378px;
-  width: 32%;
-  max-width: 400px;
+  min-width: 400px;
+  width: 23%;
   margin: 7px;
   box-shadow: 6px 4px 7px 3px rgb(51 51 51 / 12%);
   border-radius: 0 6px 6px 0;
@@ -190,7 +191,7 @@ input:focus {
   align-items: center;
   justify-content: center;
   margin-top: auto;
-  padding: 20px 0;
+  padding-bottom: 20px;
 }
 
 .pagination span {

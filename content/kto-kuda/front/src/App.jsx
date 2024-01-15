@@ -8,7 +8,7 @@ import AccountComponent from "./components/content/account/AccountComponent";
 import CalendarComponent from "./components/content/calendar/CalendarComponent";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { checkAuth } from "./features/authSlice";
+import { checkAuth, refreshMe } from "./features/authSlice";
 import { useNavigate, Navigate } from "react-router-dom";
 import EventComponent from "./components/content/event/EventComponent";
 import LoadingComponent from "./components/loading/LoadingComponent";
@@ -19,7 +19,7 @@ const App = () => {
   const navigate = useNavigate();
   const { isAuth, authStatus } = useSelector(state => state.authSlice)
   useEffect(() => {
-    dispatch(checkAuth())
+    dispatch(refreshMe())
   }, [])
 
   return (

@@ -28,31 +28,13 @@ const AccountComponent = () => {
 
   const updateProfile = async () => {
     const nameRegex = /^[a-zA-Zа-яёА-ЯЁ]{3,}$/i
-    if (!nameRegex.test(userName)) {
-      return dispatch(authSliceActions.setAuthError('Введите корректное имя'))
-    }
-    if (age < 14) {
-      return dispatch(authSliceActions.setAuthError('Пользователи должны достигнуть 14 лет'))
-    }
-    if (age > 100) {
-      return dispatch(authSliceActions.setAuthError('Введите корректный возраст'))
-    }
-    if (city === '') {
-      return dispatch(authSliceActions.setAuthError('Укажите город'))
-    }
-    if (password.length < 4 || password.length > 15) {
-      return dispatch(authSliceActions.setAuthError('Пароль содержит минимум 4 символа'))
-    }
+    if (!nameRegex.test(userName)) return dispatch(authSliceActions.setAuthError('Введите корректное имя'))
+    if (age < 14) return dispatch(authSliceActions.setAuthError('Пользователи должны достигнуть 14 лет'))
+    if (age > 100) return dispatch(authSliceActions.setAuthError('Введите корректный возраст'))
+    if (city === '') return dispatch(authSliceActions.setAuthError('Укажите город'))
+    if (password.length < 4 || password.length > 15) return dispatch(authSliceActions.setAuthError('Пароль содержит минимум 4 символа'))
     const updateUserData = { name: userName, city, age, interests, password, id: userData._id, avatarUrl }
-    await dispatch(updateUser(updateUserData))
-      .unwrap()
-      .then(() => {
-        console.log('успех')
-      })
-      .catch(() => {
-        console.log('провал')
-      })
-
+    dispatch(updateUser(updateUserData))
   }
 
   return (

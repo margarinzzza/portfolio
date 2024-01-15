@@ -24,13 +24,14 @@ const HeaderComponent = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const { windowHeight, windowWidth } = useWindowDimensions();
-  
+
   const auth = async () => {
     const telRegex = /((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}/
     const nameRegex = /^[a-zA-Zа-яёА-ЯЁ]{3,}$/i
     if (!telRegex.test(phoneNumber)) return dispatch(authSliceActions.setAuthError('Введите корректный телефон'))
     if (authType === 'Вход') {
       const loginUserData = { phone: phoneNumber, password }
+      dispatch(authSliceActions.setAuthError(''))
       return await dispatch(login(loginUserData)).unwrap().then(() => setPopUpVisible(false)).catch(() => console.log('провал'))
     }
     if (!nameRegex.test(userName)) return dispatch(authSliceActions.setAuthError('Введите корректное имя'))
@@ -40,7 +41,14 @@ const HeaderComponent = () => {
     if (password.length < 4 || password.length > 15) return dispatch(authSliceActions.setAuthError('Пароль содержит минимум 4 символа'))
     if (password !== confirmPassword) return dispatch(authSliceActions.setAuthError('Пароли не совпадают'))
     const registerUserData = { phone: phoneNumber, name: userName, avatarUrl, city, age, interests, password }
+    dispatch(authSliceActions.setAuthError(''))
     return dispatch(registerUser(registerUserData))
+  }
+
+  const authPopupHanler = (aythType) => {
+    dispatch(authSliceActions.setAuthType(aythType))
+    dispatch(authSliceActions.setAuthError(''))
+    setPopUpVisible(true)
   }
 
   return (
@@ -56,14 +64,8 @@ const HeaderComponent = () => {
         <ul className={`nav_items ${isAuth && 'mr-3'}`}>
           {!isAuth ?
             <>
-              <span onClick={() => {
-                dispatch(authSliceActions.setAuthType('Вход'))
-                setPopUpVisible(true);
-              }}>Вход</span>
-              <span onClick={() => {
-                dispatch(authSliceActions.setAuthType('Регистрация'))
-                setPopUpVisible(true);
-              }}>Регистрация</span>
+              <span onClick={() => authPopupHanler('Вход')}>Вход</span>
+              <span onClick={() => authPopupHanler('Регистрация')}>Регистрация</span>
             </> :
             <>
               <Link to={'/'}>События</Link>

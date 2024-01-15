@@ -88,6 +88,25 @@ class UserController {
             res.status(400).json({ msg: 'Ошибка поиска' })
         }
     }
+
+    async refreshMe(req, res) {
+        try {
+            const bearer = req.headers.authorization
+            if (!req.headers.authorization) return res.status(400).json({ message: 'Пользователь не авторизован' })
+            const token = bearer.replace('Bearer ', '')
+            try {
+                const decodedData = jwt.verify(token, 'SECRET_KEY')
+                const user = await User.findById(decodedData.req._id)
+                res.status(200).json(user)
+            } catch (err) {
+                return res.status(403).json({ msg: 'Нет доступа', err })
+            }
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({ msg: 'Не авторизованы' })
+        }
+    }
+
 }
 
 module.exports = new UserController()
