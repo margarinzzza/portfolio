@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth, refreshMe } from "./features/authSlice";
 import { useNavigate, Navigate } from "react-router-dom";
-import EventComponent from "./components/content/event/EventComponent";
+import EventPageComponent from "./components/content/eventPage/EventPageComponent";
 import LoadingComponent from "./components/loading/LoadingComponent";
 
 const App = () => {
@@ -31,7 +31,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<EventsComponent />} />
               <Route path="/events" element={<Navigate to="../" replace={true} />} />
-              <Route path="/events/:eventId" element={<EventComponent />} />
+              <Route path="/events/:eventId" element={<EventPageComponent />} />
               {isAuth &&
                 <>
                   <Route path="/my-proposals" element={<ProposalsComponent />} />

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { DropdownListComponent } from '../../dropdownList/DropdownListComponent'
 import { cities, categories } from "../../../staticStates";
 import { useSelector, useDispatch } from "react-redux"
-import { createEvent, eventsSliceActions, getUserEvents } from "../../../features/eventsSlice";
+import { createEvent, eventsSliceActions, getUserProposals } from "../../../features/eventsSlice";
 
 const ProposalFormComponent = () => {
 
@@ -61,7 +61,7 @@ const ProposalFormComponent = () => {
       setTimeout(() => {
         dispatch(eventsSliceActions.setCreateEventError(''))
       }, 3000)
-      dispatch(getUserEvents({ userId: userData._id }))
+      dispatch(getUserProposals({ userId: userData._id }))
     }).catch((e) => {
       console.log('e')
     })

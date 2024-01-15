@@ -15,12 +15,8 @@ const initialState = {
 
 export const createEvent = createAsyncThunk('createEvent', async (params, { rejectWithValue }) => {
     try {
-        // await axios.get('/checkAuth').then(async () => {
-            const { data } = await axios.post('/createEvent', params)
-            return data
-        // }).catch((e) => {
-            // console.log(e)
-        // })
+        const { data } = await axios.post('/createEvent', params)
+        return data
     } catch (e) {
         return rejectWithValue(e.response.data)
     }
@@ -28,12 +24,8 @@ export const createEvent = createAsyncThunk('createEvent', async (params, { reje
 
 export const deleteEvent = createAsyncThunk('deleteEvent', async (params, { rejectWithValue }) => {
     try {
-        // await axios.get('/checkAuth').then(async () => {
-            const { data } = await axios.post('/deleteEvent', params)
-            return data
-        // }).catch((e) => {
-        //     console.log(e)
-        // })
+        const { data } = await axios.post('/deleteEvent', params)
+        return data
     } catch (e) {
         return rejectWithValue(e.response.data)
     }
@@ -48,8 +40,12 @@ export const getEvents = createAsyncThunk('getEvents', async (params, { rejectWi
     }
 })
 
-export const getUserEvents = createAsyncThunk('getUserEvents', async (params, { rejectWithValue }) => {
-    return await axios.post(`/getUserEvents`, params).then(response => response.data).catch(e => rejectWithValue(e.response.data))
+export const getUserProposals = createAsyncThunk('getUserProposals', async (params, { rejectWithValue }) => {
+    return await axios.post(`/getUserProposals`, params).then(response => response.data).catch(e => rejectWithValue(e.response.data))
+})
+
+export const getMyEvents = createAsyncThunk('getMyEvents', async (params, { rejectWithValue }) => {
+    return await axios.get(`/getMyEvents/${params.userId}/${params.date}`).then(response => response.data).catch(e => rejectWithValue(e.response.data))
 })
 
 export const getEvent = createAsyncThunk('getEvent', async (params, { rejectWithValue }) => {
@@ -104,16 +100,30 @@ export const eventsSlice = createSlice({
                 state.eventsLoading = 'err'
             })
 
-            .addCase(getUserEvents.pending, (state) => {
+            .addCase(getUserProposals.pending, (state) => {
                 state.eventsData = []
                 state.eventsLoading = 'loading'
             })
-            .addCase(getUserEvents.fulfilled, (state, action) => {
+            .addCase(getUserProposals.fulfilled, (state, action) => {
                 state.eventsData = action.payload.data
                 state.eventActionsError = ''
                 state.eventsLoading = 'loaded'
             })
-            .addCase(getUserEvents.rejected, (state, action) => {
+            .addCase(getUserProposals.rejected, (state, action) => {
+                state.eventActionsError = action.payload.msg
+                state.eventsLoading = 'err'
+            })
+
+            .addCase(getMyEvents.pending, (state) => {
+                state.eventsData = []
+                state.eventsLoading = 'loading'
+            })
+            .addCase(getMyEvents.fulfilled, (state, action) => {
+                state.eventsData = action.payload.data
+                state.eventActionsError = ''
+                state.eventsLoading = 'loaded'
+            })
+            .addCase(getMyEvents.rejected, (state, action) => {
                 state.eventActionsError = action.payload.msg
                 state.eventsLoading = 'err'
             })
@@ -130,6 +140,8 @@ export const eventsSlice = createSlice({
                 state.eventActionsError = action.payload.msg
                 state.eventLoading = 'err'
             })
+
+
 
     },
     reducers: {

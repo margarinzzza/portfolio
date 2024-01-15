@@ -1,21 +1,19 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { declOfNum } from "../../../funcs";
 import { cities, categories } from "../../../staticStates";
 import { DropdownListComponent } from "../../dropdownList/DropdownListComponent";
 import styles from './EventsComponent.module.css'
 import axios from '../../../axios'
-import { Link } from "react-router-dom";
 import { eventsSliceActions, getEvents } from "../../../features/eventsSlice";
-import ava from '../../../media/img/ava.png'
 import LoadingComponent from '../../loading/LoadingComponent'
+import EventComponent from "./EventComponent";
 
 const EventsComponent = () => {
 
   const dispatch = useDispatch()
   const { userData, isAuth } = useSelector(state => state.authSlice)
-  const { eventsData, eventsLoading, eventActionsError, eventsDataPage } = useSelector(state => state.eventsSlice)
+  const { eventsData, eventsLoading, eventsDataPage } = useSelector(state => state.eventsSlice)
   const [selectedCity, setSelectedCity] = useState(isAuth ? userData.city : cities[0])
   const [eventQuery, setEventQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
@@ -54,48 +52,7 @@ const EventsComponent = () => {
       {eventsLoading === 'loaded' &&
         <div className={`events_list`}>
           {eventsArrLength === 0 && <div className="text-slate-500 mt-4">Ничего не найдено</div>}
-          {eventsData.map((el, idx) => {
-            const returnPrice = (e) => {
-              const slashIdx = e.indexOf('/')
-              if (slashIdx !== -1) {
-                let minPrice, maxPrice
-                minPrice = e.slice(0, slashIdx)
-                maxPrice = e.slice(slashIdx + 1, e.length)
-                return `От ${minPrice} ₽ до ${maxPrice} ₽`
-              }
-              if (!Number(e) > 0) return 'Бесплатно'
-              return `${e} ₽`
-            }
-            return <Link key={idx} to={`/events/${el._id}`} className="event">
-                <div className={`flex items-center text-slate-400 justify-between`}>
-                  <span>{el.startDateAndTime.slice(0, 10)}</span>
-                  <span>{el.startDateAndTime.slice(12, 17)}</span>
-                </div>
-                <span className="bg-[#e0e0e0] text-[15px] text-[#a2a0a0] px-[9px] py-[3px] rounded-[6px] mx-[5px] mt-1 w-fit">{el.category}</span>
-                <h3 className={`mt-1`}>{el.title}</h3>
-                <span className="text-slate-500 mt-1">{el.adress}</span>
-                <div className="flex items-center mb-[20px] mt-[15px]">
-                  <div className="flex">
-                    <img className="w-[50px] mx-1" src={ava} />
-                    <img className="w-[50px] mx-1" src={ava} />
-                    <img className="w-[50px] mx-1" src={ava} />
-                  </div>
-                  <span className={`text-slate-500 ml-3`}>{el.participants?.length} из {el.participantsMaxNum} чел.</span>
-                </div>
-                <div className="pt-[12px] border-t-2 border-slate-200 flex justify-between items-center">
-                  <h4>{returnPrice(el.price)}</h4>
-                  <span className={`${(el.creator === userData?._id || el.participants.find(e => e === userData?._id) || el.participants.length === el.participantsMaxNum) && 'px-[9px] py-[3px]'}
-                  ${el.participants.find(e => e === userData?._id) && 'bg-[#77c0ff]'} 
-                  ${el.creator === userData?._id && 'bg-[#000092]'} 
-                  ${(el.participants.length === el.participantsMaxNum && !el.participants.find(e => e === userData?._id)) && 'bg-[#97080c]'}
-                   text-[15px] text-white rounded-[6px] mx-[5px] w-fit`}>
-                    {el.participants.find(e => e === userData?._id) && 'Вы участник'}
-                    {el.creator === userData?._id && 'Вы создатель'}
-                    {(el.participants.length === el.participantsMaxNum && !el.participants.find(e => e === userData?._id)) && 'Максимум участников'}
-                  </span>
-                </div>
-            </Link>
-          })}
+          {eventsData.map((el, idx) => <EventComponent data={el} key={idx}  />)}
         </div>
       } {eventsLoading === 'loading' && <LoadingComponent />}
 
@@ -114,9 +71,7 @@ const EventsComponent = () => {
             })}
           </div>
           <svg onClick={() => {
-            if (eventsDataPage < Math.ceil(eventsArrLength / itemsPerPage)) {
-              dispatch(eventsSliceActions.setEventsDataPage(eventsDataPage + 1))
-            }
+            if (eventsDataPage < Math.ceil(eventsArrLength / itemsPerPage)) dispatch(eventsSliceActions.setEventsDataPage(eventsDataPage + 1))
           }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-circle" viewBox="0 0 16 16">
             <path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
           </svg>

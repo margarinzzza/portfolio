@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { deleteEvent, getUserEvents } from "../../../features/eventsSlice";
+import { deleteEvent, getUserProposals } from "../../../features/eventsSlice";
 import ava from '../../../media/img/ava.png'
 import axios from "../../../axios";
 
@@ -90,7 +90,7 @@ const ProposalListItemComponent = ({ data }) => {
         <div className="text-slate-500 cursor-pointer w-fit mt-2">
           {confirmDelete ? <span onClick={async () => {
             await dispatch(deleteEvent({ userId: userData._id, eventId: data._id })).unwrap().then(() => {
-              dispatch(getUserEvents({userId: userData._id}))
+              dispatch(getUserProposals({userId: userData._id}))
             }).catch()
           }}>Подтвердить</span> : <span onClick={() => setConfirmDelete(true)}>Отменить событие</span>}
         </div>

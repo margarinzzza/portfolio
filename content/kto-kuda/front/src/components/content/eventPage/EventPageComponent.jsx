@@ -9,7 +9,7 @@ import { getEvent } from "../../../features/eventsSlice";
 import LoadingComponent from '../../loading/LoadingComponent'
 import ava from '../../../media/img/ava.png'
 
-const EventComponent = () => {
+const EventPageComponent = () => {
 
   const params = useParams()
   const dispatch = useDispatch()
@@ -133,7 +133,8 @@ const EventComponent = () => {
               </div>
               <div className={`flex flex-wrap ${showParticipants ? 'participansListShow' : 'participansListHide'}`}>
                 {participants.length !== 0 && participants.map((el, idx) => {
-                  return <div key={idx} className={`participansList_item flex py-2 px-3 m-2 w-fit bg-[#eeeeee] rounded-[5px] ${el.name === userData.name&&'bg-[#77c0ff]'}`}>
+                  console.log(el)
+                  return <div key={idx} className={`participansList_item flex py-2 px-3 m-2 w-fit rounded-[5px] ${el._id === userData._id ? 'bg-[#77c0ff]' : 'bg-[#eeeeee]'}`}>
                     <img src={ava} className="w-[45px] mr-3 " />
                     <h4>{el.name === userData.name ? 'Вы' : el.name}</h4>
                   </div>
@@ -166,4 +167,4 @@ const EventComponent = () => {
   );
 }
 
-export default EventComponent;
+export default EventPageComponent;

@@ -303,14 +303,58 @@ textarea {
   margin: 5px 10px;
 }
 
-/* @media (max-width: 838px) {
-  .header_logo h1 {
-    display: none;
-  }
-  .header_logo img {
-    margin-right: 20px;
-  }
-} */
+/* calendar */
+
+.day h4 {
+  transition: .3s;
+  color: white;
+  color: #1067a4;
+  border: 1px solid #1067a4;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.day:hover h4 {
+  transition: .3s;
+  background-color: #1066a43f; 
+}
+
+.prevWeek,
+.nextWeek {
+  z-index: 3;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: radial-gradient(circle, rgb(153 153 153 / 34%) 0%, rgb(209 209 209 / 22%) 49%, rgb(245 245 245 / 13%) 100%);
+  width: 23px;
+  height: 100%;
+}
+
+.prevWeek {
+  left: 0;
+  border-right: 1px solid #0000001f;
+}
+
+.nextWeek {
+  justify-content: end;
+  right: 0;
+  border-left: 1px solid #0000001f;
+}
+
+.day {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
 
 @media (max-width: 570px) {
   .header_logo img {

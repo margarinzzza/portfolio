@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { eventsSliceActions, getUserEvents } from "../../../features/eventsSlice";
+import { eventsSliceActions, getUserProposals } from "../../../features/eventsSlice";
 import LoadingComponent from "../../loading/LoadingComponent";
 import ProposalListItemComponent from "./ProposalListItemComponent";
 
@@ -14,7 +14,7 @@ const MyProposalsComponent = () => {
 
   useEffect(() => {
     const fn = async () => {
-      await dispatch(getUserEvents({ userId: userData._id, eventQuery, userEventsDataTape })).unwrap().then((e) => setEventsDataLength(e.length)).catch()
+      await dispatch(getUserProposals({ userId: userData._id, eventQuery, userEventsDataTape })).unwrap().then((e) => setEventsDataLength(e.length)).catch()
     }
     fn()
   }, [eventQuery, userEventsDataTape])
