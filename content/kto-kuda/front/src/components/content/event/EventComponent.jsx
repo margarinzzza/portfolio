@@ -136,11 +136,13 @@ const EventComponent = () => {
                 })}
               </div>
             </div>
-            <div className="w-fit cursor-pointer border-[3px] p-[10px] flex flex-col items-center rounded-[5px]">
-              <img src={ava} className="w-[85px] mb-2" />
-              <span className="text-slate-500">Организатор</span>
-              <h3>{eventCreatorData.name}</h3>
-            </div>
+            {eventData.creator !== userData._id &&
+              <div className="w-fit cursor-pointer border-[3px] p-[10px] flex flex-col items-center rounded-[5px]">
+                <img src={ava} className="w-[85px] mb-2" />
+                <span className="text-slate-500">Организатор</span>
+                <h3>{eventCreatorData.name}</h3>
+              </div>
+            }
           </div>
           <div className="fixed w-full left-0 bottom-0 flex justify-center">
             <div onClick={() => partActionHandler()} className="bg-[#38a1ff] py-4 rounded-t-md w-[305px] flex justify-center items-center cursor-pointer text-white">

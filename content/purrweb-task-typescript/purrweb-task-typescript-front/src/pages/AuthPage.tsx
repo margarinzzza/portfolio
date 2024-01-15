@@ -246,7 +246,7 @@ const AuthPage = (props: any) => {
                       }
                     })} maxLength={11} type="search" placeholder="88009501141" />
                   <p className="error-text">
-                    {errorsReg?.phoneNumber && <>{errorsReg?.phoneNumber?.message || 'Error'}</>}
+                    {errorsReg?.phoneNumber && <>{`${errorsReg?.phoneNumber?.message}` || 'Error'}</>}
                     {userData?.authErr !== '' && userData.authErr}
                     </p>
                 </div>

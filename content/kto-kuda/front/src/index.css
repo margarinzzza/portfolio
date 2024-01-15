@@ -83,11 +83,9 @@ input:focus {
   background-color: white;
   z-index: 3;
   width: 100%;
-}
-
-.header .header_logo img {
-  max-width: 87px;
-  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header_logo_name {
@@ -96,9 +94,6 @@ input:focus {
   margin-left: 13px;
   margin-top: 3px;
   text-wrap: nowrap;
-}
-
-.header_logo_name h1 {
   font-size: 50px;
   text-wrap: nowrap;
   font-family: 'Rubik Doodle Shadow';
@@ -112,7 +107,6 @@ input:focus {
 
 .nav_items {
   display: flex;
-  margin-right: 20px;
   flex-wrap: wrap;
   align-content: flex-start;
   justify-content: flex-end;
@@ -306,4 +300,19 @@ textarea {
   background-size: cover;
   border-radius: 10px;
   margin: 5px 10px;
+}
+
+/* @media (max-width: 838px) {
+  .header_logo h1 {
+    display: none;
+  }
+  .header_logo img {
+    margin-right: 20px;
+  }
+} */
+
+@media (max-width: 570px) {
+  .header_logo img {
+    max-width: 70px;
+  }
 }
