@@ -136,7 +136,7 @@ const EventComponent = () => {
                 })}
               </div>
             </div>
-            {eventData.creator !== userData._id &&
+            {eventData.creator !== userData?._id &&
               <div className="w-fit cursor-pointer border-[3px] p-[10px] flex flex-col items-center rounded-[5px]">
                 <img src={ava} className="w-[85px] mb-2" />
                 <span className="text-slate-500">Организатор</span>
