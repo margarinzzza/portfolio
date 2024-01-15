@@ -71,8 +71,9 @@ const EventComponent = () => {
 
   const partActionHandler = async () => {
     if (isAuth) {
-      if (!eventData.creator === userData._id) {
+      if (eventData.creator !== userData._id) {
         await axios.get('/checkAuth').then(async r => {
+          console.log(r)
           if (!eventData.participants.indexOf(userData._id)) {
             await axios.post(`/cancelParticipate`, { userId: userData._id, eventId: eventData._id })
             return getEventReq()
