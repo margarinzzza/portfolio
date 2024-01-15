@@ -1,12 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteEvent, getUserEvents } from "../../../features/eventsSlice";
 import ava from '../../../media/img/ava.png'
+import axios from "../../../axios";
 
 const ProposalListItemComponent = ({ data }) => {
   const { userData } = useSelector(state => state.authSlice)
   const [showParticipants, setShowParticipants] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
+  const [participants, setParticipants] = useState([])
   const dispatch = useDispatch()
 
   const returnDurationTime = (e) => {
@@ -36,6 +38,14 @@ const ProposalListItemComponent = ({ data }) => {
     return `${city}, улица ${str[0]}, дом ${str[1]}`
   }
 
+  const returnParticipants = async (eventId) => {
+    await axios.get(`/getParticipants/${eventId}`).then(res => setParticipants(res.data.participantsData))
+  }
+
+  useEffect(()=>{
+    returnParticipants(data._id)
+  }, [])
+
   return (
     <div className="flex flex-wrap my-[33px] mx-[12px]">
       <div className="item_desc">
@@ -60,8 +70,8 @@ const ProposalListItemComponent = ({ data }) => {
           <h4>Стоимость участия</h4>
           <span className="text-slate-500">{returnPrice(data.price)}</span>
         </div>
-        <div onClick={() => setShowParticipants(!showParticipants)} className={`item_more_value ${data.participants.length === 0 ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'}`}>
-          {data.participants.length !== 0 ?
+        <div onClick={() => setShowParticipants(!showParticipants)} className={`item_more_value ${participants.length === 0 ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'}`}>
+          {participants.length !== 0 ?
             <>
               <h4>Участники</h4>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className={`bi bi-arrow-down-circle transition-all ${!showParticipants && 'rotate-180'}`} viewBox="0 0 16 16">
@@ -70,10 +80,10 @@ const ProposalListItemComponent = ({ data }) => {
             </> : <span className="text-slate-500">Участников нет</span>}
         </div>
         <div className={`flex flex-wrap ${showParticipants ? 'participansListShow' : 'participansListHide'}`}>
-          {data.participants.length !== 0 && data.participants.map((el, idx) => {
-            return <div className={`participansList_item flex py-2 px-3 m-2 w-fit bg-[#eeeeee] rounded-[5px]`}>
+          {participants.length !== 0 && participants.map((el, idx) => {
+            return <div key={idx} className={`participansList_item flex py-2 px-3 m-2 w-fit bg-[#eeeeee] rounded-[5px]`}>
               <img src={ava} className="w-[45px] mr-3 " />
-              <h4>Вася</h4>
+              <h4>{el.name}</h4>
             </div>
           })}
         </div>
