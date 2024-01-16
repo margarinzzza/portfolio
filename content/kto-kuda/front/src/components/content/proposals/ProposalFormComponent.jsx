@@ -113,7 +113,7 @@ const ProposalFormComponent = () => {
         <div className={'flex flex-wrap'}>
           <DropdownListComponent data={cities} selectedItem={cityPoint} setItem={setCityPoint} placeholder={'город'} />
           <input onChange={(e) => setStreetPoint(e.target.value)} value={streetPoint} type="text" placeholder={'Улица'} />
-          <input onChange={(e) => setBuildingPoint(e.target.value)} value={buildingPoint} type="text" placeholder={'Здание'} />
+          <input onChange={(e) => setBuildingPoint(e.target.value)} value={buildingPoint} type="text" placeholder={'Дом'} />
         </div>
 
         <h3>Начало события *</h3>

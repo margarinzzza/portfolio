@@ -8,27 +8,14 @@ const CalendarComponent = () => {
 
   const dispatch = useDispatch()
   const { userData } = useSelector(state => state.authSlice)
-  const { eventsData, eventsLoading, eventsDataPage } = useSelector(state => state.eventsSlice)
+  const { eventsData, eventsLoading } = useSelector(state => state.eventsSlice)
   const [selectedDay, setSelectedDay] = useState(-1)
   const [carouselOffset, setCarouselOffset] = useState(0)
   const [calendarData, setCalendarData] = useState([])
+  const [eventsFinalData, setEventsFinalData] = useState([])
   const daysDivRef = useRef(null)
   const calendarDivRef = useRef(null)
   const offsetValue = calendarDivRef?.current?.offsetWidth - 100
-  // const months = [
-  //   { id: 0, name: 'Январь', length: 31 },
-  //   { id: 1, name: 'Февраль', length: 28 },
-  //   { id: 2, name: 'Март', length: 31 },
-  //   { id: 3, name: 'Апрель', length: 30 },
-  //   { id: 4, name: 'Май', length: 31 },
-  //   { id: 5, name: 'Июнь', length: 30 },
-  //   { id: 6, name: 'Июль', length: 31 },
-  //   { id: 7, name: 'Август', length: 31 },
-  //   { id: 8, name: 'Сентябрь', length: 30 },
-  //   { id: 9, name: 'Октябрь', length: 31 },
-  //   { id: 10, name: 'Ноябрь', length: 30 },
-  //   { id: 11, name: 'Декабрь', length: 31 }
-  // ]
   const weekDayNames = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
 
   useEffect(() => {
@@ -47,12 +34,15 @@ const CalendarComponent = () => {
 
   useEffect(() => {
     const test = async () => {
-      let date
-      if (selectedDay === -1) date = selectedDay
-      if (selectedDay.el) date = selectedDay.el.date
-      dispatch(getMyEvents({ userId: userData._id, date }))
+      let arr
+      await dispatch(getMyEvents({ userId: userData._id })).then((r) => {
+        if (selectedDay === -1) return setEventsFinalData(r.payload.data)
+        if (selectedDay.el) arr = r.payload.data.filter(el => el.startDateAndTime.slice(0, 10) === selectedDay.el.date)
+        setEventsFinalData(arr)
+      })
     }
     test()
+    
   }, [selectedDay])
 
   return (
@@ -74,7 +64,7 @@ const CalendarComponent = () => {
             {calendarData?.map((el, idx) => {
               let flag = eventsData.find(e => e.startDateAndTime.slice(0, 10) === el.date)
               return <div onClick={() => setSelectedDay({ el, idx })} className={`day`} key={idx}>
-                <span className={`text-slate-500 border-b-2 ${flag ? 'border-[#1067a4]' : 'border-[#ffffff]'} `}>{el.weekDay}</span>
+                <span className={`text-slate-500 border-b-[3px] ${flag ? 'border-[#1067a4]' : 'border-[#ffffff]'} `}>{el.weekDay}</span>
                 <h4 className={`${selectedDay.idx === idx && 'bg-[#1067a4] text-white'}`}>{el.date.slice(8, 10)}</h4>
               </div>
             })}
@@ -94,8 +84,8 @@ const CalendarComponent = () => {
 
       <div className="flex flex-wrap my-6">
         {eventsLoading === 'loading' && <LoadingComponent />}
-        {eventsData.length === 0 && <div className="text-slate-500 mt-4">Ничего не найдено</div>}
-        {eventsData.map((el, idx) => <EventComponent data={el} key={idx} />)}
+        {eventsFinalData.length === 0 && <div className="text-slate-500 mt-4">Ничего не найдено</div>}
+        {eventsFinalData.map((el, idx) => <EventComponent data={el} key={idx} />)}
       </div>
 
 

@@ -361,3 +361,14 @@ textarea {
     max-width: 70px;
   }
 }
+
+@media (max-width: 468px) {
+  .event {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .event div {
+    flex-wrap: wrap;
+  }
+}

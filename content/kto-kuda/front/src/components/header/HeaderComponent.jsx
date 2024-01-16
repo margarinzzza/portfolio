@@ -70,7 +70,6 @@ const HeaderComponent = () => {
             <>
               <Link to={'/'}>События</Link>
               <Link to={'/my-proposals'}>Мои предложения</Link>
-              <Link to={'/alerts'}>Уведомления</Link>
               <Link to={'/my-events'}>Мои события</Link>
             </>
           }

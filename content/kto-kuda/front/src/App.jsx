@@ -2,13 +2,12 @@ import HeaderComponent from "./components/header/HeaderComponent";
 import { Route, Routes } from "react-router-dom"
 import NotFoundComponent from "./components/notFound/NotFoundComponent";
 import EventsComponent from "./components/content/events/EventsComponent";
-import AlertsComponent from "./components/content/alerts/AlertsComponent";
 import ProposalsComponent from "./components/content/proposals/ProposalsComponent";
 import AccountComponent from "./components/content/account/AccountComponent";
 import CalendarComponent from "./components/content/calendar/CalendarComponent";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { checkAuth, refreshMe } from "./features/authSlice";
+import { refreshMe } from "./features/authSlice";
 import { useNavigate, Navigate } from "react-router-dom";
 import EventPageComponent from "./components/content/eventPage/EventPageComponent";
 import LoadingComponent from "./components/loading/LoadingComponent";
@@ -35,7 +34,6 @@ const App = () => {
               {isAuth &&
                 <>
                   <Route path="/my-proposals" element={<ProposalsComponent />} />
-                  <Route path="/alerts" element={<AlertsComponent />} />
                   <Route path="/my-events" element={<CalendarComponent />} />
                   <Route path="/account" element={<AccountComponent />} />
                 </>

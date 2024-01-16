@@ -7,7 +7,28 @@ class EventController {
             const reqData = req.body
             const event = new Event(reqData)
             await event.save()
-            return res.status(200).json({ msg: 'Успешно', data: event })
+            res.status(200).json({ msg: 'Успешно', data: event })
+            let startDateAndTime = event.startDateAndTime.split(',')
+            let startDateAndTimeMs = new Date([startDateAndTime[0].trim(), startDateAndTime[1].trim()]).getTime()
+            let durationTime = event.durationTime.split('/')
+            let endDateAndTimeMs = startDateAndTimeMs + ((durationTime[0] * 86400000) + (durationTime[1] * 3600000) + (durationTime[2] * 60000))
+            //console.log('Актуальная дата: ', new Date(currentDateMs))
+            //console.log('дата начала: ', new Date(startDateAndTimeMs))
+            //console.log('Дата конца: ', new Date(endDateAndTimeMs))
+            let timer = setInterval(async () => {
+                const currentDateMs = new Date().getTime() //настоящая дата
+                if (event.status == 'Active') {
+                    if (currentDateMs >= startDateAndTimeMs) {
+                        event.status = 'Начало'
+                        return await event.save()
+                    }
+                }
+                if (currentDateMs >= endDateAndTimeMs) {
+                    event.status = 'Конец'
+                    await event.save()
+                    return clearInterval(timer)
+                }
+            }, 5000)
         } catch (err) {
             console.log(err)
             res.status(400).json({ msg: 'Ошибка создания события' })
@@ -91,9 +112,7 @@ class EventController {
                 const event = await Event.findById(userData.events[i])
                 arr.push(event)
             }
-            if (date == -1) return res.status(200).json({ msg: 'Успешно', data: arr })
-            arr = arr.filter(el => el.startDateAndTime.slice(0, 10) === date)
-            return res.status(200).json({ msg: 'Успешно', data: arr })    
+            return res.status(200).json({ msg: 'Успешно', data: arr })
         } catch (err) {
             console.log(err)
             res.status(400).json({ msg: 'Ошибка поиска' })
