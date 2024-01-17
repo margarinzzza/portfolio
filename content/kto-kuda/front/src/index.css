@@ -356,6 +356,13 @@ textarea {
   cursor: pointer;
 }
 
+@media (max-width: 890px) {
+  .content {
+    width: 100%!important;
+  }
+}
+
+
 @media (max-width: 570px) {
   .header_logo img {
     max-width: 70px;

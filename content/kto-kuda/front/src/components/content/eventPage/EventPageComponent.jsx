@@ -133,10 +133,9 @@ const EventPageComponent = () => {
               </div>
               <div className={`flex flex-wrap ${showParticipants ? 'participansListShow' : 'participansListHide'}`}>
                 {participants.length !== 0 && participants.map((el, idx) => {
-                  console.log(el)
-                  return <div key={idx} className={`participansList_item flex py-2 px-3 m-2 w-fit rounded-[5px] ${el._id === userData._id ? 'bg-[#77c0ff]' : 'bg-[#eeeeee]'}`}>
+                  return <div key={idx} className={`participansList_item flex py-2 px-3 m-2 w-fit rounded-[5px] ${el._id === userData?._id ? 'bg-[#77c0ff]' : 'bg-[#eeeeee]'}`}>
                     <img src={ava} className="w-[45px] mr-3 " />
-                    <h4>{el.name === userData.name ? 'Вы' : el.name}</h4>
+                    <h4>{el.name === userData?.name ? 'Вы' : el.name}</h4>
                   </div>
                 })}
               </div>
