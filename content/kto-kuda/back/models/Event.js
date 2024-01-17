@@ -17,7 +17,7 @@ const Event = new Schema({
     city: String,
     creator: { type: Schema.Types.ObjectId, ref: 'User' },
     participants: [{type: Schema.Types.ObjectId, ref: 'User' }],
-    chat: [{ userId: Schema.Types.ObjectId, text: String }],
+    chat: [{ userId: Schema.Types.ObjectId, userName: String, userAva: String, text: String }],
     status: {
         type: String,
         default: 'Active'

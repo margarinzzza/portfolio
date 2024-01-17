@@ -57,6 +57,10 @@ export const getEvent = createAsyncThunk('getEvent', async (params, { rejectWith
     }
 })
 
+export const sendMessage = createAsyncThunk('sendMessage', async (params, { rejectWithValue }) => {
+    return await axios.post(`/sendMessage`, params).then(response => response.data).catch(e => rejectWithValue(e.response.data))
+})
+
 export const eventsSlice = createSlice({
     name: 'eventsSlice',
     initialState,
@@ -141,7 +145,17 @@ export const eventsSlice = createSlice({
                 state.eventLoading = 'err'
             })
 
-
+            .addCase(sendMessage.pending, (state) => {
+                state.eventLoading = 'loading'
+            })
+            .addCase(sendMessage.fulfilled, (state, action) => {
+                state.eventData = action.payload.data
+                state.eventLoading = 'loaded'
+            })
+            .addCase(sendMessage.rejected, (state, action) => {
+                state.eventActionsError = action.payload.msg
+                state.eventLoading = 'err'
+            })
 
     },
     reducers: {

@@ -1,9 +1,22 @@
 import { useState } from "react";
 import ava from '../../../media/img/ava.png'
+import { useDispatch } from "react-redux";
+import { sendMessage } from "../../../features/eventsSlice";
 
-const ChatComponent = ({ eventData, userData}) => {
+const ChatComponent = ({ eventData, userData }) => {
 
+  const dispatch = useDispatch()
   const [showParticipantsChat, setShowParticipantsChat] = useState(false)
+  const [text, setText] = useState('')
+  const [textErrMsg, setTextErrMsg] = useState('')
+  const sendMessageHandler = async ({ userId, text, eventId }) => {
+    if (text === '') return setTextErrMsg('Введите сообщение')
+    await dispatch(sendMessage({ userId, text, eventId })).unwrap().then(r => {
+      console.log(r)
+    }).catch()
+    setTextErrMsg('')
+    setText('')
+  }
 
   return (
     <div className="flex flex-wrap flex-col">
@@ -27,11 +40,12 @@ const ChatComponent = ({ eventData, userData}) => {
           </div>
         </div>
         <div className="flex items-center">
-          <input type="text" name="msg" placeholder="Ваше сообщение" />
-          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-arrow-right-circle mx-[20px] cursor-pointer" viewBox="0 0 16 16">
+          <input value={text} onChange={(e) => setText(e.target.value)} type="text" name="msg" placeholder="Ваше сообщение" />
+          <svg onClick={() => sendMessageHandler({ userId: userData._id, text, eventId: eventData._id })} xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-arrow-right-circle mx-[20px] cursor-pointer" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
           </svg>
         </div>
+        <span className="text-slate-500 text-center mt-2">{textErrMsg !== '' && textErrMsg}</span>
       </div>
     </div>
   );

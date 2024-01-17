@@ -37,12 +37,14 @@ const CalendarComponent = () => {
       let arr
       await dispatch(getMyEvents({ userId: userData._id })).then((r) => {
         if (selectedDay === -1) return setEventsFinalData(r.payload.data)
-        if (selectedDay.el) arr = r.payload.data.filter(el => el.startDateAndTime.slice(0, 10) === selectedDay.el.date)
-        setEventsFinalData(arr)
+        if (selectedDay.el) {
+          arr = r.payload.data.filter(el => el.startDateAndTime.slice(0, 10) === selectedDay.el.date)
+          setEventsFinalData(arr)
+        }
       })
     }
     test()
-    
+
   }, [selectedDay])
 
   return (
@@ -62,7 +64,11 @@ const CalendarComponent = () => {
           </div>
           <div style={{ right: `${carouselOffset}px` }} ref={daysDivRef} className={`days relative flex transition-all duration-500`}>
             {calendarData?.map((el, idx) => {
-              let flag = eventsData.find(e => e.startDateAndTime.slice(0, 10) === el.date)
+              let flag
+
+              if (eventsData.length !== 0) {
+                flag = eventsData.find(e => e.startDateAndTime.slice(0, 10) === el.date)
+              }
               return <div onClick={() => setSelectedDay({ el, idx })} className={`day`} key={idx}>
                 <span className={`text-slate-500 border-b-[3px] ${flag ? 'border-[#1067a4]' : 'border-[#ffffff]'} `}>{el.weekDay}</span>
                 <h4 className={`${selectedDay.idx === idx && 'bg-[#1067a4] text-white'}`}>{el.date.slice(8, 10)}</h4>
@@ -84,8 +90,9 @@ const CalendarComponent = () => {
 
       <div className="flex flex-wrap my-6">
         {eventsLoading === 'loading' && <LoadingComponent />}
-        {eventsFinalData.length === 0 && <div className="text-slate-500 mt-4">Ничего не найдено</div>}
-        {eventsFinalData.map((el, idx) => <EventComponent data={el} key={idx} />)}
+        {eventsFinalData.length === 0 ? <div className="text-slate-500 mt-4">Ничего не найдено</div> :
+          eventsFinalData.map((el, idx) => <EventComponent data={el} key={idx} />)
+        }
       </div>
 
 

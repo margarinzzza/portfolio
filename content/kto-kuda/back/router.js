@@ -25,5 +25,6 @@ router.get('/getParticipants/:eventId', EventController.getParticipants)
 router.post('/participate', authMiddleware, EventController.participate)
 router.post('/cancelParticipate', authMiddleware, EventController.cancelParticipate)
 
+router.post('/sendMessage',authMiddleware, EventController.sendMessage)
 
 module.exports = router 

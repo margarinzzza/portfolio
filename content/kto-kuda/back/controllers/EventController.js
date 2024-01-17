@@ -12,9 +12,6 @@ class EventController {
             let startDateAndTimeMs = new Date([startDateAndTime[0].trim(), startDateAndTime[1].trim()]).getTime()
             let durationTime = event.durationTime.split('/')
             let endDateAndTimeMs = startDateAndTimeMs + ((durationTime[0] * 86400000) + (durationTime[1] * 3600000) + (durationTime[2] * 60000))
-            //console.log('Актуальная дата: ', new Date(currentDateMs))
-            //console.log('дата начала: ', new Date(startDateAndTimeMs))
-            //console.log('Дата конца: ', new Date(endDateAndTimeMs))
             let timer = setInterval(async () => {
                 const currentDateMs = new Date().getTime() //настоящая дата
                 if (event.status == 'Active') {
@@ -110,7 +107,7 @@ class EventController {
             const userData = await User.findById(userId).then().catch(e => res.status(400).json({ msg: 'Пользователь не найден' }))
             for (let i = 0; i < userData.events.length; i++) {
                 const event = await Event.findById(userData.events[i])
-                arr.push(event)
+                if(event!==null) arr.push(event)
             }
             return res.status(200).json({ msg: 'Успешно', data: arr })
         } catch (err) {
@@ -176,6 +173,18 @@ class EventController {
         } catch (err) {
             console.log(err)
             res.status(400).json({ msg: 'Ошибка создания события' })
+        }
+    }
+
+    async sendMessage(req, res) {
+        try {
+            const { userId, text, eventId } = req.body
+            const event = await Event.findById(eventId).catch(e => res.status(400).json({ msg: 'Событие не найдено' }))
+            const msgData = {}
+            return res.status(200).json({ msg: 'Успешно', eventData: event, })
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({ msg: 'Ошибка отправки сообщения' })
         }
     }
 
