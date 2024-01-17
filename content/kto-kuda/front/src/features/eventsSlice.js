@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit'
 import axios from '../axios'
 
 const initialState = {
@@ -149,6 +149,11 @@ export const eventsSlice = createSlice({
                 state.eventLoading = 'loading'
             })
             .addCase(sendMessage.fulfilled, (state, action) => {
+                let modifiedEventsData = [...current(state.eventsData)]
+                current(state.eventsData).forEach((el, idx) => {
+                    if (el._id === action.payload.data._id) modifiedEventsData[idx] = action.payload.data
+                })
+                state.eventsData = modifiedEventsData
                 state.eventData = action.payload.data
                 state.eventLoading = 'loaded'
             })
@@ -167,6 +172,14 @@ export const eventsSlice = createSlice({
         },
         setUserEventsDataTape: (state, action) => {
             state.userEventsDataTape = state.userEventsDataTape + 1
+        },
+        refreshChat: (state, action) => {
+            let modifiedEventsData = [...current(state.eventsData)]
+            current(state.eventsData).forEach((el, idx) => {
+                if (el._id === action.payload._id) modifiedEventsData[idx] = action.payload
+            })
+            state.eventsData = modifiedEventsData
+            state.eventData = action.payload
         },
     }
 })

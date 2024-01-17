@@ -180,8 +180,11 @@ class EventController {
         try {
             const { userId, text, eventId } = req.body
             const event = await Event.findById(eventId).catch(e => res.status(400).json({ msg: 'Событие не найдено' }))
-            const msgData = {}
-            return res.status(200).json({ msg: 'Успешно', eventData: event, })
+            const user = await User.findById(userId).catch(e => res.status(400).json({ msg: 'Юзер не нейден' }))
+            const msgData = {userId, userName: user.name, userAva: '', text}
+            event.chat.push(msgData)
+            await event.save()
+            return res.status(200).json({ msg: 'Успешно', data: event, })
         } catch (err) {
             console.log(err)
             res.status(400).json({ msg: 'Ошибка отправки сообщения' })

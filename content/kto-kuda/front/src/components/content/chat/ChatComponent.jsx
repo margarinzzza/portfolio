@@ -1,22 +1,41 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ava from '../../../media/img/ava.png'
 import { useDispatch } from "react-redux";
-import { sendMessage } from "../../../features/eventsSlice";
+import { eventsSliceActions, sendMessage } from "../../../features/eventsSlice";
+import io from 'socket.io-client'
 
 const ChatComponent = ({ eventData, userData }) => {
 
+  const socket = io.connect('http://localhost:5000')
   const dispatch = useDispatch()
   const [showParticipantsChat, setShowParticipantsChat] = useState(false)
   const [text, setText] = useState('')
   const [textErrMsg, setTextErrMsg] = useState('')
+  const messagesEndRef = useRef(null)
+
   const sendMessageHandler = async ({ userId, text, eventId }) => {
     if (text === '') return setTextErrMsg('Введите сообщение')
-    await dispatch(sendMessage({ userId, text, eventId })).unwrap().then(r => {
-      console.log(r)
-    }).catch()
+    //await dispatch(sendMessage({ userId, text, eventId })).unwrap().then().catch()
+    socket.emit('sendMsg', { userId, text, eventId })
     setTextErrMsg('')
     setText('')
   }
+
+  useEffect(() => {
+    socket.emit('join', {eventId: eventData._id, userName: userData.name})
+    messagesEndRef.current?.scrollIntoView()
+  }, [])
+
+  useEffect(() => {
+    socket.on('refreshChat', (event) => {
+      dispatch(eventsSliceActions.refreshChat(event))
+      messagesEndRef.current?.scrollIntoView()
+    })
+  }, [])
+
+  useEffect(() => {
+    if (eventData.participants.find(e => e === userData?._id) || eventData.creator === userData?._id) setShowParticipantsChat(true)
+  }, [eventData])
 
   return (
     <div className="flex flex-wrap flex-col">
@@ -30,14 +49,19 @@ const ChatComponent = ({ eventData, userData }) => {
           </> : <span className="text-slate-500">Чат для участников</span>}
       </div>
       <div className={`flex flex-col flex-wrap my-3  ${showParticipantsChat ? 'item_more_valueShow' : 'item_more_valueHide'}`}>
-        <div className="messages h-[250px] overflow-y-scroll flex flex-col justify-end">
-          <div className="flex my-3 bg-[aliceblue] p-[10px]">
-            <img src={ava} className="w-[55px] h-[55px] mr-3" />
-            <div>
-              <h4>Игорь</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-            </div>
-          </div>
+        <div className="messages h-[250px] overflow-y-scroll flex flex-col">
+          {eventData.chat.length === 0 ? <span>Сообщений нет</span> :
+            eventData.chat.map((el, idx) => {
+              return <div key={idx} className="flex my-3 bg-[aliceblue] p-[10px]">
+                <img src={ava} className="w-[55px] h-[55px] mr-3" />
+                <div>
+                  <h4>{el.userName}</h4>
+                  <p>{el.text}</p>
+                </div>
+              </div>
+            })
+          }
+          <div ref={messagesEndRef}></div>
         </div>
         <div className="flex items-center">
           <input value={text} onChange={(e) => setText(e.target.value)} type="text" name="msg" placeholder="Ваше сообщение" />
