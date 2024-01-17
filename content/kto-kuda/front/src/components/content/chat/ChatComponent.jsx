@@ -54,7 +54,7 @@ const ChatComponent = ({ eventData, userData }) => {
             eventData.chat.map((el, idx) => {
               return <div key={idx} className={`flex my-3 bg-[aliceblue] p-[10px] ${el.userName === userData.name && 'justify-end'}`}>
                 <img src={ava} className={`w-[55px] h-[55px] flex ${el.userName === userData.name ? 'order-2 ml-3' : 'mr-3'}`}  />
-                <div>
+                <div className={`${el.userName === userData.name && 'text-end'}`}>
                   <h4>{el.userName === userData.name? 'Вы' : el.userName}</h4>
                   <p>{el.text}</p>
                 </div>
