@@ -52,10 +52,10 @@ const ChatComponent = ({ eventData, userData }) => {
         <div className="messages h-[250px] overflow-y-scroll flex flex-col">
           {eventData.chat.length === 0 ? <span>Сообщений нет</span> :
             eventData.chat.map((el, idx) => {
-              return <div key={idx} className="flex my-3 bg-[aliceblue] p-[10px]">
-                <img src={ava} className="w-[55px] h-[55px] mr-3" />
+              return <div key={idx} className={`flex my-3 bg-[aliceblue] p-[10px] ${el.userName === userData.name && 'justify-end'}`}>
+                <img src={ava} className={`w-[55px] h-[55px] flex ${el.userName === userData.name ? 'order-2 ml-3' : 'mr-3'}`}  />
                 <div>
-                  <h4>{el.userName}</h4>
+                  <h4>{el.userName === userData.name? 'Вы' : el.userName}</h4>
                   <p>{el.text}</p>
                 </div>
               </div>
