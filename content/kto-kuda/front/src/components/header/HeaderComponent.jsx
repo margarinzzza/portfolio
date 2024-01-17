@@ -2,7 +2,7 @@ import logo from '../../media/img/logo.png'
 import { Link } from "react-router-dom"
 import reserveAvatar from '../../media/img/ava.png'
 import { useSelector, useDispatch } from "react-redux"
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import PopUpComponent from '../popUp/PopUpComponent'
 import { cities, categories } from '../../staticStates'
 import { DropdownListComponent } from '../dropdownList/DropdownListComponent'
@@ -42,7 +42,7 @@ const HeaderComponent = () => {
     if (password !== confirmPassword) return dispatch(authSliceActions.setAuthError('Пароли не совпадают'))
     const registerUserData = { phone: phoneNumber, name: userName, avatarUrl, city, age, interests, password }
     dispatch(authSliceActions.setAuthError(''))
-    return dispatch(registerUser(registerUserData))
+    return dispatch(registerUser(registerUserData)).then(() => setPopUpVisible(false))
   }
 
   const authPopupHanler = (aythType) => {
@@ -76,7 +76,7 @@ const HeaderComponent = () => {
         </ul>
         {isAuth &&
           <div className={`nav_account flex`}>
-            <img src={userData.avatarUrl === '' ? reserveAvatar : userData.avatarUrl} alt="ava" />
+            <img src={userData?.avatarUrl === '' ? reserveAvatar : userData?.avatarUrl} alt="ava" />
             <div className={`ms-2`}>
               <h4>{userData !== null && userData.name}</h4>
               <Link to={'/account'} className={`text-sm text-slate-500 whitespace-nowrap`}>В кабинет</Link>

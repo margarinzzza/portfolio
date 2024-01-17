@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { authSliceActions, deleteUser, updateUser } from "../../../features/authSlice";
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { declOfNum } from "../../../funcs";
 import PopUpComponent from "../../popUp/PopUpComponent";
 import { DropdownListComponent } from '../../dropdownList/DropdownListComponent'
 import { MultiselectListComponent } from '../../multiselectList/MultiselectListComponent'
@@ -14,7 +13,7 @@ const AccountComponent = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const { isAuth, userData, authError } = useSelector(state => state.authSlice)
+  const { userData, authError } = useSelector(state => state.authSlice)
   const [showPassword, setShowPassword] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [popUpVisible, setPopUpVisible] = useState(false)
@@ -48,14 +47,13 @@ const AccountComponent = () => {
             <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
             <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
           </svg>{userData.city}</span>
-          <span className="hover:underline cursor-pointer">{userData.events.length} {declOfNum(userData.events.length, ['событие', 'события', 'событий'])}</span>
         </div>
       </div>
       <div>
         <h3>Дополнительная информация</h3>
         <div className={`detail-info`}>
           <div className={`detail-info_item flex flex-wrap p-2`}>
-            <div className={`item_property mr-3 text-slate-500`}>Интересы {userData.interests.length == 0 && 'не выбраны'}</div>
+            <div className={`item_property mr-3 text-slate-500`}>Интересы {userData.interests.length === 0 && 'не выбраны'}</div>
             <div className={`item_value flex flex-col`}>
               <div className={`flex flex-wrap`}>
                 {userData.interests.length !== 0 && userData.interests.map((el, idx) => {

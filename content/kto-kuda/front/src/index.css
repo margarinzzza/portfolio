@@ -258,16 +258,14 @@ textarea {
   justify-content: space-between;
 }
 
-.participansListShow {
+.item_more_valueShow {
   max-height: 100vh;
   overflow: hidden;
-  transition: 4s;
 }
 
-.participansListHide {
+.item_more_valueHide {
   max-height: 0;
   overflow: hidden;
-  transition: 2s;
 }
 
 /* eventPage */
