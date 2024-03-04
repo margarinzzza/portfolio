@@ -15,7 +15,6 @@ const ChatComponent = ({ eventData, userData }) => {
 
   const sendMessageHandler = async ({ userId, text, eventId }) => {
     if (text === '') return setTextErrMsg('Введите сообщение')
-    //await dispatch(sendMessage({ userId, text, eventId })).unwrap().then().catch()
     socket.emit('sendMsg', { userId, text, eventId })
     setTextErrMsg('')
     setText('')
