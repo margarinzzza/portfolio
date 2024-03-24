@@ -1,0 +1,26 @@
+.popup {
+    background-color: #ce94fd26;
+    border-radius: 5px;
+    right: 19px;
+    position: absolute;
+    transition: all .3s;
+    max-width: 220px;
+    width: 160px;
+    margin-top: 7px;
+}
+
+.popupList div {
+    word-wrap: break-word;
+    border-bottom: 1px solid #ffffffa6;
+    padding: 8px;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.popupList div:hover {
+    background-color: #cfb3e626;
+}
+
+.popupList div:last-child {
+    border-bottom: 0;
+}

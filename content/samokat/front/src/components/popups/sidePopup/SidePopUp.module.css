@@ -1,0 +1,14 @@
+.popupWrapper {
+    position: absolute;
+    min-width: 300px;
+    top: 5vh;
+    right: -400px;
+    transition: .3s all;
+    height: 90vh;
+    z-index: 5;
+    background-color: #0000001c;
+}
+
+.show {
+    right: 25px;
+}

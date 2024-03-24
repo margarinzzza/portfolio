@@ -1,0 +1,31 @@
+.popupWrapper {
+    transition: .3s;
+    position: absolute;
+    background-color: #0000001c;
+    top: 0;
+    left: 0;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupContent {
+    background-color: #ffffff;
+    border-radius: 5px;
+    min-width: 270px;
+    max-width: 400px;
+    padding: 15px;
+}
+
+.confirmBtn {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.confirmBtn:hover {
+    transition: .3s;
+}
