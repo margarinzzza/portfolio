@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
 import { useParams } from 'react-router-dom';
 import SidePopUp from "../popups/sidePopup/SidePopUp";
+import { visibleStatesActions } from "../../features/visibleStates";
 
 const HeaderComponent = () => {
   const inputRef = useRef(null);
-  const [popUpVisible, setPopUpVisible] = useState(false)
+  const { sidePopUp } = useSelector(state => state.visibleStates)
+  const dispatch = useDispatch()
 
   return (
     <div className={`header rounded`}>
@@ -21,15 +23,12 @@ const HeaderComponent = () => {
         </svg>
         <input ref={inputRef} className={`font-semibold`} type="text" name="search" placeholder="Искать в Самокате" />
       </div>
-      <div onClick={()=>setPopUpVisible(!popUpVisible)} className={`header__checkin flex items-center bg-gray rounded h-[55px] px-6 cursor-pointer`}>
+      <div onClick={()=>dispatch(visibleStatesActions.showSidePopup({children: 'auth'}))} className={`header__checkin flex items-center bg-gray rounded h-[55px] px-6 cursor-pointer`}>
         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-person-fill mr-2" viewBox="0 0 16 16">
           <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
         </svg>
         <h5>Войти</h5>
       </div>
-      <SidePopUp popUpVisible={popUpVisible} setPopUpVisible={setPopUpVisible} title={''} confirmFn={() => 1} >
-        
-      </SidePopUp>
     </div>
   )
 }

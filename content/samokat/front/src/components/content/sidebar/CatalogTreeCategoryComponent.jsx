@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
 import { useParams } from 'react-router-dom';
-import { chatSliceActions, getChats, getMessages } from "../../../features/chatSlice";
 
 const CatalogTreeCategoryComponent = () => {
 
-  let { chatId } = useParams()
   const dispatch = useDispatch()
   const { userData } = useSelector(state => state.authSlice)
-  const { chats, onlineUsers, messages } = useSelector(state => state.chatSlice)
   const [isHover, setIsHover] = useState(false)
   const [isOpened, setIsOpened] = useState(false)
 
