@@ -1,8 +1,8 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useLocation, useParams, Link } from "react-router-dom"
 import NotFoundComponent from "./components/notFound/NotFoundComponent";
 import LoadingComponent from "./components/loading/LoadingComponent";
 import HeaderComponent from "./components/content/HeaderComponent";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authSliceActions, refreshMe } from "./features/authSlice";
 import { useNavigate, Navigate } from "react-router-dom";
@@ -14,14 +14,172 @@ import SidePopUp from "./components/popups/sidePopup/SidePopUp";
 import { visibleStatesActions } from "./features/visibleStates";
 import InputComponent from "./components/inputs/InputComponent";
 import { cartSliceActions } from "./features/cartSlice";
+import { productArr, storiesArr } from "./store";
+import ProductCardComponent from "./components/content/main/ProductCardComponent";
 
 const socket = io('http://localhost:5000')
 export const returnSocket = () => socket
 
+const StoryPopUp = () => {
+
+  const { storyId } = useParams()
+  const storyData = storiesArr.find(el => el.storyId == storyId)
+  const [relatedProductsArr, setRelatedProductsArr] = useState(null)
+  const [pause, setPause] = useState(false)
+  const [storiesEnd, setStoriesEnd] = useState(false)
+  const [controlHover, setControlHover] = useState(false)
+  let [currentStoryIdx, setCurrentStoryIdx] = useState(0)
+  const [currentStoryProgress, setCurrentStoryProgress] = useState(0)
+  const { type, relatedProducts, title, imgSrc, text } = storyData
+
+  useEffect(() => {
+    let arr = []
+    relatedProducts.forEach(productId => {
+      const product = productArr.find(el => el.productId === productId)
+      product && arr.push(product)
+      setRelatedProductsArr(arr)
+    })
+  }, [])
+
+  const setProgress = (idx) => {
+    if (idx < currentStoryIdx) return '100'
+    if (idx == currentStoryIdx) return currentStoryProgress
+    return '0'
+  }
+
+  function Interval() {
+    setTimeout(() => {
+      setCurrentStoryProgress(prev => prev += 1)
+    }, 50)
+  }
+
+  useEffect(() => {
+    if (!pause) {
+      if (currentStoryProgress >= 100) {
+        if (currentStoryIdx + 1 <= imgSrc.length - 1) {
+          setCurrentStoryIdx(prev => prev += 1)
+          setCurrentStoryProgress(0)
+          Interval()
+        }
+        if (currentStoryIdx + 1 > imgSrc.length - 1) {
+          setStoriesEnd(true)
+          setPause(true)
+        }
+      } else Interval()
+    }
+  }, [currentStoryProgress, pause])
+
+  const pauseHandler = (state) => {
+    if (storiesEnd) {
+      setCurrentStoryIdx(0)
+      setCurrentStoryProgress(0)
+      setPause(false)
+      setStoriesEnd(false)
+    } else setPause(state)
+  }
+
+  return (
+    <div className="flex h-full">
+      <div onMouseEnter={() => setControlHover(true)} onMouseLeave={() => setControlHover(false)} style={{ background: `url(${imgSrc[currentStoryIdx]})` }} className="rounded mr-5 bg-cover flex w-[500px] relative">
+        <div className="controls-wrapper flex justify-center items-center w-full h-full absolute">
+          <div className={`transition-all opacity-0 pointer-events-none story-controls flex w-full px-5 ${controlHover && 'opacity-100 pointer-events-auto'}`}>
+            <div className="story-controls__item story-controls__arrow flex items-center flex-[1]">
+              <svg onClick={() => {
+                setCurrentStoryIdx(prev => prev -= 1)
+                setCurrentStoryProgress(0)
+              }} className={`transition-all rotate-[180deg] rounded-full bg-[#0000002e]
+              ${imgSrc.length == 1 && 'pointer-events-none opacity-0'}
+              ${(imgSrc.length > 1 && currentStoryIdx == 0) && 'pointer-events-none opacity-0'}
+              `} p-1 width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.29289 5.29289C9.68342 4.90237 10.3166 4.90237 10.7071 5.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L10.7071 18.7071C10.3166 19.0976 9.68342 19.0976 9.29289 18.7071C8.90237 18.3166 8.90237 17.6834 9.29289 17.2929L14.5858 12L9.29289 6.70711C8.90237 6.31658 8.90237 5.68342 9.29289 5.29289Z" fill="white"></path>
+              </svg>
+            </div>
+            <div className="story-controls__item story-controls__pause flex items-center justify-center flex-[2]">
+              {!pause ?
+                <svg onClick={() => pauseHandler(true)} xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="white" class="rounded-full bg-[#0000002e] p-5 bi bi-pause-fill" viewBox="0 0 16 16">
+                  <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5" />
+                </svg>
+                :
+                <svg onClick={() => pauseHandler(false)} xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="white" class="rounded-full bg-[#0000002e] p-5 bi bi-caret-right-fill" viewBox="0 0 16 16">
+                  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                </svg>
+              }
+            </div>
+            <div className="story-controls__item story-controls__arrow flex items-center justify-end flex-[1]">
+              <svg onClick={() => {
+                setCurrentStoryIdx(prev => prev += 1)
+                setCurrentStoryProgress(0)
+              }} className={`transition-all rounded-full bg-[#0000002e]
+                ${imgSrc.length === 1 && 'pointer-events-none opacity-0'}
+                ${(imgSrc.length > 1 && currentStoryIdx == imgSrc.length - 1) && 'pointer-events-none opacity-0'}
+              `} p-1 width="40" height="40" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.29289 5.29289C9.68342 4.90237 10.3166 4.90237 10.7071 5.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L10.7071 18.7071C10.3166 19.0976 9.68342 19.0976 9.29289 18.7071C8.90237 18.3166 8.90237 17.6834 9.29289 17.2929L14.5858 12L9.29289 6.70711C8.90237 6.31658 8.90237 5.68342 9.29289 5.29289Z" fill="white"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div className="flex w-full h-fit mt-5 px-4">
+          {imgSrc.map((el, idx) => {
+            return (
+              <div className="h-[4px] flex-1 mx-1 relative">
+                <div className="bg-[#726f68] h-full rounded"></div>
+                <div style={{ width: `${setProgress(idx)}%` }} className="z-10 h-full bg-[#ffffff] rounded absolute top-0"></div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+      <div className="flex w-[400px] flex-col">
+        <h2>{title}</h2>
+        <p className={`opacity-90 border-y-[2px] py-3 my-3 border-dashed ${!relatedProductsArr && 'border-b-0'}`}>{text}</p>
+        <div className="flex flex-wrap">
+          {relatedProductsArr && relatedProductsArr.map((el, idx) => <ProductCardComponent data={el} key={idx} />)}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const ProductPopUp = () => {
+
+  const { productId } = useParams()
+  const dispatch = useDispatch()
+  const [count, setCount] = useState(null)
+  const productData = productArr.find(el => el.productId == productId)
+  const { tags, name, imgSrc, price, measure, text } = productData
+  const { cart } = useSelector(state => state.cartSlice)
+  useEffect(() => {
+    const product = cart.find(el => el.productId == productId)
+    if (product) setCount(product.count)
+    if (!product) setCount(null)
+  }, [cart])
+
+  return (
+    <div className="flex flex-col h-full justify-between">
+      <div>
+        <div className="w-[445px] h-[445px] bg-cover rounded" style={{ background: `url('https://cm.samokat.ru/processed/m/product_card/58d1c829-7966-48fe-8201-b214dba5caea.jpg')` }} ></div>
+        <div className="my-3 font-bold">
+          <h3>{name}</h3>
+          <span className="opacity-60">{measure}</span>
+        </div>
+        <div className={`max-w-[445px] opacity-90 border-t-[2px] pt-3 border-dashed`}>{text}</div>
+      </div>
+      <div onClick={() => dispatch(cartSliceActions.addProduct(Number(productId)))} className="redBtn sticky bottom-0">
+        {count && <svg onClick={(e) => {
+          dispatch(cartSliceActions.decrementProduct(Number(productId)))
+          e.stopPropagation()
+        }} xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-2 bi bi-dash-lg" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8" />
+        </svg>}
+        {count && `${count} x`} {price} ₽
+
+      </div>
+    </div>
+  )
+}
+
 export const App = () => {
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const location = useLocation()
   const { isAuth, adress } = useSelector(state => state.authSlice)
   const { sidePopUp } = useSelector(state => state.visibleStates)
   const { cart } = useSelector(state => state.cartSlice)
@@ -65,6 +223,12 @@ export const App = () => {
   }
 
   useEffect(() => {
+    const paths = location.pathname.split('/')
+    const find = paths.find(el => el == 'product' || el == 'story')
+    find && dispatch(visibleStatesActions.showSidePopup(find))
+  }, [])
+
+  useEffect(() => {
     const adresses = localStorage.adresses
     const selectedAdress = localStorage.selectedAdress
     if (!adresses) localStorage.setItem('adresses', '')
@@ -75,8 +239,6 @@ export const App = () => {
       dispatch(authSliceActions.setSelectedAdress(parseInt(selectedAdress)))
     }
   }, [localStorage.adresses, localStorage.selectedAdress])
-
-  
 
   // useEffect(() => {
   //   (async () => await dispatch(refreshMe()).unwrap().then(e => {
@@ -94,7 +256,7 @@ export const App = () => {
 
   return (
     <>
-      <div className={`app `}>
+      <div className={`app`}>
         <div className={`appWrapper`}>
           {/* <LoadingComponent visible={authStatus === 'loading' ? true : false} /> */}
           <HeaderComponent />
@@ -103,14 +265,9 @@ export const App = () => {
             <MainComponent />
             <CartComponent />
           </div>
-          {/* <div className="content relative">
-          <Routes>
-            <Route path="*" element={<NotFoundComponent />} />
-          </Routes>
-        </div> */}
         </div>
-        <div onClick={() => dispatch(visibleStatesActions.hideSidePopup())} className={`blackout ${sidePopUp.isOpened && 'opacity-100 pointer-events-auto'}`}></div>
-        <SidePopUp popUpVisible={sidePopUp.isOpened} hidePopup={visibleStatesActions.hideSidePopup} confirmFn={() => 1} >
+        <Link to={'/'} onClick={() => dispatch(visibleStatesActions.hideSidePopup())} className={`blackout ${sidePopUp.isOpened && 'opacity-100 pointer-events-auto'}`}></Link>
+        <SidePopUp popUpVisible={sidePopUp.isOpened} hidePopup={visibleStatesActions.hideSidePopup} >
           {sidePopUp.children === 'changeAdress' &&
             <div className="flex flex-col justify-between h-full">
               <div>
@@ -140,6 +297,7 @@ export const App = () => {
               }
             </div>
           }
+
           {sidePopUp.children === 'auth' &&
             <div>
               <div className="mb-5">
@@ -152,6 +310,7 @@ export const App = () => {
               </div>
             </div>
           }
+
           {sidePopUp.children === 'lk' &&
             <div className="h-full flex flex-col justify-between">
               <div>
@@ -177,8 +336,14 @@ export const App = () => {
               <div className="redBtn">Выйти</div>
             </div>
           }
+
+          <Routes>
+            <Route path="story/:storyId" element={<StoryPopUp />} />
+            <Route path="product/:productId" element={<ProductPopUp />} />
+          </Routes>
         </SidePopUp>
-      </div>
+      </div >
     </>
   )
 }
+

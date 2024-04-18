@@ -2,14 +2,16 @@ import { useState } from 'react';
 import styles from './SidePopUp.module.css'
 import { useDispatch, useSelector } from "react-redux";
 
-const SidePopUp = ({ popUpVisible, hidePopup, children, confirmFn }) => {
+const SidePopUp = ({ popUpVisible, hidePopup, children }) => {
 
     const dispatch = useDispatch()
     const { sidePopUp } = useSelector(state => state.visibleStates)
     const titles = {
         'changeAdress': 'Выбрать адрес',
         'auth': 'Авторизация',
-        'lk': ''
+        'lk': '',
+        'story': '',
+        'product': '',
     }
 
     return (

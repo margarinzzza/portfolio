@@ -34,7 +34,7 @@ const CartComponent = () => {
 
   return (
     <div className={`cart min-w-[400px] `}>
-      <div className={`cart min-w-[400px] max-w-[400px] bg-white rounded padded fixed`}>
+      <div className={`cart min-w-[400px] max-w-[400px] bg-white rounded padded fixed flex flex-col max-h-[750px]`}>
         {!isAuth && localStorage.adresses === '' ?
           <>
             <h3>Добавить адрес</h3>

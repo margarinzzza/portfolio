@@ -1,15 +1,10 @@
-import { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom"
-import { useParams } from 'react-router-dom';
-import ProductCardComponent from "./ProductCardComponent";
 import { productArr } from "../../../store";
 import CarouselComponent from "../../carousel/CarouselComponent";
 
 const ProfitableShelfComponent = () => {
 
-  const dispatch = useDispatch()
-
+  let onlyProfitable = []
+  productArr.forEach(el => el.tags.forEach(tag => tag === 'profitable' && onlyProfitable.push(el)))
 
   return (
     <div className={`main_block profitable-shelf`}>
@@ -22,10 +17,7 @@ const ProfitableShelfComponent = () => {
           </svg>
         </div>
       </div>
-
-        <CarouselComponent items={productArr} type={'product'} />
-
-
+      <CarouselComponent items={onlyProfitable} type={'product'} />
     </div>
   )
 }

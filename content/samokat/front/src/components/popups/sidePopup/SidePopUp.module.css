@@ -5,11 +5,17 @@
     right: -400px;
     transition: .3s all;
     height: 90vh;
-    z-index: 6;
+    z-index: 8;
     background-color: white;
     padding: 13px 20px;
     display: flex;
     flex-direction: column;
+    max-height: 1000px;
+    overflow-y: auto;
+}
+
+.popupWrapper::-webkit-scrollbar {
+    width: 0;
 }
 
 .show {

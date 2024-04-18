@@ -4,8 +4,9 @@ import axios from '../axios'
 const initialState = {
     sidePopUp: {
         isOpened: false,
+        type: '',
         children: ''
-    }
+    },
 }
 
 export const visibleStates = createSlice({

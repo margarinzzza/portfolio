@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
-import { useParams } from 'react-router-dom';
 import { cartSliceActions } from "../../../features/cartSlice";
+import { visibleStatesActions } from "../../../features/visibleStates";
 
 const ProductCardComponent = ({ data, isInCart }) => {
 
@@ -36,13 +36,13 @@ const ProductCardComponent = ({ data, isInCart }) => {
 
   return (
     <div className={`product-card ${isInCart && 'productInCart'}`}>
-      <div className="relative product-img">
+      <Link onClick={()=>dispatch(visibleStatesActions.showSidePopup('product'))} to={`/product/${productId}`} className="relative product-img">
         <img src="https://cm.samokat.ru/processed/m/product_card/58d1c829-7966-48fe-8201-b214dba5caea.jpg" alt="#" />
         <div className={`img-blackout ${(isAdded && !isInCart) && 'img-blackout-true'}`}> <h1 className={`${(isAdded && !isInCart) ? 'text-white' : 'text-transparent'}`}>{isAdded && productCount}</h1> </div>
-      </div>
+      </Link>
 
       <div className={`flex flex-col flex-1 ${isInCart && 'justify-between'}`}>
-        <div className="flex flex-col ">
+        <Link onClick={()=>dispatch(visibleStatesActions.showSidePopup('product'))} to={`/product/${productId}`} className="flex flex-col ">
           <div className={`leading-none flex justify-between`}>
             <span className="product-name">{name}</span>
             {isInCart && <svg onClick={() => deleteProductHandler(productId)} xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="grey" class="bi bi-x-lg" viewBox="0 0 16 16">
@@ -51,7 +51,7 @@ const ProductCardComponent = ({ data, isInCart }) => {
             }
           </div>
           <span className="product-measure">{measure}</span>
-        </div>
+        </Link>
         <div className={`flex items-center mt-4 justify-between`}>
           <div className={`product-price ${isAdded && 'product-price_added'}`}>
             {isAdded && <svg onClick={() => decrementProductHandler(productId)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
